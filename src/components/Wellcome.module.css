@@ -1,0 +1,18 @@
+.wellcome{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.wellcome h1 {
+    font-size: 50px;
+}
+
+.wellcome button {
+    font-size: 23px;
+    padding: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: none;
+}
