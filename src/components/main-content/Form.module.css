@@ -1,0 +1,26 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+    
+    
+    
+}
+
+.form div{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 18px;
+    padding-top: calc(.5rem + 16px);
+    padding-bottom: calc(.5rem + 16px);
+    background-color: lightgray;
+}
+
+.form input{
+    border: none;
+    height: 1rem;
+    font-family: "Raleway", sans-serif;
+    
+}

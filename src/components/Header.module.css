@@ -1,5 +1,8 @@
-.header div{
+.header{
     display: flex;
     justify-content: flex-end;
-    margin: 1rem;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    border-bottom: 1px solid lightgray;
 }
