@@ -4,6 +4,7 @@ import classes from "./Table.module.css";
 
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
+import { findUserIdInDatabase } from "../../store/login-functions";
 
 type List = {
   date: string;
@@ -43,6 +44,10 @@ export const Table: React.FC = (props) => {
 
   let array = dummyList.slice(-8);
 
+  const onClickDB = () => {
+    findUserIdInDatabase('0')
+  }
+
   const arrowHandler = () => {};
 
   return (
@@ -72,6 +77,7 @@ export const Table: React.FC = (props) => {
             ))}
           </ul>
         </div>
+        <button onClick={onClickDB}>DB</button>
         {isFormOpen ? (
           <div className={classes["form-container"]}>
             <ImgButton onClick={formHandler} type={"close"} />
