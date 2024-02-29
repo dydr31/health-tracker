@@ -39,6 +39,7 @@ export const findUserIdInDatabase = async (email: string) => {
 
     let result = filteredUsersCollection.find((x) => x.email === email);
 
+    //returns uid
     if (result !== undefined) {
       console.log(result.id);
       return result.id;
