@@ -4,7 +4,8 @@ import { logInWithGoogle } from "../store/login-functions";
 
 export const Wellcome = () => {
   const logInHandler = () => {
-    logInWithGoogle()
+    let obj = logInWithGoogle()
+    console.log(obj)
   }
   return (
     <>

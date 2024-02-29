@@ -45,7 +45,7 @@ export const Table: React.FC = (props) => {
   let array = dummyList.slice(-8);
 
   const onClickDB = () => {
-    findUserIdInDatabase('0')
+    findUserIdInDatabase('5', 'Helly')
   }
 
   const arrowHandler = () => {};
