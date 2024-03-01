@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { isTemplateMiddle } from "typescript";
 import classes from "./Table.module.css";
-
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
-import { findUserIdInDatabase } from "../../store/login-functions";
+import { getData } from "../../store/login-functions";
 
 type List = {
   date: string;
@@ -44,9 +42,11 @@ export const Table: React.FC = (props) => {
 
   let array = dummyList.slice(-8);
 
-  const onClickDB = () => {
-    findUserIdInDatabase('5', 'Helly')
-  }
+  const onClickDB = async () => {
+    // let id = await findUserIdInDatabase('5', 'Helly')
+    // getUserData('mEYKCMaExV0aTd9HCzU6')
+    getData("bfbfgb@bfgg", "Mark");
+  };
 
   const arrowHandler = () => {};
 
@@ -55,7 +55,7 @@ export const Table: React.FC = (props) => {
       <h2>Your tonometer measurements:</h2>
       <div className={classes.content}>
         <div className={classes.table}>
-          <div className={classes['arrow-buttons-container']}>
+          <div className={classes["arrow-buttons-container"]}>
             <ImgButton type={"left-arrow"} onClick={arrowHandler} />
             <ImgButton type={"right-arrow"} onClick={arrowHandler} />
           </div>
