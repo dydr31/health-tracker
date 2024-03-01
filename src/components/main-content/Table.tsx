@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Table.module.css";
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
-import { getData } from "../../store/login-functions";
+import { fetchData } from "../../store/data-functions";
 
 type List = {
   date: string;
@@ -36,17 +36,20 @@ const dummyList: List = [
 
 export const Table: React.FC = (props) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
+
   const formHandler = () => {
     setIsFormOpen(!isFormOpen);
   };
 
   let array = dummyList.slice(-8);
 
-  const onClickDB = async () => {
-    // let id = await findUserIdInDatabase('5', 'Helly')
-    // getUserData('mEYKCMaExV0aTd9HCzU6')
-    getData("bfbfgb@bfgg", "Mark");
-  };
+
+
+
+
+  useEffect(() => {
+    fetchData('bfbfgb@bfgg', 'Mark')
+  })
 
   const arrowHandler = () => {};
 
@@ -77,7 +80,7 @@ export const Table: React.FC = (props) => {
             ))}
           </ul>
         </div>
-        <button onClick={onClickDB}>DB</button>
+        {/* <button onClick={onClickDB}>DB</button> */}
         {isFormOpen ? (
           <div className={classes["form-container"]}>
             <ImgButton onClick={formHandler} type={"close"} />

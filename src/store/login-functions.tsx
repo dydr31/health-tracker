@@ -15,8 +15,7 @@ export const logInWithGoogle = async () => {
     localStorage.setItem("Email", email);
     localStorage.setItem("Name", name);
     console.log("you've logged in");
-    getData(email, name);
-    // return {name: response.user.displayName, email: response.user.email}
+    getUserId(email, name);
   } catch (err) {
     console.error(err);
   }
@@ -48,22 +47,21 @@ const getUsersDbData = async () => {
   }
 };
 
-export const getData = async (email: string, name: string) => {
+export const getUserId = async (email: string, name: string) => {
+
   try {
    
     let data = await getUsersDbData();
     
     let result = data?.find((x) => x.email === email);
    
-    
-
-    
     if (result !== undefined) {
-    
-      getUserData(result.id);
+        return result.id
+      //getUserData(result.id);
     } else {
       addUserToDb(email, name);
     }
+
   } catch (err) {
     console.error(err);
   }
@@ -80,7 +78,8 @@ export const addUserToDb = async (email: string, name: string) => {
 
     let user = data?.find((x) => x.email === email);
 
-    getUserData(user!.id);
+    return user?.id
+    // getUserData(user!.id);
 
   } catch (err) {
     console.error(err);

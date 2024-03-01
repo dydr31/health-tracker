@@ -3,11 +3,13 @@ import React from "react";
 type LogInContextObj = {
   LogIn: boolean;
   Email: string;
+  id: string,
 };
 
 export const LogInContext = React.createContext<LogInContextObj>({
   LogIn: false,
   Email: "",
+  id: '',
 });
 
 const LogInContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -23,9 +25,12 @@ const LogInContextProvider: React.FC<{ children: React.ReactNode }> = (
     Email = "";
   }
 
+  
+
   const contextValue: LogInContextObj = {
     LogIn: LogInStatus,
     Email: Email,
+    id: ''
   };
   return (
     <LogInContext.Provider value={contextValue}>
