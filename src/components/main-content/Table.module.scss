@@ -1,3 +1,5 @@
+@import "../../variables";
+
 h2{
     margin: 0;
 }
@@ -20,7 +22,7 @@ h2{
 .ul{
     display: flex;
     list-style: none;
-    background-color: rgb(233, 233, 233);
+    background-color: $main-color;
     width: fit-content;
     height: 174px;
 
@@ -30,8 +32,8 @@ h2{
 }
 
 .ul li {
-    border-right: 1px solid lightgray;
-    padding: .5rem;
+    border-right: $border;
+    padding: $size-main/2;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -43,15 +45,15 @@ h2{
 
 .ul p{
     margin: 0;
-    margin-left: 0.5rem;
-    margin-top: .5rem;
-    margin-right: 0.5rem;
-    margin-bottom: .5rem;
+    margin-left: $size-main/2;
+    margin-top: $size-main/2;
+    margin-right: $size-main/2;
+    margin-bottom: $size-main/2;
 }
 
 
 .date{
-    color: cornflowerblue;
+    color: $accent-color2;
 }
 
 
@@ -59,7 +61,7 @@ h2{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-top: 0rem;
+    margin-top: 0;
     width: 14vw;
     max-width: 14vw;
     
@@ -67,9 +69,14 @@ h2{
 
 .button-add-new{
     border: none;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: $size-main;
+    margin-bottom: $size-main;
     width: 14vw;
+    background-color: $main-color;
+}
+
+.button-add-new:hover{
+    background-color: $accent-color;
 }
 
 .labels{

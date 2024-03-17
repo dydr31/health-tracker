@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LogInContext } from "../store/login-context";
 import { logOut } from "../store/login-functions";
-import classes from "./Header.module.css";
+import classes from "./Header.module.scss";
 import { Button } from "./UI/Button";
 
 export const Header = () => {
@@ -9,15 +9,20 @@ export const Header = () => {
 
   const logoutHandler = async () => {
     await logOut();
-    window.location.reload()
+    window.location.reload();
   };
 
   return (
     <header className={classes.header}>
-      <div>{LogInCtx.LogIn ? LogInCtx.Email : "You've logged off"}</div>
-      {LogInCtx.LogIn && (
-        <Button text={"Log Out"} onClick={logoutHandler}></Button>
-      )}
+      <div>
+        <h1>Health tracker app</h1>
+      </div>
+      <div className={classes['elements']}>
+        <p>{LogInCtx.LogIn ? LogInCtx.Email : "You've logged off"}</p>
+        {LogInCtx.LogIn && (
+          <Button text={"Log Out"} onClick={logoutHandler}></Button>
+        )}
+      </div>
     </header>
   );
 };

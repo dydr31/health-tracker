@@ -1,7 +1,7 @@
 import React, { RefObject, useRef, useState } from "react";
 import { addDataPoint } from "../../store/data-functions";
 import { Button } from "../UI/Button";
-import classes from "./Form.module.css";
+import classes from "./Form.module.scss";
 
 export const Form: React.FC = (props) => {
   
@@ -55,9 +55,9 @@ export const Form: React.FC = (props) => {
     <form className={classes.form} onSubmit={sumbitForm}>
       <div>
         <input type="date" className={classes['date-input']}/>
-        <input type="text" placeholder="upper" ref={upperRef} />
-        <input type="text" placeholder="lower" ref={lowerRef} />
-        <input type="text" placeholder="heartbeat" ref={pulseRef} />
+        <input type="text" placeholder="upper" ref={upperRef} className={classes['input']}/>
+        <input type="text" placeholder="lower" ref={lowerRef} className={classes['input']}/>
+        <input type="text" placeholder="heartbeat" ref={pulseRef} className={classes['input']}/>
       </div>
       <Button text="save" onClick={sumbitForm} />
     </form>

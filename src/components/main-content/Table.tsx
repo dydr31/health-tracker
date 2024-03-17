@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import classes from "./Table.module.css";
+import classes from "./Table.module.scss";
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
 import { fetchData } from "../../store/data-functions";

@@ -1,6 +1,8 @@
+@import "../../variables";
+
 .close{
     border: none;
-    color: gray;
+    background-color: $accent-color;
     height: 1rem;
     width: 1rem;
     display: flex;
@@ -9,6 +11,11 @@
 
 .close img{
     width: .5rem;
+}
+
+.close:hover,
+.close:active{
+    background-color: $button-color-hover;
 }
 
 .right-arrow{

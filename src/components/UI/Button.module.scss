@@ -1,0 +1,15 @@
+@import "../../variables";
+
+.button {
+    font-size: 16px;
+    padding: $size-main/2;
+    padding-left: $size-main;
+    padding-right: $size-main;
+    border: none;
+    background-color: $button-color;
+}
+
+.button:hover,
+.button:active{
+    background-color: $button-color-hover;
+}

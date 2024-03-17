@@ -3,7 +3,7 @@ import { LogInContext } from "../store/login-context";
 import { Table } from "./main-content/Table";
 import { Wellcome } from "./Wellcome";
 
-import classes from './MainContent.module.css'
+import classes from './MainContent.module.scss'
 
 export const MainContent: React.FC = () => {
   const logInCtx = useContext(LogInContext);

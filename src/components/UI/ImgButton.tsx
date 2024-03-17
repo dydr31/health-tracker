@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./ImgButton.module.css";
+import classes from "./ImgButton.module.scss";
 import close from "../pics/close.png";
 import arrow from "../pics/down-arrow.png";
 

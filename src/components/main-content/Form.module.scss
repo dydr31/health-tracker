@@ -1,31 +1,35 @@
+@import "../../variables";
+
+
+
 .form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    
-   
-    
-    
-    
+    width: 100%; 
 }
 
 .form div{
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: $size-main;
     gap: 18px;
     padding-top: calc(.5rem + 16px);
     padding-bottom: calc(.5rem + 16px);
-    background-color: lightgray;
+    background-color: $main-color;
 }
 
 .form input{
     border: none;
-    height: 1rem;
+    height: $size-main;
     font-family: "Raleway", sans-serif;
     
 }
 
 .date-input{
-    color: cornflowerblue;
+    color: $accent-color2;
+    background-color: $accent-color;
+}
+
+.input{
+    background-color: $accent-color;
 }
