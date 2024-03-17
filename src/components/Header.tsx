@@ -7,8 +7,9 @@ import { Button } from "./UI/Button";
 export const Header = () => {
   const LogInCtx = useContext(LogInContext);
 
-  const logoutHandler = () => {
-    logOut();
+  const logoutHandler = async () => {
+    await logOut();
+    window.location.reload()
   };
 
   return (
