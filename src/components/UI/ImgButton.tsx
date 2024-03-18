@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./ImgButton.module.scss";
 import close from "../pics/close.png";
 import arrow from "../pics/down-arrow.png";
+import pencil from '../pics/pencil.png'
 
 export const ImgButton: React.FC<{
   onClick: React.MouseEventHandler;
@@ -15,6 +16,9 @@ export const ImgButton: React.FC<{
       )}
       {props.type === "left-arrow" && (
         <img src={arrow} alt="left arrow" className={classes["left-arrow"]} />
+      )}
+      {props.type ==='edit' && (
+        <img src={pencil} alt='edit'/>
       )}
     </button>
   );

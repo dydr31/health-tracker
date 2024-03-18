@@ -100,7 +100,7 @@ export const Table: React.FC = () => {
       <div className={classes["buttons"]}>
         <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
         <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
-        <button className={classes.edit}>edit data</button>
+        <ImgButton type='edit' onClick={arrowHandlerLeft}/>
       </div>
       <div className={classes["chart-and-form-container"]}>
         <div className={classes["chart-container"]}>

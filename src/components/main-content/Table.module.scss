@@ -7,8 +7,8 @@
 }
 
 .chart-container{
-    width: 80%;
-    height: 100%;
+    width: 100%;
+    
 }
 
 .form-or-button-container{
@@ -43,12 +43,4 @@
     position: absolute;
     right: 3rem;
     gap: .25rem;
-}
-
-.edit{
-    background-color: $main-color;
-    border: none;
-    height: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
