@@ -1,0 +1,16 @@
+@import "../../variables";
+
+.round-button{
+    position: fixed;
+    right: 3rem;
+    bottom: 3rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: $accent-color2;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 23px;
+    color: white;
+    
+}

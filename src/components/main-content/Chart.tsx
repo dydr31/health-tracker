@@ -9,6 +9,8 @@ export const LineChart: React.FC<{
     datasets: {
       label: string;
       data: number[];
+      backgroundColor: string[],
+      borderColor: string[],
     }[];
   };
 }> = (props) => {
@@ -16,7 +18,7 @@ export const LineChart: React.FC<{
   return (
     <div className={classes.chart}>
       {" "}
-      <Line data={props.data} />;
+      <Line data={props.data} />
     </div>
   );
 };

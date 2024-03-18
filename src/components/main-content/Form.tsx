@@ -6,14 +6,14 @@ import classes from "./Form.module.scss";
 export const Form: React.FC = (props) => {
   
   const sumbitForm = (event: React.FormEvent) => {
-    //event.preventDefault();
+    event.preventDefault();
     let result = checkForm();
     if (result !== null){
         addDataPoint("gzl123n@gmail.com", "Гузель Гузель", [result!])
     }
-    
-    
-    
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500) 
   };
 
   const checkForm = () => {
