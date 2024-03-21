@@ -3,37 +3,32 @@ import { Button } from "../UI/Button";
 import classes from "./DataPick.module.scss";
 import { useContext, useRef } from "react";
 
-export const DataPick: React.FC<{ }> = (
-  props
-) => {
-    let fromRef = useRef<HTMLInputElement>(null)
-    let toRef = useRef<HTMLInputElement>(null)
-    let currentFrom =  fromRef.current?.value
-    let currentTo = fromRef.current?.value
+export const DataPick: React.FC = () => {
+  let fromRef = useRef<HTMLInputElement>(null);
+  let toRef = useRef<HTMLInputElement>(null);
 
+  let datesCtx = useContext(DatesContext);
 
-    let datesCtx = useContext(DatesContext)
+  const submitForm = (event: React.FormEvent) => {
+    event.preventDefault();
 
-    // props.dateFrom(currentFrom)
-    const submitForm = (event: React.FormEvent) => {
-        event.preventDefault()
-        if (currentFrom !== undefined){
-            datesCtx.addDateFrom(currentFrom!)
-        }
-        
-        
-    }
-    console.log(datesCtx)
+    let currentFrom = fromRef.current!.value;
+    let currentTo = toRef.current!.value;
+
+    datesCtx.addDateFrom(currentFrom!);
+
+    datesCtx.addDateTo(currentTo!);
+
+    
+  };
 
   return (
-    
     <form className={classes["date-options"]} onSubmit={submitForm}>
-
       <label>from:</label>
-      <input type="date" ref={fromRef}/>
+      <input type="date" ref={fromRef} className={classes.input} required />
       <label>to:</label>
-      <input type="date" ref={toRef}/>
-      <Button text='apply' onClick={submitForm}/>
+      <input type="date" ref={toRef} className={classes.input} required />
+      <Button text="apply" onClick={submitForm} />
     </form>
   );
 };

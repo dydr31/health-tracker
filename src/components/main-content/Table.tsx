@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import classes from "./Table.module.scss";
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
@@ -8,6 +8,7 @@ import { LineChart } from "./Chart";
 import { RoundButton } from "../UI/RoundButton";
 import { Modal } from "../UI/Modal";
 import { DataPick } from "./DataPick";
+import { DatesContext } from "../../store/date-context";
 
 type List = {
   date: string;
@@ -29,16 +30,27 @@ export const Table: React.FC = () => {
   let [shownData, setShownData] = useState(dummyList);
 
   const [chartData, setChartData] = useState({
-    labels: ["a", "b", "c", "d", "e", "f", "h", "i", "j", "k"],
+    labels: [""],
     datasets: [
       {
-        label: "pulse",
-        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        label: "",
+        data: [0],
         backgroundColor: ["rgb(100, 166, 237)"],
         borderColor: ["rgb(100, 166, 237)"],
       },
     ],
   });
+
+  const datesCtx = useContext(DatesContext);
+  let from = Number(datesCtx.dateFrom);
+  let to = Number(datesCtx.dateTo);
+  let filteredArray = dataArray.filter(
+    (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
+    //&&
+    //Number(item.date.toString().slice(18, 28)) * 1000 < to
+  );
+
+  
 
   useEffect(() => {
     const setData = async () => {
@@ -47,42 +59,54 @@ export const Table: React.FC = () => {
       setShownData(data.slice(-14));
     };
     setData();
+    setDataArray(filteredArray)
+
+    console.log('first use effect')
   }, []);
+  
+
+  let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
+  let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
 
   useEffect(() => {
-    let pulseArray = shownData.map((item) => Number(item.pulse));
-    let upperArray = shownData.map((item) => Number(item.upper));
-    let lowerArray = shownData.map((item) => Number(item.lower));
-    let datesArray = shownData.map((item) =>
-      item.date.toString().slice(18, 28)
-    );
-    let arr = datesArray.map((item) => new Date(Number(item) * 1000));
-    let arr2 = arr.map((item) => item.toString().slice(4, 21));
+    let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 21));
 
     setChartData({
-      labels: arr2,
+      labels: datesArrStrings,
       datasets: [
         {
           label: "pulse",
-          data: pulseArray,
+          data: shownData.map((item) => Number(item.pulse)),
           backgroundColor: ["rgb(232, 72, 85)"],
           borderColor: ["rgb(232, 72, 85)"],
         },
         {
           label: "upper",
-          data: upperArray,
+          data: shownData.map((item) => Number(item.upper)),
           backgroundColor: ["rgb(239, 188, 213)"],
           borderColor: ["rgb(239, 188, 213)"],
         },
         {
           label: "lower",
-          data: lowerArray,
+          data: shownData.map((item) => Number(item.lower)),
           backgroundColor: ["rgb(100, 166, 237)"],
           borderColor: ["rgb(100, 166, 237)"],
         },
       ],
     });
+
+    setDataArray(filteredArray)
+    
   }, [shownData]);
+
+  useEffect(() => {
+    setShownData(filteredArray)
+  }, [datesCtx])
+
+
+  // filteredArray = filteredArray.filter(
+  //   (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
+  // );
 
   const arrowHandlerRight = () => {
     setShownData(dataArray.slice(-14));
@@ -92,13 +116,9 @@ export const Table: React.FC = () => {
     setShownData(dataArray.slice(0, length - 14));
   };
 
-  const menuHandler = () => {};
-
-  const dateFromHandler = (data: void) => {
-  }
-
   return (
     <>
+    {console.log(filteredArray)}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>

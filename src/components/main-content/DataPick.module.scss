@@ -1,5 +1,9 @@
 .date-options{
     display: flex;
     flex-direction: column;
-    
+    gap: .5rem;
+}
+
+.input {
+    color: gray;
 }
