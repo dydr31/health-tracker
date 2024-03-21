@@ -3,6 +3,7 @@ import classes from "./ImgButton.module.scss";
 import close from "../pics/close.png";
 import arrow from "../pics/down-arrow.png";
 import pencil from '../pics/pencil.png'
+import menu from '../pics/menu.png'
 
 export const ImgButton: React.FC<{
   onClick: React.MouseEventHandler;
@@ -19,6 +20,9 @@ export const ImgButton: React.FC<{
       )}
       {props.type ==='edit' && (
         <img src={pencil} alt='edit'/>
+      )}
+      {props.type=== 'menu' && (
+        <img src={menu} alt='menu'/>
       )}
     </button>
   );
