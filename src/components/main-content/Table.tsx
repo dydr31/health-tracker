@@ -25,7 +25,7 @@ type List = {
 const dummyList: List = [];
 
 export const Table: React.FC = () => {
-  let number = 14
+  let number = 4;
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const formHandler = () => {
@@ -33,6 +33,7 @@ export const Table: React.FC = () => {
   };
 
   let [dataArray, setDataArray] = useState(dummyList);
+  let [filteredDataArray, setFilteredDataArray] = useState(dummyList);
   let [shownData, setShownData] = useState(dummyList);
 
   const [chartData, setChartData] = useState({
@@ -62,7 +63,7 @@ export const Table: React.FC = () => {
   let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
 
   useEffect(() => {
-    let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 21));
+    let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
 
     setChartData({
       labels: datesArrStrings,
@@ -90,6 +91,9 @@ export const Table: React.FC = () => {
   }, [shownData]);
 
   let [message, setMessage] = useState("");
+  let length = dataArray.length;
+  const [clicks, setClicks] = useState(0);
+  let maxClicks = length / number;
 
   useEffect(() => {
     let from = Number(datesCtx.dateFrom);
@@ -101,60 +105,66 @@ export const Table: React.FC = () => {
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
       );
     }
+    console.log(filteredArray);
     if (to > 0) {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
       );
     }
+    console.log(filteredArray);
     if (filteredArray.length === 0) {
       setShownData(dataArray.slice(-number));
-      setMessage("data not found");
+      // setMessage("data not found");
     } else {
-      setShownData(filteredArray);
+      //setShownData(filteredArray);
+      setDataArray(filteredArray);
     }
   }, [datesCtx]);
 
-  let length = dataArray.length;
-  const [clicks, setClicks] = useState(0)
-  let maxClicks = length/number
-
   const arrowHandlerRight = () => {
-    // setShownData(dataArray.slice(-number));
-    setClicks(clicks + 1)
+    setClicks(clicks + 1);
   };
   const arrowHandlerLeft = () => {
-    // let length = dataArray.length;
-    // setShownData(dataArray.slice(length - number *2 , length - number));
-    setClicks(clicks - 1)
+    setClicks(clicks - 1);
   };
 
   useEffect(() => {
-    
-    setShownData(dataArray.slice(length + number * clicks, length + number * (clicks + 1)))
-  }, [clicks])
+    let a = length + number * clicks;
+    if (a < 0) {
+      a = 0;
+    }
+    let b = length + number * (clicks + 1);
+    if (b > length) {
+      b = length;
+    }
 
+    setShownData(dataArray.slice(a, b));
+    console.log(shownData);
+  }, [clicks, datesCtx]);
 
-
-  let dataCtx = useContext(DataContext)
+  let dataCtx = useContext(DataContext);
   const [showDataMenu, setShowDataMenu] = useState(false);
 
   const dataMenuHandler = () => {
     setShowDataMenu(!showDataMenu);
-    dataCtx.loadItems()
+    dataCtx.loadItems();
   };
 
   return (
     <>
-    
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>
-          {-1 * clicks < maxClicks  && <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />}
-          {clicks < 0 && <ImgButton type="right-arrow" onClick={arrowHandlerRight} />}
+          {-1 * clicks < maxClicks && (
+            <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
+          )}
+          {clicks < -1 && (
+            <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
+          )}
           <ImgButton type="edit" onClick={dataMenuHandler} />
         </div>
 
-        <DataPick />
+        <div className={classes['data-pick-container']}><DataPick /></div>
       </div>
       <div className={classes["chart-and-form-container"]}>
         <div className={classes["chart-container"]}>
@@ -170,7 +180,7 @@ export const Table: React.FC = () => {
             </div>
           </>
         )}
-        <p className={classes.message}>{message}</p>
+        {/* <p className={classes.message}>{message}</p> */}
 
         <div className={"form-or-button-container"}>
           {isFormOpen && (

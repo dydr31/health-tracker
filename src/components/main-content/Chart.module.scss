@@ -3,5 +3,12 @@
 .chart {
     max-height: 80vh;
     max-width: 80%;
+    min-height: 50vh;
     // background-color: $main-color;
+}
+
+@media(max-width: 500px){
+    .chart{
+        max-width: 100%;
+    }
 }

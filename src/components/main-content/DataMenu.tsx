@@ -9,16 +9,6 @@ import { DataContext } from "../../store/data-context";
 export const DataMenu: React.FC<{
   data: { date: string; upper: number; lower: number; pulse: number }[];
 }> = (props) => {
-
-
-  const deleteHandler = () => {};
-
-
-  const [showButton, setShowbutton] = useState(false)
-  const showDeleteButton = () => {
-    setShowbutton(!showButton)
-  }
-
   return (
     <>
       <div className={classes["container"]}>
@@ -31,7 +21,13 @@ export const DataMenu: React.FC<{
           </li>
 
           {props.data.map((item) => (
-            <DataMenuItem date={item.date} upper={item.upper} lower={item.lower} pulse={item.pulse} key={Math.random()}/>
+            <DataMenuItem
+              date={item.date}
+              upper={item.upper}
+              lower={item.lower}
+              pulse={item.pulse}
+              key={Math.random()}
+            />
           ))}
         </ul>
       </div>
