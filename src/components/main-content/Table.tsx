@@ -9,6 +9,8 @@ import { RoundButton } from "../UI/RoundButton";
 import { Modal } from "../UI/Modal";
 import { DataPick } from "./DataPick";
 import { DatesContext } from "../../store/date-context";
+import { fileURLToPath } from "url";
+import { DataMenu } from "./DataMenu";
 
 type List = {
   date: string;
@@ -42,15 +44,6 @@ export const Table: React.FC = () => {
   });
 
   const datesCtx = useContext(DatesContext);
-  let from = Number(datesCtx.dateFrom);
-  let to = Number(datesCtx.dateTo);
-  let filteredArray = dataArray.filter(
-    (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
-    //&&
-    //Number(item.date.toString().slice(18, 28)) * 1000 < to
-  );
-
-  
 
   useEffect(() => {
     const setData = async () => {
@@ -59,11 +52,8 @@ export const Table: React.FC = () => {
       setShownData(data.slice(-14));
     };
     setData();
-    setDataArray(filteredArray)
-
-    console.log('first use effect')
+    console.log("first use effect");
   }, []);
-  
 
   let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
   let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
@@ -94,19 +84,32 @@ export const Table: React.FC = () => {
         },
       ],
     });
-
-    setDataArray(filteredArray)
-    
   }, [shownData]);
 
+  let [message, setMessage] = useState("");
+
   useEffect(() => {
-    setShownData(filteredArray)
-  }, [datesCtx])
+    let from = Number(datesCtx.dateFrom);
+    let to = Number(datesCtx.dateTo);
+    let filteredArray = dataArray;
 
-
-  // filteredArray = filteredArray.filter(
-  //   (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
-  // );
+    if (from > 0) {
+      filteredArray = filteredArray.filter(
+        (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
+      );
+    }
+    if (to > 0) {
+      filteredArray = filteredArray.filter(
+        (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
+      );
+    }
+    if (filteredArray.length === 0) {
+      setShownData(dataArray.slice(-14));
+      setMessage("data not found");
+    } else {
+      setShownData(filteredArray);
+    }
+  }, [datesCtx]);
 
   const arrowHandlerRight = () => {
     setShownData(dataArray.slice(-14));
@@ -116,22 +119,39 @@ export const Table: React.FC = () => {
     setShownData(dataArray.slice(0, length - 14));
   };
 
+  const [showDataMenu, setShowDataMenu] = useState(false);
+
+  const dataMenuHandler = () => {
+    setShowDataMenu(!showDataMenu);
+  };
+
   return (
     <>
-    {console.log(filteredArray)}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>
           <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
           <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
-          <ImgButton type="edit" onClick={arrowHandlerLeft} />
+          <ImgButton type="edit" onClick={dataMenuHandler} />
         </div>
+
         <DataPick />
       </div>
       <div className={classes["chart-and-form-container"]}>
         <div className={classes["chart-container"]}>
           <LineChart data={chartData} />
         </div>
+
+        {showDataMenu && (
+          <>
+            <Modal />
+            <div className={classes["data-menu-container"]}>
+              <ImgButton type={"close"} onClick={dataMenuHandler} />
+              <DataMenu data={shownData} />
+            </div>
+          </>
+        )}
+        <p className={classes.message}>{message}</p>
 
         <div className={"form-or-button-container"}>
           {isFormOpen && (

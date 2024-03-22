@@ -1,7 +1,17 @@
+@import "../../variables";
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .date-options{
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    background-color: $main-color;
+    padding: .5rem;
 }
 
 .input {
