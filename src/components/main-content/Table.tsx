@@ -12,6 +12,8 @@ import { DatesContext } from "../../store/date-context";
 import { fileURLToPath } from "url";
 import { DataMenu } from "./DataMenu";
 import { DataContext } from "../../store/data-context";
+import { click } from "@testing-library/user-event/dist/click";
+import { InactiveButton } from "../UI/InactiveButton";
 
 type List = {
   date: string;
@@ -23,6 +25,7 @@ type List = {
 const dummyList: List = [];
 
 export const Table: React.FC = () => {
+  let number = 14
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const formHandler = () => {
@@ -50,7 +53,7 @@ export const Table: React.FC = () => {
     const setData = async () => {
       let data = await fetchData("gzl123n@gmail.com");
       setDataArray(data);
-      setShownData(data.slice(-14));
+      setShownData(data.slice(-number));
     };
     setData();
   }, []);
@@ -104,20 +107,33 @@ export const Table: React.FC = () => {
       );
     }
     if (filteredArray.length === 0) {
-      setShownData(dataArray.slice(-14));
+      setShownData(dataArray.slice(-number));
       setMessage("data not found");
     } else {
       setShownData(filteredArray);
     }
   }, [datesCtx]);
 
+  let length = dataArray.length;
+  const [clicks, setClicks] = useState(0)
+  let maxClicks = length/number
+
   const arrowHandlerRight = () => {
-    setShownData(dataArray.slice(-14));
+    // setShownData(dataArray.slice(-number));
+    setClicks(clicks + 1)
   };
   const arrowHandlerLeft = () => {
-    let length = dataArray.length;
-    setShownData(dataArray.slice(0, length - 14));
+    // let length = dataArray.length;
+    // setShownData(dataArray.slice(length - number *2 , length - number));
+    setClicks(clicks - 1)
   };
+
+  useEffect(() => {
+    
+    setShownData(dataArray.slice(length + number * clicks, length + number * (clicks + 1)))
+  }, [clicks])
+
+
 
   let dataCtx = useContext(DataContext)
   const [showDataMenu, setShowDataMenu] = useState(false);
@@ -129,11 +145,12 @@ export const Table: React.FC = () => {
 
   return (
     <>
+    
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>
-          <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
-          <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
+          {-1 * clicks < maxClicks  && <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />}
+          {clicks < 0 && <ImgButton type="right-arrow" onClick={arrowHandlerRight} />}
           <ImgButton type="edit" onClick={dataMenuHandler} />
         </div>
 

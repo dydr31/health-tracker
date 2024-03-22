@@ -6,28 +6,33 @@ import { updateData } from "../../store/data-functions";
 import { DataContext } from "../../store/data-context";
 
 export const DataMenuItem: React.FC<{
-   date: string; upper: number; lower: number; pulse: number; 
+  date: string;
+  upper: number;
+  lower: number;
+  pulse: number;
 }> = (props) => {
-
-    const dataCtx = useContext(DataContext)
+  const dataCtx = useContext(DataContext);
   const deleteHandler = async () => {
-    await dataCtx.removeItem(props.date)
-    
-    
+    await dataCtx.removeItem(props.date);
+    setTimeout(() => {
+        window.location.reload()
+    }, 1000)
   };
- 
-  
+
   const [showButton, setShowbutton] = useState(false);
   const showDeleteButton = () => {
     setShowbutton(true);
   };
   const removeDeleteButton = () => {
-    setShowbutton(false)
-  }
+    setShowbutton(false);
+  };
 
-  
   return (
-    <li onMouseEnter={showDeleteButton} onMouseLeave={removeDeleteButton} className={classes.li}>
+    <li
+      onMouseEnter={showDeleteButton}
+      onMouseLeave={removeDeleteButton}
+      className={classes.li}
+    >
       <div className={classes["floating-button"]}>
         {showButton && <ImgButton type={"close"} onClick={deleteHandler} />}
       </div>

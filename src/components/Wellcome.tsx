@@ -12,6 +12,7 @@ export const Wellcome = () => {
   }
   return (
     <>
+    <div className={classes.background}></div>
       <div className={classes.wellcome}>
         <h1>This is a health tracker app.</h1>
         

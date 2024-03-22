@@ -1,0 +1,9 @@
+@import "../../variables";
+
+.inactive{
+    background-color: $accent-color;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none;
+    cursor:none;
+}
