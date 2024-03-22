@@ -9,7 +9,7 @@ export const Form: React.FC = (props) => {
     event.preventDefault();
     let result = checkForm();
     if (result !== null){
-        addDataPoint("gzl123n@gmail.com", "Гузель Гузель", [result!])
+        addDataPoint("gzl123n@gmail.com", [result!])
     }
     setTimeout(() => {
       window.location.reload();

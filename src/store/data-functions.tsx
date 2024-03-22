@@ -12,34 +12,56 @@ export const getUserData = async (id: string) => {
   }
 };
 
-export const fetchData = async (email: string, name: string) => {
+export const fetchData = async (email: string) => {
   try {
-    let id = await getUserId(email, name);
+    let id = await getUserId(email);
     let data = await getUserData(id!);
     return data;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 
-type Data = 
-  {
-    date: Date;
-    upper: number;
-    lower: number;
-    pulse: number;
-  }[];
+type Data1 = {
+  date: Date;
+  upper: number;
+  lower: number;
+  pulse: number;
+}[];
 
-export const addDataPoint = async (email: string, name: string, data: Data) => {
+type Data2 = {
+  date: {seconds: number, nanoseconds: number};
+  upper: number;
+  lower: number;
+  pulse: number;
+}
+
+export const addDataPoint = async (
+  email: string,
+  data: Data1
+) => {
   try {
     //we need to store id in a context
-    let id = await getUserId(email, name);
+    let id = await getUserId(email);
     const userRef = doc(db, "users", id!);
-    let prevData = await getUserData(id!)
-    console.log(prevData.concat(data))
-    //and data array in context 
+    let prevData = await getUserData(id!);
+    console.log(prevData.concat(data));
+    //and data array in context
     await updateDoc(userRef, { data: prevData.concat(data) });
   } catch (err) {
-    console.error(err)
+    console.error(err);
+  }
+};
+
+export const updateData = async (
+  email: string,
+  data: Data2[]
+) => {
+  try {
+    let id = await getUserId(email);
+    const userRef = doc(db, "users", id!);
+    await updateDoc(userRef, { data: data });
+  } catch (err) {
+    console.error(err);
   }
 };

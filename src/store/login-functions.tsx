@@ -15,7 +15,7 @@ export const logInWithGoogle = async () => {
     localStorage.setItem("Email", email);
     localStorage.setItem("Name", name);
     console.log("you've logged in");
-    getUserId(email, name);
+    getUserId(email);
   } catch (err) {
     console.error(err);
   }
@@ -47,7 +47,7 @@ const getUsersDbData = async () => {
   }
 };
 
-export const getUserId = async (email: string, name: string) => {
+export const getUserId = async (email: string) => {
 
   try {
    
@@ -59,7 +59,7 @@ export const getUserId = async (email: string, name: string) => {
         return result.id
       //getUserData(result.id);
     } else {
-      addUserToDb(email, name);
+      addUserToDb(email);
     }
 
   } catch (err) {
@@ -67,10 +67,10 @@ export const getUserId = async (email: string, name: string) => {
   }
 };
 
-export const addUserToDb = async (email: string, name: string) => {
+export const addUserToDb = async (email: string) => {
   try {
     await addDoc(usersRef, {
-      name: name,
+      name: '',
       email: email,
       data: [],
     });

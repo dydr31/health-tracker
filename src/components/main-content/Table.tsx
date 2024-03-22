@@ -11,6 +11,7 @@ import { DataPick } from "./DataPick";
 import { DatesContext } from "../../store/date-context";
 import { fileURLToPath } from "url";
 import { DataMenu } from "./DataMenu";
+import { DataContext } from "../../store/data-context";
 
 type List = {
   date: string;
@@ -47,12 +48,11 @@ export const Table: React.FC = () => {
 
   useEffect(() => {
     const setData = async () => {
-      let data = await fetchData("gzl123n@gmail.com", "Гузель Гузель");
+      let data = await fetchData("gzl123n@gmail.com");
       setDataArray(data);
       setShownData(data.slice(-14));
     };
     setData();
-    console.log("first use effect");
   }, []);
 
   let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
@@ -119,10 +119,12 @@ export const Table: React.FC = () => {
     setShownData(dataArray.slice(0, length - 14));
   };
 
+  let dataCtx = useContext(DataContext)
   const [showDataMenu, setShowDataMenu] = useState(false);
 
   const dataMenuHandler = () => {
     setShowDataMenu(!showDataMenu);
+    dataCtx.loadItems()
   };
 
   return (

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { getUserId } from "./login-functions";
 
 type LogInContextObj = {
   LogIn: boolean;
   Email: string;
-  id: string,
+  id: string;
+  fetchId: () => void
 };
 
 export const LogInContext = React.createContext<LogInContextObj>({
   LogIn: false,
   Email: "",
   id: '',
+  fetchId: () => {},
 });
 
 const LogInContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -25,12 +28,17 @@ const LogInContextProvider: React.FC<{ children: React.ReactNode }> = (
     Email = "";
   }
 
-  
+  const [idValue, setId] = useState('')
+
+  const fetchIdHandler = () => {
+    getUserId(Email)
+  }
 
   const contextValue: LogInContextObj = {
     LogIn: LogInStatus,
     Email: Email,
-    id: ''
+    id: idValue,
+    fetchId: fetchIdHandler
   };
   return (
     <LogInContext.Provider value={contextValue}>

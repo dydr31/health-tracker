@@ -1,0 +1,17 @@
+@import "../../variables";
+.li {
+  border-right: $border;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  min-width: 3vw;
+}
+
+.floating-button {
+  position: absolute;
+  top: 2.5rem;
+}
