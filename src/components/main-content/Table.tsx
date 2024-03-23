@@ -3,19 +3,15 @@ import classes from "./Table.module.scss";
 import { Form } from "./Form";
 import { ImgButton } from "../UI/ImgButton";
 import { fetchData } from "../../store/data-functions";
-import { DateDisplay } from "./DateDisplay";
 import { LineChart } from "./Chart";
 import { RoundButton } from "../UI/RoundButton";
 import { Modal } from "../UI/Modal";
 import { DataPick } from "./DataPick";
 import { DatesContext } from "../../store/date-context";
-import { fileURLToPath } from "url";
 import { DataMenu } from "./DataMenu";
 import { DataContext } from "../../store/data-context";
-import { click } from "@testing-library/user-event/dist/click";
-import { InactiveButton } from "../UI/InactiveButton";
-import { Button } from "../UI/Button";
 import { SmallButton } from "../UI/SmallButton";
+import { LogInContext } from "../../store/login-context";
 
 type List = {
   date: string;
@@ -35,8 +31,9 @@ export const Table: React.FC = () => {
   };
 
   let [dataArray, setDataArray] = useState(dummyList);
-  let [filteredDataArray, setFilteredDataArray] = useState(dummyList);
   let [shownData, setShownData] = useState(dummyList);
+
+
 
   const [chartData, setChartData] = useState({
     labels: [""],
@@ -50,19 +47,29 @@ export const Table: React.FC = () => {
     ],
   });
 
+
+
   const datesCtx = useContext(DatesContext);
+  const logInCtx = useContext(LogInContext);
+
+
 
   useEffect(() => {
     const setData = async () => {
-      let data = await fetchData("gzl123n@gmail.com");
+      let email = logInCtx.Email;
+      let data = await fetchData(email);
       setDataArray(data);
       setShownData(data.slice(-number));
     };
     setData();
   }, []);
 
+
+
   let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
   let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
+
+
 
   useEffect(() => {
     let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
@@ -92,10 +99,13 @@ export const Table: React.FC = () => {
     });
   }, [shownData, number]);
 
-  let [message, setMessage] = useState("");
+
+
   let length = dataArray.length;
   const [clicks, setClicks] = useState(0);
   let maxClicks = length / number;
+
+
 
   useEffect(() => {
     let from = Number(datesCtx.dateFrom);
@@ -116,9 +126,7 @@ export const Table: React.FC = () => {
     console.log(filteredArray);
     if (filteredArray.length === 0) {
       setShownData(dataArray.slice(-number));
-      // setMessage("data not found");
     } else {
-      //setShownData(filteredArray);
       setDataArray(filteredArray);
     }
   }, [datesCtx]);
@@ -129,6 +137,8 @@ export const Table: React.FC = () => {
   const arrowHandlerLeft = () => {
     setClicks(clicks - 1);
   };
+
+
 
   useEffect(() => {
     let a = length + number * clicks;
@@ -169,7 +179,9 @@ export const Table: React.FC = () => {
           )}
           <ImgButton type="edit" onClick={dataMenuHandler} />
           <DataPick />
-          <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
+          <div className={classes["dont-show-on-mobile"]}>
+            <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
+          </div>
         </div>
       </div>
       <div className={classes["chart-and-form-container"]}>
