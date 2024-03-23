@@ -1,8 +1,6 @@
 import classes from "./DataMenuItem.module.scss";
-import { ImgButton } from "../UI/ImgButton";
 import { DateDisplay } from "./DateDisplay";
-import { useCallback, useContext, useState } from "react";
-import { updateData } from "../../store/data-functions";
+import { useContext, useState } from "react";
 import { DataContext } from "../../store/data-context";
 import { TransparentButton } from "../UI/TransparentButton";
 

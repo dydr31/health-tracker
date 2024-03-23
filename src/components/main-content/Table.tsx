@@ -62,7 +62,7 @@ export const Table: React.FC = () => {
       setShownData(data.slice(-number));
     };
     setData();
-  }, []);
+  });
 
 
 
