@@ -6,26 +6,32 @@
     flex-direction: column;
     align-items: flex-end;
     z-index: 101;
+
     position:absolute;
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.date-options{
+.form{
     display: flex;
     flex-direction: column;
-    gap: .5rem;
     background-color: $main-color;
-    padding: .5rem;
+    width: 100%;
+    
 }
 .form-content{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: .5rem;
+    padding: 1rem;
+}
+.form-content label{
+    text-align: right;
 }
 
 .input {
-    color: gray;
+    color: $accent-color2;
 }
 
 @media(max-width: 500px){

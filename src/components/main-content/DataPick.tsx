@@ -37,8 +37,7 @@ export const DataPick: React.FC = () => {
           <div className={classes["form-container"]}>
             <ImgButton type={"close"} onClick={showFormHandler} />
 
-            <form className={classes["date-options"]} onSubmit={submitForm}>
-
+            <form className={classes.form} onSubmit={submitForm}>
               <div className={classes["form-content"]}>
                 <label>from:</label>
                 <input
@@ -56,16 +55,12 @@ export const DataPick: React.FC = () => {
                 />
               </div>
 
-              <div className={classes.submit}>
-                <Button text="apply" onClick={submitForm} />
-              </div>
+              <Button text="apply" onClick={submitForm} />
             </form>
           </div>
         </>
       )}
-      {(
-        <SmallButton text={"filter by date"} onClick={showFormHandler} />
-      )}
+      {<SmallButton text={"filter by date"} onClick={showFormHandler} />}
     </>
   );
 };

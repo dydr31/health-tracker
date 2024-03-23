@@ -15,6 +15,12 @@
     width: .75rem;
 }
 
+.transparent {
+    background-color: red
+    //rgb(0, 0, 0, 0)
+    ;
+}
+
 .close:hover,
 .close:active{
     background-color: $button-color-hover;

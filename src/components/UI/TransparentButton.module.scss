@@ -1,0 +1,17 @@
+@import "../../variables";
+
+.close{
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.close img{
+    width: .75rem;
+}
+

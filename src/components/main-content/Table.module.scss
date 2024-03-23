@@ -3,7 +3,7 @@
 .chart-and-form-container{
     display: flex;
     gap: 1rem;
-    // width: 100vw;
+    
 }
 
 .chart-container{
@@ -43,11 +43,11 @@
 }
 
 .options{
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
-    position: absolute;
     right: 3rem;
     gap: .5rem;
 }
@@ -72,12 +72,6 @@
     transform: translate(-50%, -50%);
 }
 
-.data-pick-container{
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-}
-
 @media(max-width: 500px){
     .chart-and-form-container{
         flex-direction: column;
@@ -86,11 +80,6 @@
         position: static;
         flex-direction: row;
         margin-bottom: .5rem;
-    }
-    .data-pick-container{
-        position:static;
-        flex-direction: row;
-        //top: 50vh;
     }
     h2{
         font-size: 18px;

@@ -168,9 +168,6 @@ export const Table: React.FC = () => {
             <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
           )}
           <ImgButton type="edit" onClick={dataMenuHandler} />
-        </div>
-
-        <div className={classes["data-pick-container"]}>
           <DataPick />
           <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
         </div>
@@ -189,7 +186,6 @@ export const Table: React.FC = () => {
             </div>
           </>
         )}
-        {/* <p className={classes.message}>{message}</p> */}
 
         <div className={"form-or-button-container"}>
           {isFormOpen && (

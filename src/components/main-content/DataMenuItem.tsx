@@ -4,6 +4,7 @@ import { DateDisplay } from "./DateDisplay";
 import { useCallback, useContext, useState } from "react";
 import { updateData } from "../../store/data-functions";
 import { DataContext } from "../../store/data-context";
+import { TransparentButton } from "../UI/TransparentButton";
 
 export const DataMenuItem: React.FC<{
   date: string;
@@ -34,7 +35,7 @@ export const DataMenuItem: React.FC<{
       className={classes.li}
     >
       <div className={classes["floating-button"]}>
-        {showButton && <ImgButton type={"close"} onClick={deleteHandler} />}
+        {showButton && <TransparentButton onClick={deleteHandler} />}
       </div>
       <div>
         <DateDisplay date={props.date} />

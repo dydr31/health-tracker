@@ -3,8 +3,8 @@
   border-right: $border;
   margin: 0;
   padding: 0;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,5 +16,12 @@
 .floating-button {
   position: absolute;
   top: 2.5rem;
-  transform: translate(.75rem);
+  transform: translate(1.5rem);
+}
+
+@media(max-width: 500px){
+    .floating-button{
+        top: 2.5rem;
+        transform: translate(.75rem, -.5rem);
+    }
 }
