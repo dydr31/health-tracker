@@ -1,7 +1,8 @@
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { addDataPoint } from "../../store/data-functions";
 import { Button } from "../UI/Button";
 import classes from "./Form.module.scss";
+import { LogInContext } from "../../store/login-context";
 
 export const Form: React.FC = (props) => {
 
@@ -9,11 +10,14 @@ export const Form: React.FC = (props) => {
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
 
+  const logInCtx = useContext(LogInContext)
+
   const sumbitForm = (event: React.FormEvent) => {
     event.preventDefault();
     let checkData = checkForm();
     if (checkData !== null) {
-      addDataPoint("gzl123n@gmail.com", [checkData!]);
+      let email = logInCtx.Email
+      addDataPoint(email, [checkData!]);
       setTimeout(() => {
         window.location.reload();
       }, 1000);
