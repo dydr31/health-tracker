@@ -6,11 +6,11 @@
   width: 100%;
 }
 
-.form div {
+.inputs{
   display: flex;
   flex-direction: column;
   padding: $size-main;
-  gap: 18px;
+  gap: .5rem;
   padding-top: calc(0.5rem + 16px);
   padding-bottom: calc(0.5rem + 16px);
   background-color: $main-color;

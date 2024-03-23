@@ -4,6 +4,7 @@ import { Button } from "../UI/Button";
 import classes from "./Form.module.scss";
 
 export const Form: React.FC = (props) => {
+
   const upperRef = useRef<HTMLInputElement>(null);
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
@@ -19,22 +20,48 @@ export const Form: React.FC = (props) => {
     }
   };
   let [invalidUpper, setInvalidUpper] = useState(false);
+  let [invalidLower, setInvalidLower] = useState(false);
+  let [invalidPulse, setInvalidPulse] = useState(false);
+
+  const checkUpper = (upper: number) => {
+    if (upper <= 370 && upper >= 50) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const checkLower = (lower: number) => {
+    if (lower >= 20 && lower <= 360) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const checkPulse = (pulse: number) => {
+    if (pulse >= 26 && pulse <= 600) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const checkForm = () => {
-    const upper = upperRef.current!.value;
-    const lower = lowerRef.current!.value;
-    const pulse = pulseRef.current!.value;
-    let checkUpper = Number(upper);
-    console.log(checkUpper);
-    let checkLower = Number(lower);
-    let checkPulse = Number(pulse);
-    if (checkUpper <= 370 && checkUpper >= 50) {
-      if (checkLower >= 20 && checkLower <= 360) {
-        if (checkPulse >= 26 && checkPulse <= 600) {
+    let upper = Number(upperRef.current!.value);
+    let lower = Number(lowerRef.current!.value);
+    let pulse = Number(pulseRef.current!.value);
+
+    if (checkUpper(upper) === true) {
+
+      if (checkLower(lower) === true) {
+
+        if (checkPulse(pulse) === true) {
           let dataPoint = {
             date: new Date(),
-            upper: checkUpper!,
-            lower: checkLower!,
-            pulse: checkPulse!,
+            upper: upper!,
+            lower: lower!,
+            pulse: pulse!,
           };
           console.log(dataPoint);
           return dataPoint;
@@ -43,51 +70,83 @@ export const Form: React.FC = (props) => {
           return null;
         }
       }
+
+      setInvalidLower(true);
+
+      if (checkPulse(pulse) === false) {
+
+        setInvalidPulse(true)
+        return null;
+      }
+      return null;
+
     } else {
+      setInvalidUpper(true);
+      console.log(pulse);
+      if (checkLower(lower) === false) {
+        setInvalidLower(true);
+      }
+      if (checkPulse(pulse) === false) {
+        setInvalidPulse(true);
+      }
       return null;
     }
   };
 
   const handleUpperBlur = () => {
     const upper = Number(upperRef.current!.value);
-    if (upper <= 370 && upper >= 50) {
+    if (checkUpper(upper) === true) {
       setInvalidUpper(false);
-      console.log("valid");
     } else {
       setInvalidUpper(true);
     }
   };
 
+  const handleLowerBlur = () => {
+    const lower = Number(lowerRef.current!.value);
+    if (checkLower(lower) === true) {
+      setInvalidLower(false);
+    } else {
+      setInvalidLower(true);
+    }
+  };
+
+  const handlePulseBlur = () => {
+    const pulse = Number(lowerRef.current!.value);
+    if (checkPulse(pulse) === true) {
+      setInvalidPulse(false);
+    } else {
+      setInvalidPulse(true);
+    }
+  };
+
   return (
     <>
-      {console.log(invalidUpper)}
       <form className={classes.form} onSubmit={sumbitForm}>
-        <div>
+        <div className={classes["inputs"]}>
           <input type="date" className={classes["date-input"]} />
-          <div>
-            <input
-              type="text"
-              placeholder="upper"
-              ref={upperRef}
-              className={`${classes["input"]} ${
-                invalidUpper && classes["red"]
-              }`}
-              onBlur={handleUpperBlur}
-            />
-            <p className={classes["red-text"]}>value invalid</p>
-          </div>
+
+          <input
+            type="text"
+            placeholder="upper"
+            ref={upperRef}
+            className={`${classes["input"]} ${invalidUpper && classes["red"]}`}
+            onBlur={handleUpperBlur}
+          />
 
           <input
             type="text"
             placeholder="lower"
             ref={lowerRef}
-            className={classes["input"]}
+            className={`${classes["input"]} ${invalidLower && classes["red"]}`}
+            onBlur={handleLowerBlur}
           />
           <input
             type="text"
             placeholder="heartbeat"
             ref={pulseRef}
-            className={classes["input"]}
+            className={`${classes["input"]} ${invalidPulse && classes["red"]}`}
+            onBlur={handlePulseBlur}
           />
         </div>
         <Button text="save" onClick={sumbitForm} />

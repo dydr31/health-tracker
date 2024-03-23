@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React from "react";
 import { getUserData, updateData } from "./data-functions";
 import { getUserId } from "./login-functions";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import { useState } from "react";
 type Date = { seconds: number; nanoseconds: number };
 
 type ItemObj = {
-  date: Date,
+  date: Date;
   upper: number;
   lower: number;
   pulse: number;
@@ -21,7 +21,7 @@ type DataContextObj = {
 export const DataContext = React.createContext<DataContextObj>({
   items: [
     {
-      date: {seconds : 0, nanoseconds: 0},
+      date: { seconds: 0, nanoseconds: 0 },
       upper: 0,
       lower: 0,
       pulse: 0,
@@ -36,7 +36,7 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
 ) => {
   let [items, setItems] = useState([
     {
-      date: {seconds: 0, nanoseconds: 0},
+      date: { seconds: 0, nanoseconds: 0 },
       upper: 1,
       lower: 1,
       pulse: 1,
@@ -49,7 +49,7 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     );
 
     console.log(filteredItems);
-    console.log(items)
+    console.log(items);
     let transformed = filteredItems.map((x) => ({
       data: new Date(Number(x.date.toString().slice(18, 28)) * 1000),
       upper: x.upper,

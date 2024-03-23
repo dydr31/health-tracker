@@ -3,6 +3,8 @@ import { Button } from "../UI/Button";
 import { ImgButton } from "../UI/ImgButton";
 import classes from "./DataPick.module.scss";
 import { useContext, useRef, useState } from "react";
+import { SmallButton } from "../UI/SmallButton";
+import { Modal } from "../UI/Modal";
 
 export const DataPick: React.FC = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -30,25 +32,39 @@ export const DataPick: React.FC = () => {
   return (
     <>
       {isFormOpen && (
-        <div className={classes['form-container']}>
-          <ImgButton type={"close"} onClick={showFormHandler} />
+        <>
+          <Modal />
+          <div className={classes["form-container"]}>
+            <ImgButton type={"close"} onClick={showFormHandler} />
 
-          <form className={classes["date-options"]} onSubmit={submitForm}>
-            <label>from:</label>
-            <input
-              type="date"
-              ref={fromRef}
-              className={classes.input}
-              required
-            />
-            <label>to:</label>
-            <input type="date" ref={toRef} className={classes.input} required />
-            <Button text="apply" onClick={submitForm} />
-          </form>
-        </div>
+            <form className={classes["date-options"]} onSubmit={submitForm}>
+
+              <div className={classes["form-content"]}>
+                <label>from:</label>
+                <input
+                  type="date"
+                  ref={fromRef}
+                  className={classes.input}
+                  required
+                />
+                <label>to:</label>
+                <input
+                  type="date"
+                  ref={toRef}
+                  className={classes.input}
+                  required
+                />
+              </div>
+
+              <div className={classes.submit}>
+                <Button text="apply" onClick={submitForm} />
+              </div>
+            </form>
+          </div>
+        </>
       )}
-      {!isFormOpen && (
-        <Button text={"filter by date"} onClick={showFormHandler} />
+      {(
+        <SmallButton text={"filter by date"} onClick={showFormHandler} />
       )}
     </>
   );

@@ -1,0 +1,17 @@
+@import "../../variables";
+
+.small-button {
+    font-size: 14px;
+    height: 1.5rem;
+    padding: $size-main/4;
+    padding-left: $size-main;
+    padding-right: $size-main;
+    border: none;
+    background-color: $button-color;
+    cursor: pointer;
+}
+
+.small-button:hover,
+.small-button:active{
+    background-color: $button-color-hover;
+}

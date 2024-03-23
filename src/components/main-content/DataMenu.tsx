@@ -1,10 +1,6 @@
-import { useContext, useState } from "react";
-import { ImgButton } from "../UI/ImgButton";
-import { Modal } from "../UI/Modal";
 import classes from "./DataMenu.module.scss";
-import { DateDisplay } from "./DateDisplay";
 import { DataMenuItem } from "./DataMenuItem";
-import { DataContext } from "../../store/data-context";
+
 
 export const DataMenu: React.FC<{
   data: { date: string; upper: number; lower: number; pulse: number }[];
@@ -13,12 +9,12 @@ export const DataMenu: React.FC<{
     <>
       <div className={classes["container"]}>
         <ul>
-          <li className={classes.labels}>
+          {/* <li className={classes.labels}>
             <p>date</p>
             <p>upper</p>
             <p>lower</p>
             <p>pulse</p>
-          </li>
+          </li> */}
 
           {props.data.map((item) => (
             <DataMenuItem

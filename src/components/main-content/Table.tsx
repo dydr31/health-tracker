@@ -14,6 +14,8 @@ import { DataMenu } from "./DataMenu";
 import { DataContext } from "../../store/data-context";
 import { click } from "@testing-library/user-event/dist/click";
 import { InactiveButton } from "../UI/InactiveButton";
+import { Button } from "../UI/Button";
+import { SmallButton } from "../UI/SmallButton";
 
 type List = {
   date: string;
@@ -25,7 +27,7 @@ type List = {
 const dummyList: List = [];
 
 export const Table: React.FC = () => {
-  let number = 4;
+  const [number, setNumber] = useState(7);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const formHandler = () => {
@@ -88,7 +90,7 @@ export const Table: React.FC = () => {
         },
       ],
     });
-  }, [shownData]);
+  }, [shownData, number]);
 
   let [message, setMessage] = useState("");
   let length = dataArray.length;
@@ -140,7 +142,7 @@ export const Table: React.FC = () => {
 
     setShownData(dataArray.slice(a, b));
     console.log(shownData);
-  }, [clicks, datesCtx]);
+  }, [clicks, datesCtx, number]);
 
   let dataCtx = useContext(DataContext);
   const [showDataMenu, setShowDataMenu] = useState(false);
@@ -148,6 +150,10 @@ export const Table: React.FC = () => {
   const dataMenuHandler = () => {
     setShowDataMenu(!showDataMenu);
     dataCtx.loadItems();
+  };
+
+  const showMoreElementsHandler = () => {
+    setNumber(number + 1);
   };
 
   return (
@@ -164,7 +170,10 @@ export const Table: React.FC = () => {
           <ImgButton type="edit" onClick={dataMenuHandler} />
         </div>
 
-        <div className={classes['data-pick-container']}><DataPick /></div>
+        <div className={classes["data-pick-container"]}>
+          <DataPick />
+          <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
+        </div>
       </div>
       <div className={classes["chart-and-form-container"]}>
         <div className={classes["chart-container"]}>

@@ -17,27 +17,33 @@
     border-bottom: $border;
 }
 
-.container li {
-    border-right: $border;
-    margin-left: .75rem;
-    margin-right: .75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    text-align: center;
-    min-width: 3vw;
+// .container li {
+//     border-right: $border;
 
-}
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end;
+//     justify-content: center;
+//     text-align: center;
+//     min-width: 3vw;
 
-.labels{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
+// }
+
+// .labels{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-end;
+//     padding-left: 1rem;
+//     padding-right: .5rem;
+// }
 
 .floating-button{
     position: absolute;
     top: 2.5rem;
 }
 
+@media(max-width: 500px){
+    .container{
+        padding: .5rem;
+    }
+}

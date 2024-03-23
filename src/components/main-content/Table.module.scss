@@ -72,16 +72,25 @@
     transform: translate(-50%, -50%);
 }
 
+.data-pick-container{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
 @media(max-width: 500px){
     .chart-and-form-container{
         flex-direction: column;
     }
     .options{
         position: static;
+        flex-direction: row;
+        margin-bottom: .5rem;
     }
     .data-pick-container{
-        position: absolute;
-        top: 50vh;
+        position:static;
+        flex-direction: row;
+        //top: 50vh;
     }
     h2{
         font-size: 18px;

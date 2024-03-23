@@ -1,7 +1,6 @@
 import classes from "./Wellcome.module.css";
 import { Button } from "./UI/Button";
 import { logInWithGoogle } from "../store/login-functions";
-import { useState } from "react";
 
 export const Wellcome = () => {
   
