@@ -20,7 +20,7 @@ type List = {
   pulse: number;
 }[];
 
-const dummyList: List = [];
+const dummyList: List = [{ date: "2020-01-01", upper: 0, lower: 0, pulse: 0 }];
 
 export const Table: React.FC = () => {
   const [number, setNumber] = useState(7);
@@ -32,8 +32,6 @@ export const Table: React.FC = () => {
 
   let [dataArray, setDataArray] = useState(dummyList);
   let [shownData, setShownData] = useState(dummyList);
-
-
 
   const [chartData, setChartData] = useState({
     labels: [""],
@@ -47,12 +45,8 @@ export const Table: React.FC = () => {
     ],
   });
 
-
-
   const datesCtx = useContext(DatesContext);
   const logInCtx = useContext(LogInContext);
-
-
 
   useEffect(() => {
     const setData = async () => {
@@ -64,12 +58,8 @@ export const Table: React.FC = () => {
     setData();
   });
 
-
-
   let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
   let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
-
-
 
   useEffect(() => {
     let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
@@ -99,13 +89,10 @@ export const Table: React.FC = () => {
     });
   }, [shownData, number]);
 
-
-
-  let length = dataArray.length;
+  
   const [clicks, setClicks] = useState(0);
+  let length = dataArray.length;
   let maxClicks = length / number;
-
-
 
   useEffect(() => {
     let from = Number(datesCtx.dateFrom);
@@ -117,13 +104,13 @@ export const Table: React.FC = () => {
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
       );
     }
-    console.log(filteredArray);
+    // console.log(filteredArray);
     if (to > 0) {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
       );
     }
-    console.log(filteredArray);
+    // console.log(filteredArray);
     if (filteredArray.length === 0) {
       setShownData(dataArray.slice(-number));
     } else {
@@ -138,8 +125,6 @@ export const Table: React.FC = () => {
     setClicks(clicks - 1);
   };
 
-
-
   useEffect(() => {
     let a = length + number * clicks;
     if (a < 0) {
@@ -151,7 +136,7 @@ export const Table: React.FC = () => {
     }
 
     setShownData(dataArray.slice(a, b));
-    console.log(shownData);
+    // console.log(shownData);
   }, [clicks, datesCtx, number]);
 
   let dataCtx = useContext(DataContext);

@@ -1,10 +1,11 @@
 import { auth } from "../config/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { googleProvider } from "../config/firebase";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { getUserData } from "./data-functions";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const logInWithGoogle = async () => {
   try {
@@ -48,20 +49,17 @@ const getUsersDbData = async () => {
 };
 
 export const getUserId = async (email: string) => {
-
   try {
-   
     let data = await getUsersDbData();
-    
+
     let result = data?.find((x) => x.email === email);
-   
+
     if (result !== undefined) {
-        return result.id
+      return result.id;
       //getUserData(result.id);
     } else {
       addUserToDb(email);
     }
-
   } catch (err) {
     console.error(err);
   }
@@ -70,7 +68,7 @@ export const getUserId = async (email: string) => {
 export const addUserToDb = async (email: string) => {
   try {
     await addDoc(usersRef, {
-      name: '',
+      name: "",
       email: email,
       data: [],
     });
@@ -78,10 +76,35 @@ export const addUserToDb = async (email: string) => {
 
     let user = data?.find((x) => x.email === email);
 
-    return user?.id
+    return user?.id;
     // getUserData(user!.id);
-
   } catch (err) {
     console.error(err);
   }
 };
+
+export const LogIn = async (email: string, password: string) => {
+  try {
+    let response = await signInWithEmailAndPassword(auth, email, password);
+    console.log(response);
+    return response
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const signUp = async (email:string, password: string) => {
+  try{
+    let response = await createUserWithEmailAndPassword(auth, email, password)
+    console.log(response)
+    return response
+    // if (response.ok){
+    //   console.log('a')
+    // }
+
+  } catch(err: unknown){
+    console.error(err)
+    // console.log(err.message)
+    return err
+  }
+}

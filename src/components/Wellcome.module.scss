@@ -9,7 +9,7 @@
     left: 50%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    //align-items: flex-end;
 }
 
 .wellcome h1 {
@@ -18,12 +18,30 @@
 
 .wellcome button {
     font-size: 23px;
-    padding: .5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border: none;
 }
 
+.signup{
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.menu-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+.signup-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 @media(max-width: 500px){
     .wellcome h1{
         font-size: 40px;

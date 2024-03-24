@@ -18,9 +18,13 @@ export const Form: React.FC = (props) => {
     if (checkData !== null) {
       let email = logInCtx.Email
       addDataPoint(email, [checkData!]);
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      upperRef.current!.value = ''
+      lowerRef.current!.value = ''
+      pulseRef.current!.value = ''
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1000);
+
     }
   };
   let [invalidUpper, setInvalidUpper] = useState(false);
@@ -67,7 +71,7 @@ export const Form: React.FC = (props) => {
             lower: lower!,
             pulse: pulse!,
           };
-          console.log(dataPoint);
+          // console.log(dataPoint);
           return dataPoint;
         } else {
           console.log("measurements invalid");
