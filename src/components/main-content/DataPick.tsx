@@ -5,6 +5,7 @@ import classes from "./DataPick.module.scss";
 import { useContext, useRef, useState } from "react";
 import { SmallButton } from "../UI/SmallButton";
 import { Modal } from "../UI/Modal";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const DataPick: React.FC = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -34,30 +35,38 @@ export const DataPick: React.FC = () => {
       {isFormOpen && (
         <>
           <Modal />
-          <div className={classes["form-container"]}>
-            <ImgButton type={"close"} onClick={showFormHandler} />
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ bounce: 0, duration: 0.5 }}
+              className={classes["form-container"]}
+            >
+              <ImgButton type={"close"} onClick={showFormHandler} />
 
-            <form className={classes.form} onSubmit={submitForm}>
-              <div className={classes["form-content"]}>
-                <label>from:</label>
-                <input
-                  type="date"
-                  ref={fromRef}
-                  className={classes.input}
-                  required
-                />
-                <label>to:</label>
-                <input
-                  type="date"
-                  ref={toRef}
-                  className={classes.input}
-                  required
-                />
-              </div>
+              <form className={classes.form} onSubmit={submitForm}>
+                <div className={classes["form-content"]}>
+                  <label>from:</label>
+                  <input
+                    type="date"
+                    ref={fromRef}
+                    className={classes.input}
+                    required
+                  />
+                  <label>to:</label>
+                  <input
+                    type="date"
+                    ref={toRef}
+                    className={classes.input}
+                    required
+                  />
+                </div>
 
-              <Button text="apply" onClick={submitForm} />
-            </form>
-          </div>
+                <Button text="apply" onClick={submitForm} />
+              </form>
+            </motion.div>
+          </AnimatePresence>
         </>
       )}
       {<SmallButton text={"filter by date"} onClick={showFormHandler} />}

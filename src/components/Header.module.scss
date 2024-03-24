@@ -23,6 +23,10 @@
 
 }
 
+.message{
+    cursor: pointer;
+}
+
 @media(max-width: 500px){
     .header{
         padding-top: $size-main/2;

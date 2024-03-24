@@ -10,28 +10,32 @@ export const SignUpMenu: React.FC = () => {
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const getResponse = async (email: string, password: string) => {
     let response = await signUp(email, password);
-    console.log(response)
-     if (response === undefined){
-        console.log()
-        setErrorMessage('Email already in use')
-     }
-     else {
-        setErrorMessage('')
-        localStorage.setItem('Email', email)
-        // window.location.reload()
-     }
-  }
+    console.log(response);
+    if (response === undefined) {
+      console.log();
+      setErrorMessage("Email already in use");
+    } else {
+      setErrorMessage("");
+      localStorage.setItem("Email", email);
+      setSuccessMessage(true)
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000)
+      
+    }
+  };
 
   const signUpWithEmailAndPassword = (event: FormEvent) => {
     event.preventDefault();
     let email = emailRef.current!.value;
     let password = passwordRef.current!.value;
     if (checkForm(email, password) === true) {
-      getResponse(email, password)
+      getResponse(email, password);
     } else {
       return null;
     }
@@ -62,7 +66,7 @@ export const SignUpMenu: React.FC = () => {
     let email = emailRef.current!.value;
     if (email.indexOf("@") > -1) {
       setEmailInvalid(false);
-      setErrorMessage('')
+      setErrorMessage("");
     } else {
       setEmailInvalid(true);
     }
@@ -79,11 +83,12 @@ export const SignUpMenu: React.FC = () => {
 
   return (
     <>
-      <form className={classes.form}>
+{!successMessage   &&   <form className={classes.form}>
         <input
           type="email"
           placeholder="email"
           className={`${classes.input} ${emailInvalid && classes.red}`}
+          key={'1'}
           ref={emailRef}
           onBlur={onBlurEmailHandler}
         />
@@ -91,12 +96,16 @@ export const SignUpMenu: React.FC = () => {
           type="password"
           placeholder="password"
           className={`${classes.input} ${passwordInvalid && classes.red}`}
+          key={'2'}
           ref={passwordRef}
           onBlur={onBlurPasswordHandler}
         />
-        {errorMessage !== '' && <p className={classes['error-message']}>{errorMessage}</p>}
+        {errorMessage !== "" && (
+          <p className={classes["error-message"]}>{errorMessage}</p>
+        )}
         <Button text={"Sign Up"} onClick={signUpWithEmailAndPassword} />
-      </form>
+      </form>}
+      {successMessage && <h2>You've signed up</h2>}
     </>
   );
 };

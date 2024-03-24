@@ -1,5 +1,16 @@
-import classes from './Modal.module.scss'
+import classes from "./Modal.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
 
-export const Modal: React.FC = props => {
-    return <div className={classes.modal}></div>
-}
+export const Modal: React.FC = (props) => {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ bounce: 0, duration: 0.5 }}
+        className={classes.modal}
+      ></motion.div>
+    </AnimatePresence>
+  );
+};

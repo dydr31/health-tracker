@@ -6,6 +6,8 @@ import { ImgButton } from "./UI/ImgButton";
 import { TransparentButton } from "./UI/TransparentButton";
 import { SignUpMenu } from "./SignUpMenu";
 import { LogInMenu } from "./LogInMenu";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const Wellcome = () => {
   const logInWithGoogleHandler = async () => {
@@ -30,28 +32,48 @@ export const Wellcome = () => {
     setLogInMenu(!logInMenu);
   };
 
-  
-
   return (
     <>
-    {console.log(isMenuOpen, logInMenu, signUpMenu)}
       <div className={classes.background}></div>
+      <AnimatePresence>
       <div className={classes.wellcome}>
-        {!isMenuOpen && (
-          <>
-            <h1>This is a health tracker.</h1>
-            <Button text={"Log in"} onClick={menuHandler} />
-          </>
-        )}
+        {/* <AnimatePresence> */}
+          {!isMenuOpen && (
+            <div
+              // initial={{ y: -50, opacity: 0 }}
+              // animate={{ y: 0, opacity: 1 }}
+              // exit={{ y: -50, opacity: 0 }}
+              // transition={{ bounce: 0, duration: 0.25 }}
+            >
+              <h1>This is a health tracker.</h1>
+              <Button text={"Log in"} onClick={menuHandler} />
+            </div>
+          )}
+        {/* </AnimatePresence> */}
 
-
+        
         {isMenuOpen && (
-          <div>
-            {!signUpMenu  &&  !logInMenu &&(
-              <div className={classes["menu-container"]}>
+          <motion.div
+            // initial={{ y: -50, opacity: 0 }}
+            // animate={{ y: 0, opacity: 1 }}
+            // exit={{ y: -50, opacity: 0 }}
+            // transition={{ bounce: 0, duration: 0.25 }}
+          >
+            {!signUpMenu && !logInMenu && (
+              <motion.div
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -50, opacity: 0 }}
+                transition={{ bounce: 0, duration: 0.25 }}
+                className={classes["menu-container"]}
+                key={"1"}
+              >
                 <TransparentButton onClick={menuHandler} />
                 <div className={classes["menu"]}>
-                  <Button text={"Log in with Email"} onClick={logInMenuHandler} />
+                  <Button
+                    text={"Log in with Email"}
+                    onClick={logInMenuHandler}
+                  />
                   <Button
                     text={"Log in with Google"}
                     onClick={logInWithGoogleHandler}
@@ -66,25 +88,40 @@ export const Wellcome = () => {
                     </strong>
                   </p>
                 </div>
-              </div>
+              </motion.div>
             )}
 
             {signUpMenu && (
-              <div className={classes["signup-menu"]}>
+              <motion.div
+                key={"2"}
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -50, opacity: 0 }}
+                transition={{ bounce: 0, duration: 0.25 }}
+                className={classes["menu-container"]}
+              >
                 <TransparentButton onClick={signUpMenuHandler} />
                 <SignUpMenu />
-              </div>
+              </motion.div>
             )}
 
             {logInMenu && (
-              <div className={classes["signup-menu"]}>
+              <motion.div
+                key={"3"}
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -50, opacity: 0 }}
+                transition={{ bounce: 0, duration: 0.25 }}
+                className={classes["menu-container"]}
+              >
                 <TransparentButton onClick={logInMenuHandler} />
                 <LogInMenu />
-              </div>
+              </motion.div>
             )}
-          </div>
-        )}
+          </motion.div>
+        )} 
       </div>
+      </AnimatePresence>
     </>
   );
 };

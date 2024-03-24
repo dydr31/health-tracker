@@ -15,10 +15,10 @@ export const Header = () => {
   return (
     <header className={classes.header}>
       <div>
-        <h1>Health tracker app</h1>
+        <h1>Health tracker</h1>
       </div>
       <div className={classes['elements']}>
-        <p>{LogInCtx.LogIn ? LogInCtx.Email : "You've logged off"}</p>
+        <p className={classes.message}>{LogInCtx.LogIn ? LogInCtx.Email : "You've logged off"}</p>
         {LogInCtx.LogIn && (
           <Button text={"Log Out"} onClick={logoutHandler}></Button>
         )}

@@ -10,6 +10,8 @@ export const LogInMenu: React.FC = () => {
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState('')
+
   const onBlurEmailHandler = () => {
     let email = emailRef.current!.value;
     if (email.indexOf("@") > -1) {
@@ -17,6 +19,7 @@ export const LogInMenu: React.FC = () => {
     } else {
       setEmailInvalid(true);
     }
+    setErrorMessage('')
   };
 
   const onBlurPasswordHandler = () => {
@@ -26,33 +29,31 @@ export const LogInMenu: React.FC = () => {
     } else {
       setPasswordInvalid(true);
     }
+    setErrorMessage('')
   };
 
-  const getResponse = async(email: string, password: string) => {
-    let response = await LogIn(email, password)
-    console.log(response)
-
-    if(response !== undefined){
-        console.log('logged')
-        localStorage.setItem('Email', email)
-        localStorage.setItem('Log In', 'true')
-        window.location.reload()
-    }
-    else {
-
-    }
-
-    return response
-  }
-  const logInWithEmailAndPassword = (event: FormEvent) => {
-    event.preventDefault()
+  const logInWithEmailAndPassword = async (event: FormEvent) => {
+    event.preventDefault();
     let email = emailRef.current!.value;
     let password = passwordRef.current!.value;
-    
-    let response = getResponse(email, password)
-   
 
-  }
+    
+    
+
+    if (email.indexOf("@") > -1 && password.length >= 8) {
+      let response = await LogIn(email, password);
+      console.log(response);
+
+      if (response !== undefined) {
+        console.log("logged");
+        localStorage.setItem("Email", email);
+        localStorage.setItem("Log In", "true");
+        window.location.reload();
+      } else {
+        setErrorMessage('Invalid credertials')
+      }
+    }
+  };
   return (
     <>
       <form className={classes.form}>
@@ -70,9 +71,9 @@ export const LogInMenu: React.FC = () => {
           ref={passwordRef}
           onBlur={onBlurPasswordHandler}
         />
-        {/* {errorMessage !== "" && (
+        {errorMessage !== "" && (
           <p className={classes["error-message"]}>{errorMessage}</p>
-        )} */}
+        )}
         <Button text={"Sign Up"} onClick={logInWithEmailAndPassword} />
       </form>
     </>

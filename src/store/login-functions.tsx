@@ -86,7 +86,6 @@ export const addUserToDb = async (email: string) => {
 export const LogIn = async (email: string, password: string) => {
   try {
     let response = await signInWithEmailAndPassword(auth, email, password);
-    console.log(response);
     return response
   } catch (err) {
     console.error(err);

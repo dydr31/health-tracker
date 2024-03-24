@@ -21,9 +21,9 @@ export const Form: React.FC = (props) => {
       upperRef.current!.value = ''
       lowerRef.current!.value = ''
       pulseRef.current!.value = ''
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 400);
 
     }
   };

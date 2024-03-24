@@ -12,6 +12,7 @@ import { DataMenu } from "./DataMenu";
 import { DataContext } from "../../store/data-context";
 import { SmallButton } from "../UI/SmallButton";
 import { LogInContext } from "../../store/login-context";
+import { AnimatePresence, motion } from "framer-motion";
 
 type List = {
   date: string;
@@ -56,7 +57,7 @@ export const Table: React.FC = () => {
       setShownData(data.slice(-number));
     };
     setData();
-  });
+  }, []);
 
   let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
   let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
@@ -89,8 +90,7 @@ export const Table: React.FC = () => {
     });
   }, [shownData, number]);
 
-  
-  const [clicks, setClicks] = useState(0);
+  const [clicks, setClicks] = useState(-1);
   let length = dataArray.length;
   let maxClicks = length / number;
 
@@ -127,7 +127,7 @@ export const Table: React.FC = () => {
 
   useEffect(() => {
     let a = length + number * clicks;
-    if (a < 0) {
+    if (a <= 0) {
       a = 0;
     }
     let b = length + number * (clicks + 1);
@@ -137,7 +137,7 @@ export const Table: React.FC = () => {
 
     setShownData(dataArray.slice(a, b));
     // console.log(shownData);
-  }, [clicks, datesCtx, number]);
+  }, [clicks, datesCtx]);
 
   let dataCtx = useContext(DataContext);
   const [showDataMenu, setShowDataMenu] = useState(false);
@@ -169,34 +169,48 @@ export const Table: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className={classes["chart-and-form-container"]}>
-        <div className={classes["chart-container"]}>
-          <LineChart data={chartData} />
-        </div>
 
-        {showDataMenu && (
-          <>
-            <Modal />
-            <div className={classes["data-menu-container"]}>
-              <ImgButton type={"close"} onClick={dataMenuHandler} />
-              <DataMenu data={shownData} />
-            </div>
-          </>
-        )}
+      <AnimatePresence>
+        <motion.div className={classes["chart-and-form-container"]}>
+          <div className={classes["chart-container"]}>
+            <LineChart data={chartData} />
+          </div>
 
-        <div className={"form-or-button-container"}>
-          {isFormOpen && (
+          {showDataMenu && (
             <>
+
               <Modal />
-              <div className={classes["form-container"]}>
-                <ImgButton onClick={formHandler} type={"close"} />
-                <Form />
-              </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{  opacity: 1 }}
+                exit={{  opacity: 0 }}
+                transition={{ bounce: 0, duration: .5 }}
+                className={classes["data-menu-container"]}
+              >
+                <ImgButton type={"close"} onClick={dataMenuHandler} />
+                <DataMenu data={shownData} />
+              </motion.div>
             </>
           )}
-          <RoundButton onClick={formHandler} />
-        </div>
-      </div>
+
+          <div className={"form-or-button-container"}>
+            {isFormOpen && (
+              <>
+                <Modal />
+                <motion.div
+                initial={{ opacity: 0 }}
+                animate={{  opacity: 1 }}
+                exit={{  opacity: 0 }}
+                transition={{ bounce: 0, duration: .5 }} className={classes["form-container"]}>
+                  <ImgButton onClick={formHandler} type={"close"} />
+                  <Form />
+                </motion.div>
+              </>
+            )}
+            <RoundButton onClick={formHandler} />
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 };
