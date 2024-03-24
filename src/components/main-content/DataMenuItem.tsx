@@ -37,9 +37,9 @@ export const DataMenuItem: React.FC<{
       </div>
       <div>
         <DateDisplay date={props.date} />
-        <p>{props.upper}</p>
-        <p>{props.lower}</p>
-        <p>{props.pulse}</p>
+        <p className={classes.upper}>{props.upper}</p>
+        <p className={classes.lower}>{props.lower}</p>
+        <p className={classes.pulse}>{props.pulse}</p>
       </div>
     </li>
   );
