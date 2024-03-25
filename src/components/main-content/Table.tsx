@@ -162,7 +162,7 @@ export const Table: React.FC = () => {
           {clicks < -1 && (
             <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
           )}
-          <ImgButton type="edit" onClick={dataMenuHandler} />
+          <ImgButton type="menu" onClick={dataMenuHandler} />
           <DataPick />
           <div className={classes["dont-show-on-mobile"]}>
             <SmallButton onClick={showMoreElementsHandler} text={"show more"} />

@@ -95,6 +95,7 @@ export const LogIn = async (email: string, password: string) => {
 export const signUp = async (email:string, password: string) => {
   try{
     let response = await createUserWithEmailAndPassword(auth, email, password)
+    console.log('user created')
     console.log(response)
     return response
     // if (response.ok){

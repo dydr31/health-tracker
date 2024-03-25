@@ -15,18 +15,26 @@ export const SignUpMenu: React.FC = () => {
 
   const getResponse = async (email: string, password: string) => {
     let response = await signUp(email, password);
-    console.log(response);
+    let type = typeof response;
+    console.log(type);
     if (response === undefined) {
       console.log();
       setErrorMessage("Email already in use");
-    } else {
-      setErrorMessage("");
-      localStorage.setItem("Email", email);
-      setSuccessMessage(true)
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000)
-      
+    } else if (typeof response === "object") {
+      let responseMessage = response!.toString().slice(0, 13);
+      // console.log(response!.toString())
+      // console.log(responseMessage)
+      if (responseMessage === "FirebaseError") {
+        setErrorMessage("Ivalid email");
+        setSuccessMessage(false);
+      } else {
+        setErrorMessage("");
+        localStorage.setItem("Email", email);
+        setSuccessMessage(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
     }
   };
 
@@ -83,29 +91,31 @@ export const SignUpMenu: React.FC = () => {
 
   return (
     <>
-{!successMessage   &&   <form className={classes.form}>
-        <input
-          type="email"
-          placeholder="email"
-          className={`${classes.input} ${emailInvalid && classes.red}`}
-          key={'1'}
-          ref={emailRef}
-          onBlur={onBlurEmailHandler}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          className={`${classes.input} ${passwordInvalid && classes.red}`}
-          key={'2'}
-          ref={passwordRef}
-          onBlur={onBlurPasswordHandler}
-        />
-        {errorMessage !== "" && (
-          <p className={classes["error-message"]}>{errorMessage}</p>
-        )}
-        <Button text={"Sign Up"} onClick={signUpWithEmailAndPassword} />
-      </form>}
-      {successMessage && <h2>You've signed up</h2>}
+      {!successMessage && (
+        <form className={classes.form}>
+          <input
+            type="email"
+            placeholder="email"
+            className={`${classes.input} ${emailInvalid && classes.red}`}
+            key={"1"}
+            ref={emailRef}
+            onBlur={onBlurEmailHandler}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            className={`${classes.input} ${passwordInvalid && classes.red}`}
+            key={"2"}
+            ref={passwordRef}
+            onBlur={onBlurPasswordHandler}
+          />
+          {errorMessage !== "" && (
+            <p className={classes["error-message"]}>{errorMessage}</p>
+          )}
+          <Button text={"Sign Up"} onClick={signUpWithEmailAndPassword} />
+        </form>
+      )}
+      {successMessage && <h2>Sign up successful</h2>}
     </>
   );
 };
