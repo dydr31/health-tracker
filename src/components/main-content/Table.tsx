@@ -51,8 +51,10 @@ export const Table: React.FC = () => {
 
   useEffect(() => {
     const setData = async () => {
+      
       let email = logInCtx.Email;
       let data = await fetchData(email);
+      console.log(data)
       setDataArray(data);
       setShownData(data.slice(-number));
     };

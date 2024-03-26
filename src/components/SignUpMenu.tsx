@@ -2,6 +2,7 @@ import { Button } from "./UI/Button";
 import classes from "./SignUpMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
 import { signUp } from "../store/login-functions";
+import { isEmailValid, isPasswordValild } from "./util/signup-login-form-validation";
 
 export const SignUpMenu: React.FC = () => {
   let emailRef = useRef<HTMLInputElement>(null);
@@ -15,15 +16,11 @@ export const SignUpMenu: React.FC = () => {
 
   const getResponse = async (email: string, password: string) => {
     let response = await signUp(email, password);
-    let type = typeof response;
-    console.log(type);
     if (response === undefined) {
       console.log();
       setErrorMessage("Email already in use");
     } else if (typeof response === "object") {
       let responseMessage = response!.toString().slice(0, 13);
-      // console.log(response!.toString())
-      // console.log(responseMessage)
       if (responseMessage === "FirebaseError") {
         setErrorMessage("Ivalid email");
         setSuccessMessage(false);
@@ -50,29 +47,27 @@ export const SignUpMenu: React.FC = () => {
   };
 
   const checkForm = (email: string, password: string) => {
-    console.log(email.indexOf("@"), password.length);
-    if (email.indexOf("@") > -1) {
-      if (password.length >= 8) {
-        console.log("true");
-        return true;
-      } else {
-        setPasswordInvalid(true);
-        return false;
-      }
-    } else {
-      setEmailInvalid(true);
-      if (password.length >= 8) {
-        setPasswordInvalid(false);
-      } else {
-        setPasswordInvalid(true);
-      }
-      return false;
+    if (isEmailValid(email) && isPasswordValild(password)){
+      setEmailInvalid(false)
+      setPasswordInvalid(false)
+      return true
+    }
+    else if (!isEmailValid(email)){
+      setEmailInvalid(true)
+      return false
+    }
+    else if(!isPasswordValild(password)){
+      setPasswordInvalid(true)
+      return false
+    }
+    else {
+      return false
     }
   };
 
   const onBlurEmailHandler = () => {
     let email = emailRef.current!.value;
-    if (email.indexOf("@") > -1) {
+    if (isEmailValid(email)) {
       setEmailInvalid(false);
       setErrorMessage("");
     } else {
@@ -82,7 +77,7 @@ export const SignUpMenu: React.FC = () => {
 
   const onBlurPasswordHandler = () => {
     let password = passwordRef.current!.value;
-    if (password.length >= 8) {
+    if (isPasswordValild(password)) {
       setPasswordInvalid(false);
     } else {
       setPasswordInvalid(true);
@@ -100,6 +95,7 @@ export const SignUpMenu: React.FC = () => {
             key={"1"}
             ref={emailRef}
             onBlur={onBlurEmailHandler}
+            required
           />
           <input
             type="password"
@@ -108,6 +104,7 @@ export const SignUpMenu: React.FC = () => {
             key={"2"}
             ref={passwordRef}
             onBlur={onBlurPasswordHandler}
+            required
           />
           {errorMessage !== "" && (
             <p className={classes["error-message"]}>{errorMessage}</p>

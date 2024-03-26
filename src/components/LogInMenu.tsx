@@ -2,6 +2,7 @@ import classes from "./LogInMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "./UI/Button";
 import { LogIn } from "../store/login-functions";
+import { isEmailValid, isPasswordValild } from "./util/signup-login-form-validation";
 
 export const LogInMenu: React.FC = () => {
   let emailRef = useRef<HTMLInputElement>(null);
@@ -14,7 +15,7 @@ export const LogInMenu: React.FC = () => {
 
   const onBlurEmailHandler = () => {
     let email = emailRef.current!.value;
-    if (email.indexOf("@") > -1) {
+    if (isEmailValid(email)) {
       setEmailInvalid(false);
     } else {
       setEmailInvalid(true);
@@ -24,7 +25,7 @@ export const LogInMenu: React.FC = () => {
 
   const onBlurPasswordHandler = () => {
     let password = passwordRef.current!.value;
-    if (password.length >= 8) {
+    if (isPasswordValild(password)) {
       setPasswordInvalid(false);
     } else {
       setPasswordInvalid(true);
@@ -37,10 +38,7 @@ export const LogInMenu: React.FC = () => {
     let email = emailRef.current!.value;
     let password = passwordRef.current!.value;
 
-    
-    
-
-    if (email.indexOf("@") > -1 && password.length >= 8) {
+    if (isEmailValid(email) && isPasswordValild(password)) {
       let response = await LogIn(email, password);
       console.log(response);
 

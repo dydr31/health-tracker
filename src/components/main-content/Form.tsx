@@ -3,101 +3,63 @@ import { addDataPoint } from "../../store/data-functions";
 import { Button } from "../UI/Button";
 import classes from "./Form.module.scss";
 import { LogInContext } from "../../store/login-context";
+import {
+  checkUpper,
+  checkLower,
+  checkPulse,
+} from "../util/datapoint-form-validation";
 
 export const Form: React.FC = (props) => {
-
   const upperRef = useRef<HTMLInputElement>(null);
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
 
-  const logInCtx = useContext(LogInContext)
+  const logInCtx = useContext(LogInContext);
 
-  const sumbitForm = (event: React.FormEvent) => {
+  const sumbitForm = async (event: React.FormEvent) => {
     event.preventDefault();
     let checkData = checkForm();
     if (checkData !== null) {
-      let email = logInCtx.Email
-      addDataPoint(email, [checkData!]);
-      upperRef.current!.value = ''
-      lowerRef.current!.value = ''
-      pulseRef.current!.value = ''
+      let email = logInCtx.Email;
+      await addDataPoint(email, [checkData!]);
+      upperRef.current!.value = "";
+      lowerRef.current!.value = "";
+      pulseRef.current!.value = "";
       setTimeout(() => {
         window.location.reload();
       }, 400);
-
     }
   };
   let [invalidUpper, setInvalidUpper] = useState(false);
   let [invalidLower, setInvalidLower] = useState(false);
   let [invalidPulse, setInvalidPulse] = useState(false);
 
-  const checkUpper = (upper: number) => {
-    if (upper <= 370 && upper >= 50) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  const checkLower = (lower: number) => {
-    if (lower >= 20 && lower <= 360) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  const checkPulse = (pulse: number) => {
-    if (pulse >= 26 && pulse <= 600) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   const checkForm = () => {
     let upper = Number(upperRef.current!.value);
     let lower = Number(lowerRef.current!.value);
     let pulse = Number(pulseRef.current!.value);
 
-    if (checkUpper(upper) === true) {
-
-      if (checkLower(lower) === true) {
-
-        if (checkPulse(pulse) === true) {
-          let dataPoint = {
-            date: new Date(),
-            upper: upper!,
-            lower: lower!,
-            pulse: pulse!,
-          };
-          // console.log(dataPoint);
-          return dataPoint;
-        } else {
-          console.log("measurements invalid");
-          return null;
-        }
-      }
-
-      setInvalidLower(true);
-
-      if (checkPulse(pulse) === false) {
-
-        setInvalidPulse(true)
-        return null;
-      }
-      return null;
-
-    } else {
+    if (checkUpper(upper) && checkLower(lower) && checkPulse(pulse)) {
+      let dataPoint = {
+        date: new Date(),
+        upper: upper!,
+        lower: lower!,
+        pulse: pulse!,
+      };
+      // console.log(dataPoint);
+      return dataPoint;
+    }
+    if (!checkUpper(upper)) {
       setInvalidUpper(true);
-      console.log(pulse);
-      if (checkLower(lower) === false) {
-        setInvalidLower(true);
-      }
-      if (checkPulse(pulse) === false) {
-        setInvalidPulse(true);
-      }
-      return null;
+      return null
+    }
+    if (!checkLower(lower)) {
+      setInvalidLower(true);
+      return null
+    }
+    if (!checkPulse(pulse)) {
+      setInvalidPulse(true);
+      return null
     }
   };
 
