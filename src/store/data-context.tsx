@@ -14,8 +14,8 @@ type ItemObj = {
 
 type DataContextObj = {
   items: ItemObj[];
-  removeItem: (date: string) => void;
-  loadItems: () => void;
+  removeItem: (date: string, email: string) => void;
+  loadItems: (email: string) => void;
 };
 
 export const DataContext = React.createContext<DataContextObj>({
@@ -43,7 +43,8 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     },
   ]);
 
-  const removeItemHandler = async (date: string) => {
+  const removeItemHandler = async (date: string, email: string) => {
+    console.log('removing item')
     let filteredItems = items.filter(
       (x) => x.date.toString() !== date.toString()
     );
@@ -57,11 +58,11 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
       pulse: x.pulse,
     }));
 
-    await updateData("gzl123n@gmail.com", filteredItems);
+    await updateData(email, filteredItems);
   };
 
-  const loadItemsHandler = async () => {
-    let id = await getUserId("gzl123n@gmail.com");
+  const loadItemsHandler = async (email: string) => {
+    let id = await getUserId(email);
     let data = await getUserData(id!);
     setItems(data);
   };

@@ -3,6 +3,7 @@ import { DateDisplay } from "./DateDisplay";
 import { useContext, useState } from "react";
 import { DataContext } from "../../store/data-context";
 import { TransparentButton } from "../UI/TransparentButton";
+import { LogInContext } from "../../store/login-context";
 
 export const DataMenuItem: React.FC<{
   date: string;
@@ -11,11 +12,12 @@ export const DataMenuItem: React.FC<{
   pulse: number;
 }> = (props) => {
   const dataCtx = useContext(DataContext);
+  const logInCtx = useContext(LogInContext)
   const deleteHandler = async () => {
-    await dataCtx.removeItem(props.date);
+    await dataCtx.removeItem(props.date, logInCtx.Email);
     setTimeout(() => {
         window.location.reload()
-    }, 1000)
+    }, 500)
   };
 
   const [showButton, setShowbutton] = useState(false);

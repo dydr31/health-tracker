@@ -60,7 +60,8 @@ export const updateData = async (
   try {
     let id = await getUserId(email);
     const userRef = doc(db, "users", id!);
-    await updateDoc(userRef, { data: data });
+    let response = await updateDoc(userRef, { data: data });
+    console.log(response)
   } catch (err) {
     console.error(err);
   }

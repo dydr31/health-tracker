@@ -48,6 +48,7 @@ export const Table: React.FC = () => {
 
   const datesCtx = useContext(DatesContext);
   const logInCtx = useContext(LogInContext);
+  const dataCtx = useContext(DataContext)
 
   useEffect(() => {
     const setData = async () => {
@@ -56,6 +57,8 @@ export const Table: React.FC = () => {
       let data = await fetchData(email);
       console.log(data)
       setDataArray(data);
+      await dataCtx.loadItems(email)
+      
       setShownData(data.slice(-number));
     };
     setData();
@@ -141,12 +144,13 @@ export const Table: React.FC = () => {
     // console.log(shownData);
   }, [clicks, datesCtx]);
 
-  let dataCtx = useContext(DataContext);
+
   const [showDataMenu, setShowDataMenu] = useState(false);
 
   const dataMenuHandler = () => {
     setShowDataMenu(!showDataMenu);
-    dataCtx.loadItems();
+    let email = logInCtx.Email
+    dataCtx.loadItems(email);
   };
 
   const showMoreElementsHandler = () => {
@@ -155,6 +159,7 @@ export const Table: React.FC = () => {
 
   return (
     <>
+    {console.log(dataCtx)}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>

@@ -9,7 +9,7 @@ import {
   checkPulse,
 } from "../util/datapoint-form-validation";
 
-export const Form: React.FC = (props) => {
+export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
@@ -46,7 +46,6 @@ export const Form: React.FC = (props) => {
         lower: lower!,
         pulse: pulse!,
       };
-      // console.log(dataPoint);
       return dataPoint;
     }
     if (!checkUpper(upper)) {
