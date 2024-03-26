@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const Modal: React.FC = (props) => {
   return (
-    <AnimatePresence>
+  
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -11,6 +11,6 @@ export const Modal: React.FC = (props) => {
         transition={{ bounce: 0, duration: 0.5 }}
         className={classes.modal}
       ></motion.div>
-    </AnimatePresence>
+    
   );
 };

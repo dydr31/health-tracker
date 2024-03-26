@@ -48,17 +48,15 @@ export const Table: React.FC = () => {
 
   const datesCtx = useContext(DatesContext);
   const logInCtx = useContext(LogInContext);
-  const dataCtx = useContext(DataContext)
+  const dataCtx = useContext(DataContext);
 
   useEffect(() => {
     const setData = async () => {
-      
       let email = logInCtx.Email;
       let data = await fetchData(email);
-      console.log(data)
       setDataArray(data);
-      await dataCtx.loadItems(email)
-      
+      await dataCtx.loadItems(email);
+
       setShownData(data.slice(-number));
     };
     setData();
@@ -144,12 +142,11 @@ export const Table: React.FC = () => {
     // console.log(shownData);
   }, [clicks, datesCtx]);
 
-
   const [showDataMenu, setShowDataMenu] = useState(false);
 
   const dataMenuHandler = () => {
     setShowDataMenu(!showDataMenu);
-    let email = logInCtx.Email
+    let email = logInCtx.Email;
     dataCtx.loadItems(email);
   };
 
@@ -159,7 +156,6 @@ export const Table: React.FC = () => {
 
   return (
     <>
-    {console.log(dataCtx)}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>
@@ -170,28 +166,37 @@ export const Table: React.FC = () => {
             <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
           )}
           <ImgButton type="menu" onClick={dataMenuHandler} />
-          <DataPick />
+          
+            <DataPick />
+          
           <div className={classes["dont-show-on-mobile"]}>
             <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
           </div>
         </div>
       </div>
 
-      <AnimatePresence>
-        <motion.div className={classes["chart-and-form-container"]}>
-          <div className={classes["chart-container"]}>
+      <motion.div className={classes["chart-and-form-container"]}>
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ bounce: 0, duration: 0.5 }}
+            className={classes["chart-container"]}
+          >
             <LineChart data={chartData} />
-          </div>
+          </motion.div>
+        </AnimatePresence>
 
+        <AnimatePresence>
           {showDataMenu && (
             <>
-
               <Modal />
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{  opacity: 1 }}
-                exit={{  opacity: 0 }}
-                transition={{ bounce: 0, duration: .5 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ bounce: 0, duration: 0.5 }}
                 className={classes["data-menu-container"]}
               >
                 <ImgButton type={"close"} onClick={dataMenuHandler} />
@@ -199,25 +204,29 @@ export const Table: React.FC = () => {
               </motion.div>
             </>
           )}
+        </AnimatePresence>
 
-          <div className={"form-or-button-container"}>
+        <div className={"form-or-button-container"}>
+          <AnimatePresence>
             {isFormOpen && (
               <>
                 <Modal />
                 <motion.div
-                initial={{ opacity: 0 }}
-                animate={{  opacity: 1 }}
-                exit={{  opacity: 0 }}
-                transition={{ bounce: 0, duration: .5 }} className={classes["form-container"]}>
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ bounce: 0, duration: 0.5 }}
+                  className={classes["form-container"]}
+                >
                   <ImgButton onClick={formHandler} type={"close"} />
                   <Form />
                 </motion.div>
               </>
             )}
-            <RoundButton onClick={formHandler} />
-          </div>
-        </motion.div>
-      </AnimatePresence>
+          </AnimatePresence>
+          <RoundButton onClick={formHandler} />
+        </div>
+      </motion.div>
     </>
   );
 };

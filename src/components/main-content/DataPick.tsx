@@ -32,10 +32,11 @@ export const DataPick: React.FC = () => {
 
   return (
     <>
-      {isFormOpen && (
-        <>
-          <Modal />
-          <AnimatePresence>
+      <AnimatePresence>
+        {isFormOpen && (
+          <>
+            <Modal />
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -66,9 +67,9 @@ export const DataPick: React.FC = () => {
                 <Button text="apply" onClick={submitForm} />
               </form>
             </motion.div>
-          </AnimatePresence>
-        </>
-      )}
+          </>
+        )}
+      </AnimatePresence>
       {<SmallButton text={"filter by date"} onClick={showFormHandler} />}
     </>
   );

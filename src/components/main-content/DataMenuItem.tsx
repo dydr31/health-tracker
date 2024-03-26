@@ -37,11 +37,11 @@ export const DataMenuItem: React.FC<{
       <div className={classes["floating-button"]}>
         {showButton && <TransparentButton onClick={deleteHandler} />}
       </div>
-      <div>
+      <div className={classes.content}>
         <DateDisplay date={props.date} />
-        <p className={classes.upper}>{props.upper}</p>
-        <p className={classes.lower}>{props.lower}</p>
-        <p className={classes.pulse}>{props.pulse}</p>
+        <p className={`${classes.upper} ${classes.number}`}>{props.upper}</p>
+        <p className={`${classes.lower} ${classes.number}`}>{props.lower}</p>
+        <p className={`${classes.pulse} ${classes.number}`}>{props.pulse}</p>
       </div>
     </li>
   );
