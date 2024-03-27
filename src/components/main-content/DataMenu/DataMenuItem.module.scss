@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../variables";
 .li {
   border-right: $border;
   margin: 0;
@@ -36,8 +36,6 @@
 }
 
 .number{
-  // padding-left: 1rem;
-  // padding-right: 1rem;
   width: 14vw;
 }
 
@@ -45,8 +43,5 @@
   .floating-button {
     top: 2.5rem;
     transform: translate(0.75rem, -0.5rem);
-  }
-  .upper{
-
   }
 }

@@ -12,10 +12,19 @@ type ItemObj = {
   pulse: number;
 };
 
+type ItemObj2 = {
+  date: string;
+  upper: number;
+  lower: number;
+  pulse: number;
+}
+
 type DataContextObj = {
   items: ItemObj[];
   removeItem: (date: string, email: string) => void;
   loadItems: (email: string) => void;
+  shownItems: ItemObj2[];
+  updateShownItems: (data: ItemObj2[]) => void
 };
 
 export const DataContext = React.createContext<DataContextObj>({
@@ -29,6 +38,15 @@ export const DataContext = React.createContext<DataContextObj>({
   ],
   removeItem: () => {},
   loadItems: () => {},
+  shownItems: [
+    {
+      date: '',
+      upper: 0,
+      lower: 0,
+      pulse: 0,
+    },
+  ],
+  updateShownItems: () => {}
 });
 
 export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -44,7 +62,7 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
   ]);
 
   const removeItemHandler = async (date: string, email: string) => {
-    console.log('removing item')
+    console.log("removing item");
     let filteredItems = items.filter(
       (x) => x.date.toString() !== date.toString()
     );
@@ -67,13 +85,28 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     setItems(data);
   };
 
+  const [shownItems, setShownItems] = useState([
+    {
+      date: '',
+      upper: 1,
+      lower: 1,
+      pulse: 1,
+    },
+  ])
+
+  const updateShownItems = (data: ItemObj2[]) => {
+    setShownItems(data)
+  }
+
   const contextValue: DataContextObj = {
-    items: items,
+    items,
     removeItem: removeItemHandler,
     loadItems: loadItemsHandler,
+    shownItems,
+    updateShownItems,
   };
 
-  //console.log(items)
+  
   return (
     <DataContext.Provider value={contextValue}>
       {props.children}

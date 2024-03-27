@@ -1,9 +1,9 @@
 import classes from "./DataMenuItem.module.scss";
 import { DateDisplay } from "./DateDisplay";
 import { useContext, useState } from "react";
-import { DataContext } from "../../store/data-context";
-import { TransparentButton } from "../UI/TransparentButton";
-import { LogInContext } from "../../store/login-context";
+import { DataContext } from "../../../store/data-context";
+import { TransparentButton } from "../../UI/TransparentButton";
+import { LogInContext } from "../../../store/login-context";
 
 export const DataMenuItem: React.FC<{
   date: string;

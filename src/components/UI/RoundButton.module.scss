@@ -15,3 +15,12 @@
     z-index: 55;
     
 }
+
+@media(max-width: 500px){
+    .round-button{
+        bottom: 5.5rem;
+        right: 1rem;
+        z-index: 0;
+    }
+
+}

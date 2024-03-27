@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./Table.module.scss";
-import { Form } from "./Form";
+import { Form } from "./Form/Form";
 import { ImgButton } from "../UI/ImgButton";
 import { fetchData } from "../../store/data-functions";
 import { LineChart } from "./Chart";
@@ -8,11 +8,17 @@ import { RoundButton } from "../UI/RoundButton";
 import { Modal } from "../UI/Modal";
 import { DataPick } from "./DataPick";
 import { DatesContext } from "../../store/date-context";
-import { DataMenu } from "./DataMenu";
+import { DataMenu } from "./DataMenu/DataMenu";
 import { DataContext } from "../../store/data-context";
 import { SmallButton } from "../UI/SmallButton";
 import { LogInContext } from "../../store/login-context";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  FormsStateContext,
+  FormsStateContextProvider,
+} from "../../store/forms-state";
+import { FormContainer } from "./Form/FormContainer";
+import { DataMenuContainer } from "./DataMenu/DataMenuContainer";
 
 type List = {
   date: string;
@@ -25,11 +31,11 @@ const dummyList: List = [{ date: "2020-01-01", upper: 0, lower: 0, pulse: 0 }];
 
 export const Table: React.FC = () => {
   const [number, setNumber] = useState(7);
-  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const formHandler = () => {
-    setIsFormOpen(!isFormOpen);
-  };
+  const datesCtx = useContext(DatesContext);
+  const logInCtx = useContext(LogInContext);
+  const dataCtx = useContext(DataContext);
+  const formsStateCtx = useContext(FormsStateContext);
 
   let [dataArray, setDataArray] = useState(dummyList);
   let [shownData, setShownData] = useState(dummyList);
@@ -46,17 +52,14 @@ export const Table: React.FC = () => {
     ],
   });
 
-  const datesCtx = useContext(DatesContext);
-  const logInCtx = useContext(LogInContext);
-  const dataCtx = useContext(DataContext);
-
   useEffect(() => {
     const setData = async () => {
       let email = logInCtx.Email;
       let data = await fetchData(email);
       setDataArray(data);
       await dataCtx.loadItems(email);
-
+      //////////////////////////////////
+      dataCtx.updateShownItems(data.slice(-number));
       setShownData(data.slice(-number));
     };
     setData();
@@ -107,14 +110,16 @@ export const Table: React.FC = () => {
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
       );
     }
-    // console.log(filteredArray);
+
     if (to > 0) {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
       );
     }
-    // console.log(filteredArray);
+
     if (filteredArray.length === 0) {
+      ///////////////////////////////////
+      dataCtx.updateShownItems(dataArray.slice(-number));
       setShownData(dataArray.slice(-number));
     } else {
       setDataArray(filteredArray);
@@ -137,17 +142,15 @@ export const Table: React.FC = () => {
     if (b > length) {
       b = length;
     }
-
+    /////////////////////////////////////
+    dataCtx.updateShownItems(dataArray.slice(a, b));
     setShownData(dataArray.slice(a, b));
-    // console.log(shownData);
   }, [clicks, datesCtx]);
 
-  const [showDataMenu, setShowDataMenu] = useState(false);
-
   const dataMenuHandler = () => {
-    setShowDataMenu(!showDataMenu);
     let email = logInCtx.Email;
     dataCtx.loadItems(email);
+    formsStateCtx.toggleDataMenu();
   };
 
   const showMoreElementsHandler = () => {
@@ -156,6 +159,7 @@ export const Table: React.FC = () => {
 
   return (
     <>
+      {/* {console.log(dataCtx.shownItems)} */}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
         <div className={classes.buttons}>
@@ -166,9 +170,9 @@ export const Table: React.FC = () => {
             <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
           )}
           <ImgButton type="menu" onClick={dataMenuHandler} />
-          
-            <DataPick />
-          
+
+          <DataPick />
+
           <div className={classes["dont-show-on-mobile"]}>
             <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
           </div>
@@ -187,45 +191,9 @@ export const Table: React.FC = () => {
             <LineChart data={chartData} />
           </motion.div>
         </AnimatePresence>
-
-        <AnimatePresence>
-          {showDataMenu && (
-            <>
-              <Modal />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ bounce: 0, duration: 0.5 }}
-                className={classes["data-menu-container"]}
-              >
-                <ImgButton type={"close"} onClick={dataMenuHandler} />
-                <DataMenu data={shownData} />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-
-        <div className={"form-or-button-container"}>
-          <AnimatePresence>
-            {isFormOpen && (
-              <>
-                <Modal />
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ bounce: 0, duration: 0.5 }}
-                  className={classes["form-container"]}
-                >
-                  <ImgButton onClick={formHandler} type={"close"} />
-                  <Form />
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
-          <RoundButton onClick={formHandler} />
-        </div>
+        <DataMenuContainer />
+        <FormContainer />
+        <RoundButton onClick={() => formsStateCtx.toggleForm()} />
       </motion.div>
     </>
   );

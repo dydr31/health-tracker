@@ -1,13 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
-import { addDataPoint } from "../../store/data-functions";
-import { Button } from "../UI/Button";
+import { addDataPoint } from "../../../store/data-functions";
+import { Button } from "../../UI/Button";
 import classes from "./Form.module.scss";
-import { LogInContext } from "../../store/login-context";
+import { LogInContext } from "../../../store/login-context";
 import {
   checkUpper,
   checkLower,
   checkPulse,
-} from "../util/datapoint-form-validation";
+} from "../../util/datapoint-form-validation";
 
 export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);
