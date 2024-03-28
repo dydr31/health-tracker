@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { addDataPoint } from "../../../store/data-functions";
+import { addDataPoint } from "../../../util/data-functions";
 import { Button } from "../../UI/Button";
 import classes from "./Form.module.scss";
 import { LogInContext } from "../../../store/login-context";

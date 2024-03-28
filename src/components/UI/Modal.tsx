@@ -1,5 +1,5 @@
 import classes from "./Modal.module.scss";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const Modal: React.FC = () => {
   return (

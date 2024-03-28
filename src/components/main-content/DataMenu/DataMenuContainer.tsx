@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence} from "framer-motion";
 
 import { Modal } from "../../UI/Modal";
 import { ImgButton } from "../../UI/ImgButton";

@@ -1,7 +1,7 @@
 import classes from "./LogInMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "../UI/Button";
-import { LogIn } from "../../store/login-functions";
+import { LogIn } from "../../util/login-functions";
 import { isEmailValid, isPasswordValild } from "../../util/signup-login-form-validation";
 
 export const LogInMenu: React.FC = () => {

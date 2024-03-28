@@ -1,14 +1,12 @@
-import { DatesContext } from "../../store/date-context";
-import { Button } from "../UI/Button";
-import { ImgButton } from "../UI/ImgButton";
+import { DatesContext } from "../../../store/date-context";
+import { Button } from "../../UI/Button";
+import { ImgButton } from "../../UI/ImgButton";
 import classes from "./DataPick.module.scss";
-import { useContext, useRef, useState } from "react";
-import { SmallButton } from "../UI/SmallButton";
-import { Modal } from "../UI/Modal";
-import { AnimatePresence, motion } from "framer-motion";
-import { FormsStateContext } from "../../store/forms-state-context";
-import { OpacityChangingWrapper } from "../UI/OpacityChangingWrapper";
-import { DataContext } from "../../store/data-context";
+import { useContext, useRef} from "react";
+import { Modal } from "../../UI/Modal";
+import { AnimatePresence} from "framer-motion";
+import { FormsStateContext } from "../../../store/forms-state-context";
+import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 
 export const DataPick: React.FC = () => {
 

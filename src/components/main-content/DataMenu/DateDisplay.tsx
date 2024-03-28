@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './DateDisplay.module.css'
+import classes from './DateDisplay.module.scss'
 
 export const DateDisplay: React.FC<{ date: string }> = (props) => {
   let timestamp = props.date.toString();
@@ -9,6 +9,5 @@ export const DateDisplay: React.FC<{ date: string }> = (props) => {
 
   return (
     <p className={classes['date']}>{date.toString().slice(4, 10) + ", "} <br/>{date.toString().slice(16, 21)} </p>
-    
   );
 };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import classes from "./DataMenu.module.scss";
 import { DataMenuItem } from "./DataMenuItem";
 

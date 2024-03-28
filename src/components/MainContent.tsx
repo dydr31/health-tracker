@@ -5,15 +5,22 @@ import { Wellcome } from "./Wellcome";
 
 import classes from "./MainContent.module.scss";
 import { FormsStateContextProvider } from "../store/forms-state-context";
+import { SignInContextProvider } from "../store/sign-up-sign-in-menu-context";
 
 export const MainContent: React.FC = () => {
   const logInCtx = useContext(LogInContext);
 
   return (
-    <FormsStateContextProvider>
-      <main className={classes.main}>
-        {logInCtx.LogIn ? <Table /> : <Wellcome />}
-      </main>
-    </FormsStateContextProvider>
+    <main className={classes.main}>
+      {logInCtx.LogIn ? (
+        <FormsStateContextProvider>
+          <Table />
+        </FormsStateContextProvider>
+      ) : (
+        <SignInContextProvider>
+          <Wellcome />
+        </SignInContextProvider>
+      )}
+    </main>
   );
 };

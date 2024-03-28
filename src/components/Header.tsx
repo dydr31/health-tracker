@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LogInContext } from "../store/login-context";
-import { logOut } from "../store/login-functions";
+import { logOut } from "../util/login-functions";
 import classes from "./Header.module.scss";
 import { Button } from "./UI/Button";
 

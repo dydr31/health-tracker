@@ -1,0 +1,15 @@
+@import '../variables';
+
+.footer{
+  width: 95%;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media(max-width: 500px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    background-color: $accent-color;
+  }
+}

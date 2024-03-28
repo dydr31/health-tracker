@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./Table.module.scss";
-import { fetchData } from "../../store/data-functions";
-import { LineChart } from "./Chart/Chart";
+import { fetchData } from "../../util/data-functions";
 import { RoundButton } from "../UI/RoundButton";
-import { DataPick } from "./DataPick";
+import { DataPick } from "./DataPick/DataPick";
 import { DatesContext } from "../../store/date-context";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
@@ -34,7 +33,7 @@ export const Table: React.FC = () => {
   const number = formsStateCtx.number;
 
 
-  
+
   useEffect(() => {
     const setData = async () => {
       let email = logInCtx.Email;

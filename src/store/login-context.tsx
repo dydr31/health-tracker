@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getUserId } from "./login-functions";
+import { getUserId } from "../util/login-functions";
 
 type LogInContextObj = {
   LogIn: boolean;

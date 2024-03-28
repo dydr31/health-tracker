@@ -1,6 +1,6 @@
 import React from "react";
-import { getUserData, updateData } from "./data-functions";
-import { getUserId } from "./login-functions";
+import { getUserData, updateData } from "../util/data-functions";
+import { getUserId } from "../util/login-functions";
 import { useState } from "react";
 
 type Date = { seconds: number; nanoseconds: number };
