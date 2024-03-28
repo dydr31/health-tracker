@@ -1,4 +1,9 @@
 .buttons{
+    //position: static;
     display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    right: 3rem;
     gap: .25rem;
 }
