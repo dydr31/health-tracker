@@ -66,15 +66,12 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     let filteredItems = items.filter(
       (x) => x.date.toString() !== date.toString()
     );
-
-    console.log(filteredItems);
-    console.log(items);
-    let transformed = filteredItems.map((x) => ({
-      data: new Date(Number(x.date.toString().slice(18, 28)) * 1000),
-      upper: x.upper,
-      lower: x.lower,
-      pulse: x.pulse,
-    }));
+    // let transformed = filteredItems.map((x) => ({
+    //   data: new Date(Number(x.date.toString().slice(18, 28)) * 1000),
+    //   upper: x.upper,
+    //   lower: x.lower,
+    //   pulse: x.pulse,
+    // }));
 
     await updateData(email, filteredItems);
   };
@@ -83,7 +80,13 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     let id = await getUserId(email);
     let data = await getUserData(id!);
     setItems(data);
+    
   };
+
+  // let sortedItems = items.sort((a,b) => {
+  //   return a.date.seconds - b.date.seconds
+  // })
+  // console.log(sortedItems)
 
   const [shownItems, setShownItems] = useState([
     {
@@ -96,6 +99,8 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
 
   const updateShownItems = (data: ItemObj2[]) => {
     setShownItems(data)
+    //console.log(data[0].date.toString().slice(18,28))
+
   }
 
   const contextValue: DataContextObj = {

@@ -33,11 +33,18 @@ export const Table: React.FC = () => {
   const number = formsStateCtx.number;
 
 
+  const filterData = (data: List) => {
+    data.sort((a,b) => {
+      return Number (a.date.toString().slice(18,28)) -  Number (b.date.toString().slice(18,28))
+    })
+  }
+
 
   useEffect(() => {
     const setData = async () => {
       let email = logInCtx.Email;
       let data = await fetchData(email);
+      filterData(data)
       setDataArray(data);
       await dataCtx.loadItems(email);
       dataCtx.updateShownItems(data.slice(-number));
