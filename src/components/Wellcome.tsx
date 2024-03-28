@@ -1,11 +1,9 @@
 import classes from "./Wellcome.module.scss";
 import { Button } from "./UI/Button";
-import { logInWithGoogle } from "../util/login-functions";
 import { useContext, useState } from "react";
 import { TransparentButton } from "./UI/TransparentButton";
 import { SignUpMenu } from "./log-in-sign-up/SignUpMenu";
 import { LogInMenu } from "./log-in-sign-up/LogInMenu";
-import { AnimatePresence } from "framer-motion";
 import { DropdownWrapper } from "./UI/DropdownWrapper";
 import { SignInContext } from "../store/sign-up-sign-in-menu-context";
 import { MainMenu } from "./log-in-sign-up/MainMenu";
