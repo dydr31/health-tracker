@@ -4,8 +4,8 @@ import { LogIn, logInWithGoogle } from "../store/login-functions";
 import { useState } from "react";
 import { ImgButton } from "./UI/ImgButton";
 import { TransparentButton } from "./UI/TransparentButton";
-import { SignUpMenu } from "./SignUpMenu";
-import { LogInMenu } from "./LogInMenu";
+import { SignUpMenu } from "./log-in-sign-up/SignUpMenu";
+import { LogInMenu } from "./log-in-sign-up/LogInMenu";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 

@@ -4,7 +4,7 @@ import { Table } from "./main-content/Table";
 import { Wellcome } from "./Wellcome";
 
 import classes from "./MainContent.module.scss";
-import { FormsStateContextProvider } from "../store/forms-state";
+import { FormsStateContextProvider } from "../store/forms-state-context";
 
 export const MainContent: React.FC = () => {
   const logInCtx = useContext(LogInContext);

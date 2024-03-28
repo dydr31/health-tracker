@@ -6,14 +6,17 @@ import { useContext, useRef, useState } from "react";
 import { SmallButton } from "../UI/SmallButton";
 import { Modal } from "../UI/Modal";
 import { AnimatePresence, motion } from "framer-motion";
+import { FormsStateContext } from "../../store/forms-state-context";
+import { OpacityChangingWrapper } from "../UI/OpacityChangingWrapper";
+import { DataContext } from "../../store/data-context";
 
 export const DataPick: React.FC = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
 
   let fromRef = useRef<HTMLInputElement>(null);
   let toRef = useRef<HTMLInputElement>(null);
 
   let datesCtx = useContext(DatesContext);
+  let formsStateCtx = useContext(FormsStateContext);
 
   const submitForm = (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,29 +25,20 @@ export const DataPick: React.FC = () => {
     let currentTo = toRef.current!.value;
 
     datesCtx.addDateFrom(currentFrom!);
-
     datesCtx.addDateTo(currentTo!);
-  };
-
-  const showFormHandler = () => {
-    setIsFormOpen(!isFormOpen);
   };
 
   return (
     <>
       <AnimatePresence>
-        {isFormOpen && (
+        {formsStateCtx.dataPick && (
           <>
             <Modal />
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ bounce: 0, duration: 0.5 }}
-              className={classes["form-container"]}
-            >
-              <ImgButton type={"close"} onClick={showFormHandler} />
+            <OpacityChangingWrapper className={classes["form-container"]}>
+              <ImgButton
+                type={"close"}
+                onClick={() => formsStateCtx.toggleDataPick()}
+              />
 
               <form className={classes.form} onSubmit={submitForm}>
                 <div className={classes["form-content"]}>
@@ -66,11 +60,10 @@ export const DataPick: React.FC = () => {
 
                 <Button text="apply" onClick={submitForm} />
               </form>
-            </motion.div>
+            </OpacityChangingWrapper>
           </>
         )}
       </AnimatePresence>
-      {<SmallButton text={"filter by date"} onClick={showFormHandler} />}
     </>
   );
 };

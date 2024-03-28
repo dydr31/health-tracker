@@ -3,7 +3,7 @@ import classes from "./Table.module.scss";
 import { Form } from "./Form/Form";
 import { ImgButton } from "../UI/ImgButton";
 import { fetchData } from "../../store/data-functions";
-import { LineChart } from "./Chart";
+import { LineChart } from "./Chart/Chart";
 import { RoundButton } from "../UI/RoundButton";
 import { Modal } from "../UI/Modal";
 import { DataPick } from "./DataPick";
@@ -16,9 +16,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   FormsStateContext,
   FormsStateContextProvider,
-} from "../../store/forms-state";
+} from "../../store/forms-state-context";
 import { FormContainer } from "./Form/FormContainer";
 import { DataMenuContainer } from "./DataMenu/DataMenuContainer";
+import { ButtonsRow } from "./ButtonsRow/ButtonsRow";
 
 type List = {
   date: string;
@@ -30,7 +31,8 @@ type List = {
 const dummyList: List = [{ date: "2020-01-01", upper: 0, lower: 0, pulse: 0 }];
 
 export const Table: React.FC = () => {
-  const [number, setNumber] = useState(7);
+  // const [number, setNumber] = useState(7);
+  
 
   const datesCtx = useContext(DatesContext);
   const logInCtx = useContext(LogInContext);
@@ -39,6 +41,8 @@ export const Table: React.FC = () => {
 
   let [dataArray, setDataArray] = useState(dummyList);
   let [shownData, setShownData] = useState(dummyList);
+
+  const number = formsStateCtx.number
 
   const [chartData, setChartData] = useState({
     labels: [""],
@@ -96,9 +100,8 @@ export const Table: React.FC = () => {
     });
   }, [shownData, number]);
 
-  const [clicks, setClicks] = useState(-1);
+  const clicks = formsStateCtx.clicks
   let length = dataArray.length;
-  let maxClicks = length / number;
 
   useEffect(() => {
     let from = Number(datesCtx.dateFrom);
@@ -126,13 +129,6 @@ export const Table: React.FC = () => {
     }
   }, [datesCtx]);
 
-  const arrowHandlerRight = () => {
-    setClicks(clicks + 1);
-  };
-  const arrowHandlerLeft = () => {
-    setClicks(clicks - 1);
-  };
-
   useEffect(() => {
     let a = length + number * clicks;
     if (a <= 0) {
@@ -145,56 +141,23 @@ export const Table: React.FC = () => {
     /////////////////////////////////////
     dataCtx.updateShownItems(dataArray.slice(a, b));
     setShownData(dataArray.slice(a, b));
-  }, [clicks, datesCtx]);
-
-  const dataMenuHandler = () => {
-    let email = logInCtx.Email;
-    dataCtx.loadItems(email);
-    formsStateCtx.toggleDataMenu();
-  };
-
-  const showMoreElementsHandler = () => {
-    setNumber(number + 1);
-  };
+  }, [clicks, datesCtx, number]);
 
   return (
     <>
-      {/* {console.log(dataCtx.shownItems)} */}
       <h2>Your tonometer measurements:</h2>
       <div className={classes["options"]}>
-        <div className={classes.buttons}>
-          {-1 * clicks < maxClicks && (
-            <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
-          )}
-          {clicks < -1 && (
-            <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
-          )}
-          <ImgButton type="menu" onClick={dataMenuHandler} />
-
-          <DataPick />
-
-          <div className={classes["dont-show-on-mobile"]}>
-            <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
-          </div>
-        </div>
+        <ButtonsRow/>
       </div>
 
-      <motion.div className={classes["chart-and-form-container"]}>
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ bounce: 0, duration: 0.5 }}
-            className={classes["chart-container"]}
-          >
-            <LineChart data={chartData} />
-          </motion.div>
-        </AnimatePresence>
-        <DataMenuContainer />
-        <FormContainer />
-        <RoundButton onClick={() => formsStateCtx.toggleForm()} />
-      </motion.div>
+      <div className={classes["chart-container"]}>
+        <LineChart data={chartData} />
+      </div>
+
+      <DataPick />
+      <DataMenuContainer />
+      <FormContainer />
+      <RoundButton onClick={() => formsStateCtx.toggleForm()} />
     </>
   );
 };

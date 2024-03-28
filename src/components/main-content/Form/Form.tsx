@@ -7,7 +7,7 @@ import {
   checkUpper,
   checkLower,
   checkPulse,
-} from "../../util/datapoint-form-validation";
+} from "../../../util/datapoint-form-validation";
 
 export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);

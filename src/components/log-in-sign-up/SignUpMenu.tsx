@@ -1,8 +1,8 @@
-import { Button } from "./UI/Button";
+import { Button } from "../UI/Button";
 import classes from "./SignUpMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
-import { signUp } from "../store/login-functions";
-import { isEmailValid, isPasswordValild } from "./util/signup-login-form-validation";
+import { signUp } from "../../store/login-functions";
+import { isEmailValid, isPasswordValild } from "../../util/signup-login-form-validation";
 
 export const SignUpMenu: React.FC = () => {
   let emailRef = useRef<HTMLInputElement>(null);
