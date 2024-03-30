@@ -19,7 +19,7 @@ export const MainMenu: React.FC<{}> = (props) => {
     <AnimatePresence>
       {!signInCtx.signUp && !signInCtx.signIn && (
         <DropdownWrapper className={classes["menu-container"]} key={"1"}>
-          <TransparentButton onClick={() => signInCtx.toggleMainMenu()} />
+          <TransparentButton type='close' onClick={() => signInCtx.toggleMainMenu()} />
           <div className={classes["menu"]}>
             <Button
               text={"Log in with Email"}

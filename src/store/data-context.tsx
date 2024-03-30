@@ -99,6 +99,8 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
 
   const updateShownItems = (data: ItemObj2[]) => {
     setShownItems(data)
+    // console.log(data)
+    console.log('updated')
     //console.log(data[0].date.toString().slice(18,28))
 
   }

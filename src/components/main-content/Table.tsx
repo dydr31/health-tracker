@@ -66,20 +66,31 @@ export const Table: React.FC = () => {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
       );
+      console.log(filteredArray)
+      setDataArray(filteredArray)
+      console.log('trimmed')
     }
 
     if (to > 0) {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
       );
+      setDataArray(filteredArray)
+      console.log('trimmed')
     }
+
 
     if (filteredArray.length === 0) {
       dataCtx.updateShownItems(dataArray.slice(-number));
     } else {
       setDataArray(filteredArray);
     }
-  }, [datesCtx]);
+
+    // setDataArray(filteredArray)
+    console.log(filteredArray)
+    dataCtx.updateShownItems(filteredArray)
+    // console.log(filteredArray)
+  }, [datesCtx, dataArray]);
 
 
 
@@ -97,7 +108,8 @@ export const Table: React.FC = () => {
 
 
   return (
-    <>
+    <div className={classes.table}>
+    {/* {console.log(dataCtx.shownItems)} */}
       <h2>Your tonometer measurements:</h2>
       <ButtonsRow />
       <ChartContainer/>
@@ -105,6 +117,6 @@ export const Table: React.FC = () => {
       <DataMenuContainer />
       <FormContainer />
       <RoundButton onClick={() => formsStateCtx.toggleForm()} />
-    </>
+    </div>
   );
 };

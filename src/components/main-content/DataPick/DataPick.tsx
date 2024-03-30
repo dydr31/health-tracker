@@ -28,6 +28,7 @@ export const DataPick: React.FC = () => {
 
   return (
     <>
+    {/* {console.log(datesCtx)} */}
       <AnimatePresence>
         {formsStateCtx.dataPick && (
           <>

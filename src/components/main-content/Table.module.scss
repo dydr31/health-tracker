@@ -1,8 +1,11 @@
 @import "../../variables";
 
 @media(max-width: 500px){
-    h2{
-        font-size: 18px;
+    .table h2{
+        font-size: 16px;
     }
+    // .table{
+    //     margin-top: 4rem;
+    // }
 }
 

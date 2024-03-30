@@ -30,6 +30,7 @@ export const ChartContainer: React.FC<{}> = (props) => {
     let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
     let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
 
+    
     setChartData({
       labels: datesArrStrings,
       datasets: [

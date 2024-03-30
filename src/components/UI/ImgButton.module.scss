@@ -34,3 +34,13 @@
 .left-arrow{
     transform: rotate(90deg);
 }
+.mobile-get-back{
+    transform: rotate(90deg);
+}
+
+@media(max-width: 500px){
+    .close{
+        height: 2rem;
+        width: 2rem;
+    }
+}

@@ -16,3 +16,10 @@
 .small-button:active{
     background-color: $button-color-hover;
 }
+
+@media(max-width: 500px){
+    .small-button{
+        height: 2rem;
+        
+    }
+}

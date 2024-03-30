@@ -32,14 +32,14 @@ export const Wellcome = () => {
 
         {signInCtx.signUp && (
           <DropdownWrapper key={"2"} className={classes["menu-container"]}>
-            <TransparentButton onClick={() => signInCtx.toggleSignUp()} />
+            <TransparentButton type='close' onClick={() => signInCtx.toggleSignUp()} />
             <SignUpMenu />
           </DropdownWrapper>
         )}
 
         {signInCtx.signIn && (
           <DropdownWrapper key={"3"} className={classes["menu-container"]}>
-            <TransparentButton onClick={() => signInCtx.toggleSignIn()} />
+            <TransparentButton type='close' onClick={() => signInCtx.toggleSignIn()} />
             <LogInMenu />
           </DropdownWrapper>
         )}

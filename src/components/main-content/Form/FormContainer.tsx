@@ -20,6 +20,7 @@ export const FormContainer = () => {
     <AnimatePresence>
       {formsStateCtx.form && (
         <>
+        
           <Modal />
           <OpacityChangingWrapper className={classes["form-container"]}>
             <ImgButton onClick={formHandler} type={"close"} />

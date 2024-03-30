@@ -35,7 +35,7 @@ export const DataMenuItem: React.FC<{
       className={classes.li}
     >
       <div className={classes["floating-button"]}>
-        {showButton && <TransparentButton onClick={deleteHandler} />}
+        {showButton && <TransparentButton  type='close' onClick={deleteHandler} />}
       </div>
       <div className={classes.content}>
         <DateDisplay date={props.date} />
