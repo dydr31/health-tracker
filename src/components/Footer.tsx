@@ -1,4 +1,4 @@
-import classes from './Footer.module.scss'
+import classes from "./Footer.module.scss";
 
 export const Footer: React.FC = () => {
   return (
@@ -37,6 +37,14 @@ export const Footer: React.FC = () => {
               title="open menu icons"
             >
               Open menu icons created by Pixel perfect - Flaticon
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://www.flaticon.com/free-icons/filter"
+              title="filter icons"
+            >
+              Filter icons created by herikus - Flaticon
             </a>
           </p>
         </div>

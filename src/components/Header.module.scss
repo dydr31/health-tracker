@@ -45,7 +45,7 @@
         display: flex;
         flex-direction: row;
         gap: $margin/4;
-        align-items: flex-start;
+
         // position: fixed;
         // z-index: 101;
     }
@@ -53,7 +53,7 @@
         display: flex;
         flex-direction: column;
         gap: .75rem;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
     }
     .elements{

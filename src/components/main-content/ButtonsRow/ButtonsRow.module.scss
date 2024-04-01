@@ -7,8 +7,16 @@
     gap: .25rem;
 }
 
+.show-on-mobile{
+    display: none;
+}
+
 @media(max-width: 500px){
     .dont-show-on-mobile{
         display: none;
     }
+    .show-on-mobile{
+        display: block;
+    }
+
 }

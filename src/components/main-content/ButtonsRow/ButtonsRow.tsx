@@ -45,10 +45,10 @@ export const ButtonsRow: React.FC = () => {
         <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
       )}
       <ImgButton type="menu" onClick={dataMenuHandler} />
-      <SmallButton
-        text={"filter by date"}
-        onClick={() => formsStateCtx.toggleDataPick()}
-      />
+      <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} />
+      <div className={classes["show-on-mobile"]}>
+        <ImgButton type="add new" onClick={() => formsStateCtx.toggleForm()} />
+      </div>
 
       <div className={classes["dont-show-on-mobile"]}>
         <SmallButton onClick={showMoreElementsHandler} text={"show more"} />

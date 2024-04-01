@@ -15,3 +15,9 @@
 .button:active{
     background-color: $button-color-hover;
 }
+
+@media(max-width: 500px){
+    .button{
+        height: 2.5rem;
+    }
+}
