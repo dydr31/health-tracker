@@ -90,7 +90,7 @@ export const Table: React.FC = () => {
     console.log(filteredArray)
     dataCtx.updateShownItems(filteredArray)
     // console.log(filteredArray)
-  }, [datesCtx, dataArray]);
+  }, [datesCtx]);
 
 
 
