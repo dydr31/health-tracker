@@ -23,6 +23,20 @@ type List = {
 
 const dummyList: List = [{ date: "2020-01-01", upper: 0, lower: 0, pulse: 0 }];
 
+const filterForShowing = (data: List, clicks: number, number: number) => {
+  let len = data.length
+  let a = len + number * clicks;
+  if (a <= 0) {
+    a = 0;
+  }
+  let b = len + number * (clicks + 1);
+  if (b > len) {
+    b = len;
+  }
+  return data.slice(a, b)
+
+}
+
 export const Table: React.FC = () => {
   const datesCtx = useContext(DatesContext);
   const logInCtx = useContext(LogInContext);
@@ -37,6 +51,7 @@ export const Table: React.FC = () => {
     data.sort((a,b) => {
       return Number (a.date.toString().slice(18,28)) -  Number (b.date.toString().slice(18,28))
     })
+
   }
 
 
@@ -51,6 +66,7 @@ export const Table: React.FC = () => {
       dataCtx.updateShownItems(data.slice(-number));
     };
     setData();
+    console.log('set data')
   }, []);
 
 
@@ -84,32 +100,28 @@ export const Table: React.FC = () => {
     //   setDataArray(filteredArray);
     // }
 
-    // setDataArray(filteredArray)
-    console.log(filteredArray)
-    dataCtx.updateShownItems(filteredArray)
-    setDataArray(filteredArray)
     // console.log(filteredArray)
+    let res = filterForShowing(filteredArray, clicks, number)
+
+    dataCtx.updateShownItems(res)
+    setDataArray(filteredArray)
+    console.log('filtered by date')
+
   }, [datesCtx]);
 
 
 
-  // useEffect(() => {
-  //   let a = length + number * clicks;
-  //   if (a <= 0) {
-  //     a = 0;
-  //   }
-  //   let b = length + number * (clicks + 1);
-  //   if (b > length) {
-  //     b = length;
-  //   }
-  //   dataCtx.updateShownItems(dataArray.slice(a, b))
-  // }, [clicks, datesCtx, number]);
+  useEffect(() => {
+    let res = filterForShowing(dataArray, clicks, number)
+    dataCtx.updateShownItems(res)
+    console.log('filtered for showing')
+  }, [clicks, number]);
 
 
   return (
     <>
-    {/* {console.log(dataArray)} */}
-    {console.log(dataCtx.shownItems)}
+    {console.log(dataArray.length)}
+    {/* {console.log(dataCtx.shownItems)} */}
     <div className={classes.table}>
       <h2>Your tonometer measurements:</h2>
       <ButtonsRow />
