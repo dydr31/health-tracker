@@ -16,7 +16,7 @@ const dummyChartData = {
   ],
 };
 
-export const ChartContainer: React.FC<{}> = (props) => {
+export const ChartContainer: React.FC<{}> = () => {
   const [chartData, setChartData] = useState(dummyChartData);
   const dataCtx = useContext(DataContext);
   const formsStateCtx = useContext(FormsStateContext);

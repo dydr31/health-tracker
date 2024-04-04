@@ -45,6 +45,7 @@ export const Table: React.FC = () => {
       let email = logInCtx.Email;
       let data = await fetchData(email);
       filterData(data)
+      //dataCtx.setItems(data)
       setDataArray(data);
       await dataCtx.loadItems(email);
       dataCtx.updateShownItems(data.slice(-number));
@@ -64,52 +65,52 @@ export const Table: React.FC = () => {
 
     if (from > 0) {
       filteredArray = filteredArray.filter(
-        (item) => Number(item.date.toString().slice(18, 28)) * 1000 > from
+        (item) => Number(item.date.toString().slice(18, 28)) * 1000 >= from
       );
-      console.log(filteredArray)
       setDataArray(filteredArray)
-      console.log('trimmed')
     }
 
     if (to > 0) {
       filteredArray = filteredArray.filter(
-        (item) => Number(item.date.toString().slice(18, 28)) * 1000 < to
+        (item) => Number(item.date.toString().slice(18, 28)) * 1000 <= to
       );
       setDataArray(filteredArray)
-      console.log('trimmed')
     }
 
 
-    if (filteredArray.length === 0) {
-      dataCtx.updateShownItems(dataArray.slice(-number));
-    } else {
-      setDataArray(filteredArray);
-    }
+    // if (filteredArray.length === 0) {
+    //   dataCtx.updateShownItems(dataArray.slice(-number));
+    // } else {
+    //   setDataArray(filteredArray);
+    // }
 
     // setDataArray(filteredArray)
     console.log(filteredArray)
     dataCtx.updateShownItems(filteredArray)
+    setDataArray(filteredArray)
     // console.log(filteredArray)
   }, [datesCtx]);
 
 
 
-  useEffect(() => {
-    let a = length + number * clicks;
-    if (a <= 0) {
-      a = 0;
-    }
-    let b = length + number * (clicks + 1);
-    if (b > length) {
-      b = length;
-    }
-    dataCtx.updateShownItems(dataArray.slice(a, b))
-  }, [clicks, datesCtx, number]);
+  // useEffect(() => {
+  //   let a = length + number * clicks;
+  //   if (a <= 0) {
+  //     a = 0;
+  //   }
+  //   let b = length + number * (clicks + 1);
+  //   if (b > length) {
+  //     b = length;
+  //   }
+  //   dataCtx.updateShownItems(dataArray.slice(a, b))
+  // }, [clicks, datesCtx, number]);
 
 
   return (
+    <>
+    {/* {console.log(dataArray)} */}
+    {console.log(dataCtx.shownItems)}
     <div className={classes.table}>
-    {/* {console.log(dataCtx.shownItems)} */}
       <h2>Your tonometer measurements:</h2>
       <ButtonsRow />
       <ChartContainer/>
@@ -118,5 +119,6 @@ export const Table: React.FC = () => {
       <FormContainer />
       <RoundButton onClick={() => formsStateCtx.toggleForm()} />
     </div>
+    </>
   );
 };

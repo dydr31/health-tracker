@@ -21,10 +21,13 @@ type ItemObj2 = {
 
 type DataContextObj = {
   items: ItemObj[];
+  setItems: (items: ItemObj[]) => void;
   removeItem: (date: string, email: string) => void;
   loadItems: (email: string) => void;
   shownItems: ItemObj2[];
-  updateShownItems: (data: ItemObj2[]) => void
+  updateShownItems: (data: ItemObj2[]) => void;
+  filteredItems: ItemObj2[];
+  updateFilteredItems: (data: ItemObj2[]) => void;
 };
 
 export const DataContext = React.createContext<DataContextObj>({
@@ -36,6 +39,7 @@ export const DataContext = React.createContext<DataContextObj>({
       pulse: 0,
     },
   ],
+  setItems: () => {},
   removeItem: () => {},
   loadItems: () => {},
   shownItems: [
@@ -46,7 +50,17 @@ export const DataContext = React.createContext<DataContextObj>({
       pulse: 0,
     },
   ],
-  updateShownItems: () => {}
+  
+  updateShownItems: () => {},
+  filteredItems: [
+    {
+      date: '',
+      upper: 0,
+      lower: 0,
+      pulse: 0,
+    },
+  ],
+  updateFilteredItems: () => {},
 });
 
 export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -66,13 +80,6 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     let filteredItems = items.filter(
       (x) => x.date.toString() !== date.toString()
     );
-    // let transformed = filteredItems.map((x) => ({
-    //   data: new Date(Number(x.date.toString().slice(18, 28)) * 1000),
-    //   upper: x.upper,
-    //   lower: x.lower,
-    //   pulse: x.pulse,
-    // }));
-
     await updateData(email, filteredItems);
   };
 
@@ -82,11 +89,6 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     setItems(data);
     
   };
-
-  // let sortedItems = items.sort((a,b) => {
-  //   return a.date.seconds - b.date.seconds
-  // })
-  // console.log(sortedItems)
 
   const [shownItems, setShownItems] = useState([
     {
@@ -99,18 +101,30 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
 
   const updateShownItems = (data: ItemObj2[]) => {
     setShownItems(data)
-    // console.log(data)
-    console.log('updated')
-    //console.log(data[0].date.toString().slice(18,28))
+  }
 
+  const [filteredItems, setFilteredItems] = useState([
+    {
+      date: '',
+      upper: 1,
+      lower: 1,
+      pulse: 1,
+    },
+  ])
+
+  const updateFilteredItems = (data: ItemObj2[]) => {
+    setFilteredItems(data)
   }
 
   const contextValue: DataContextObj = {
     items,
+    setItems,
     removeItem: removeItemHandler,
     loadItems: loadItemsHandler,
     shownItems,
     updateShownItems,
+    filteredItems,
+    updateFilteredItems,
   };
 
   
