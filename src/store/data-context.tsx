@@ -2,22 +2,8 @@ import React from "react";
 import { getUserData, updateData } from "../util/data-functions";
 import { getUserId } from "../util/login-functions";
 import { useState } from "react";
-
-type Date = { seconds: number; nanoseconds: number };
-
-type ItemObj = {
-  date: Date;
-  upper: number;
-  lower: number;
-  pulse: number;
-};
-
-type ItemObj2 = {
-  date: string;
-  upper: number;
-  lower: number;
-  pulse: number;
-}
+import { ItemObj } from "../types/types";
+import { ItemObj2 } from "../types/types";
 
 type DataContextObj = {
   items: ItemObj[];
@@ -26,8 +12,8 @@ type DataContextObj = {
   loadItems: (email: string) => void;
   shownItems: ItemObj2[];
   updateShownItems: (data: ItemObj2[]) => void;
-  filteredItems: ItemObj2[];
-  updateFilteredItems: (data: ItemObj2[]) => void;
+
+
 };
 
 export const DataContext = React.createContext<DataContextObj>({
@@ -52,15 +38,6 @@ export const DataContext = React.createContext<DataContextObj>({
   ],
   
   updateShownItems: () => {},
-  filteredItems: [
-    {
-      date: '',
-      upper: 0,
-      lower: 0,
-      pulse: 0,
-    },
-  ],
-  updateFilteredItems: () => {},
 });
 
 export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -123,8 +100,7 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     loadItems: loadItemsHandler,
     shownItems,
     updateShownItems,
-    filteredItems,
-    updateFilteredItems,
+
   };
 
   

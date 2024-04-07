@@ -13,9 +13,14 @@
 }
 
 .small-button:hover,
-.small-button:active{
+.small-button:active,
+.active{
     background-color: $button-color-hover;
 }
+
+// .active{
+//     background-color: red;
+// }
 
 @media(max-width: 500px){
     .small-button{

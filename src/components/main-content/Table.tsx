@@ -9,8 +9,10 @@ import { LogInContext } from "../../store/login-context";
 import { FormsStateContext } from "../../store/forms-state-context";
 import { FormContainer } from "./Form/FormContainer";
 import { DataMenuContainer } from "./DataMenu/DataMenuContainer";
-import { ButtonsRow } from "./ButtonsRow/ButtonsRow";
+import { ButtonsRow } from "./ButtonsRow/ButtonsRightSide";
 import { ChartContainer } from "./Chart/ChartContainer";
+import { ChartParenContainer } from "./Chart/ChartParentContainer";
+import { ButtonsRowContainer } from "./ButtonsRow/ButtonRowContainer";
 
 type List = {
   date: string;
@@ -37,16 +39,10 @@ const filterForShowing = (data: List, clicks: number, number: number) => {
   return data.slice(a, b);
 };
 
-const getDateFromString = (date: string) => {
-  return new Date(Number (date.toString().slice(18,28))  * 1000)
+const getHoursFromString = (date: string) => {
+  return (new Date(Number (date.toString().slice(18,28))  * 1000)).getHours()
 }
 
-const filterForDay = (data: List) => {
-
-  let arr: Date[] = []
-  let res = data.filter(x => ( ( getDateFromString(x.date)).getHours() < 17) )
-  console.log(res)
-}
 
 export const Table: React.FC = () => {
   const datesCtx = useContext(DatesContext);
@@ -75,7 +71,7 @@ export const Table: React.FC = () => {
     setDataArray(data);
     await dataCtx.loadItems(email);
     dataCtx.updateShownItems(data.slice(-number));
-    filterForDay(data)
+    // console.log(filterForDayAndEvening(data))
   };
 
   useEffect(() => {
@@ -126,8 +122,8 @@ export const Table: React.FC = () => {
       {/* {console.log(dataCtx.shownItems)} */}
       <div className={classes.table}>
         <h2>Your tonometer measurements:</h2>
-        <ButtonsRow />
-        <ChartContainer />
+        <ButtonsRowContainer/>
+        <ChartParenContainer/>
         <DataPick />
         <DataMenuContainer />
         <FormContainer />

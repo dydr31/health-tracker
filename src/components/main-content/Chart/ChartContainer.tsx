@@ -16,13 +16,20 @@ const dummyChartData = {
   ],
 };
 
-export const ChartContainer: React.FC<{}> = () => {
+type ItemObj2 = {
+  date: string;
+  upper: number;
+  lower: number;
+  pulse: number;
+}
+
+export const ChartContainer: React.FC<{data: ItemObj2[]}> = (props) => {
   const [chartData, setChartData] = useState(dummyChartData);
   const dataCtx = useContext(DataContext);
   const formsStateCtx = useContext(FormsStateContext);
 
   let number = formsStateCtx.number;
-  let shownData = dataCtx.shownItems;
+  let shownData = props.data
 
   useEffect(() => {
 

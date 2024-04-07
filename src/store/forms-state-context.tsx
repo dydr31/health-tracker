@@ -7,12 +7,14 @@ type FormsStateContextObj = {
   dataMenu: boolean;
   dataPick: boolean;
   clicks: number;
+  type: boolean;
   setNumber: () => void;
   toggleForm: () => void;
   toggleDataMenu: () => void;
   toggleDataPick: () => void;
   plusClick: () => void;
   minusClick: () => void;
+  toggleType: () => void;
 };
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
@@ -21,12 +23,14 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   dataMenu: false,
   dataPick: false,
   clicks: -1,
+  type: true,
   setNumber: () => {},
   toggleForm: () => {},
   toggleDataMenu: () => {},
   toggleDataPick: () => {},
   plusClick: () => {},
   minusClick: () => {},
+  toggleType: () => {},
 });
 
 export const FormsStateContextProvider: React.FC<{
@@ -64,6 +68,12 @@ export const FormsStateContextProvider: React.FC<{
     setClicks(clicks - 1)
 
   }
+
+  const [type, setType] = useState(true)
+
+  const toggleType = () => {
+    setType(!type)
+  }
   
 
   const contextValue: FormsStateContextObj = {
@@ -78,6 +88,8 @@ export const FormsStateContextProvider: React.FC<{
     toggleDataPick,
     plusClick,
     minusClick,
+    type,
+    toggleType,
 
   };
 

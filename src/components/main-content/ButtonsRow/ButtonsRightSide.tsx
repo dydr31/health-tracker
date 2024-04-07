@@ -51,7 +51,7 @@ export const ButtonsRow: React.FC = () => {
       </div>
 
       <div className={classes["dont-show-on-mobile"]}>
-        <SmallButton onClick={showMoreElementsHandler} text={"show more"} />
+        <SmallButton onClick={showMoreElementsHandler} text={"show more"} active={false} />
       </div>
     </div>
   );

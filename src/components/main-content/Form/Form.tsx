@@ -13,14 +13,14 @@ export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null)
+  const dateRef = useRef<HTMLInputElement>(null);
 
   const logInCtx = useContext(LogInContext);
 
   const sumbitForm = async (event: React.FormEvent) => {
     event.preventDefault();
     let checkData = checkForm();
-    
+
     if (checkData !== null) {
       let email = logInCtx.Email;
       await addDataPoint(email, [checkData!]);
@@ -40,12 +40,12 @@ export const Form: React.FC = () => {
     let upper = Number(upperRef.current!.value);
     let lower = Number(lowerRef.current!.value);
     let pulse = Number(pulseRef.current!.value);
-    let dateRefValue = dateRef.current!.value
-    let date = new Date ()
-    if (dateRefValue.length !== 0){
-      date = new Date (dateRef.current!.value)
+    let dateRefValue = dateRef.current!.value;
+    let date = new Date();
+    if (dateRefValue.length !== 0) {
+      date = new Date(dateRef.current!.value);
     }
-    console.log(date)
+    console.log(date);
 
     if (checkUpper(upper) && checkLower(lower) && checkPulse(pulse)) {
       let dataPoint = {
@@ -58,15 +58,15 @@ export const Form: React.FC = () => {
     }
     if (!checkUpper(upper)) {
       setInvalidUpper(true);
-      return null
+      return null;
     }
     if (!checkLower(lower)) {
       setInvalidLower(true);
-      return null
+      return null;
     }
     if (!checkPulse(pulse)) {
       setInvalidPulse(true);
-      return null
+      return null;
     }
   };
 
@@ -101,7 +101,13 @@ export const Form: React.FC = () => {
     <>
       <form className={classes.form} onSubmit={sumbitForm}>
         <div className={classes["inputs"]}>
-          <input type="date" className={classes["date-input"]} ref={dateRef}/>
+          <div className={classes["date-inputs"]}>
+            <input
+              type="datetime-local"
+              className={classes["date-input"]}
+              ref={dateRef}
+            />
+          </div>
 
           <input
             type="text"
