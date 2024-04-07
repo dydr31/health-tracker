@@ -6,9 +6,7 @@ import { DataPick } from "./DataPick/DataPick";
 import { DatesContext } from "../../store/date-context";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
-import {
-  FormsStateContext,
-} from "../../store/forms-state-context";
+import { FormsStateContext } from "../../store/forms-state-context";
 import { FormContainer } from "./Form/FormContainer";
 import { DataMenuContainer } from "./DataMenu/DataMenuContainer";
 import { ButtonsRow } from "./ButtonsRow/ButtonsRow";
@@ -24,7 +22,7 @@ type List = {
 const dummyList: List = [{ date: "2020-01-01", upper: 0, lower: 0, pulse: 0 }];
 
 const filterForShowing = (data: List, clicks: number, number: number) => {
-  let len = data.length
+  let len = data.length;
   let a = len + number * clicks;
   if (a <= 0) {
     a = 0;
@@ -32,9 +30,22 @@ const filterForShowing = (data: List, clicks: number, number: number) => {
   let b = len + number * (clicks + 1);
   if (b > len) {
     b = len;
+  } else if (b <= 0) {
+    b = len + number * (clicks + 2);
   }
-  return data.slice(a, b)
+  console.log(a, b);
+  return data.slice(a, b);
+};
 
+const getDateFromString = (date: string) => {
+  return new Date(Number (date.toString().slice(18,28))  * 1000)
+}
+
+const filterForDay = (data: List) => {
+
+  let arr: Date[] = []
+  let res = data.filter(x => ( ( getDateFromString(x.date)).getHours() < 17) )
+  console.log(res)
 }
 
 export const Table: React.FC = () => {
@@ -46,35 +57,39 @@ export const Table: React.FC = () => {
   let [dataArray, setDataArray] = useState(dummyList);
   const number = formsStateCtx.number;
 
+  const [day, setDay] = useState(dummyList)
 
-  const filterData = (data: List) => {
-    data.sort((a,b) => {
-      return Number (a.date.toString().slice(18,28)) -  Number (b.date.toString().slice(18,28))
-    })
+  const filterByDate = (data: List) => {
+    data.sort((a, b) => {
+      return (
+        Number(a.date.toString().slice(18, 28)) -
+        Number(b.date.toString().slice(18, 28))
+      );
+    });
+  };
 
-  }
-
+  const setData = async () => {
+    let email = logInCtx.Email;
+    let data = await fetchData(email);
+    filterByDate(data);
+    setDataArray(data);
+    await dataCtx.loadItems(email);
+    dataCtx.updateShownItems(data.slice(-number));
+    filterForDay(data)
+  };
 
   useEffect(() => {
-    const setData = async () => {
-      let email = logInCtx.Email;
-      let data = await fetchData(email);
-      filterData(data)
-      //dataCtx.setItems(data)
-      setDataArray(data);
-      await dataCtx.loadItems(email);
-      dataCtx.updateShownItems(data.slice(-number));
-    };
+
     setData();
-    console.log('set data')
+    console.log("set data");
   }, []);
-
-
 
   const clicks = formsStateCtx.clicks;
   let length = dataArray.length;
 
   useEffect(() => {
+    // setData()
+    
     let from = Number(datesCtx.dateFrom);
     let to = Number(datesCtx.dateTo);
     let filteredArray = dataArray;
@@ -83,54 +98,41 @@ export const Table: React.FC = () => {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 >= from
       );
-      setDataArray(filteredArray)
+      setDataArray(filteredArray);
     }
 
     if (to > 0) {
       filteredArray = filteredArray.filter(
         (item) => Number(item.date.toString().slice(18, 28)) * 1000 <= to
       );
-      setDataArray(filteredArray)
+      setDataArray(filteredArray);
     }
+    let res = filterForShowing(filteredArray, clicks, number);
 
-
-    // if (filteredArray.length === 0) {
-    //   dataCtx.updateShownItems(dataArray.slice(-number));
-    // } else {
-    //   setDataArray(filteredArray);
-    // }
-
-    // console.log(filteredArray)
-    let res = filterForShowing(filteredArray, clicks, number)
-
-    dataCtx.updateShownItems(res)
-    setDataArray(filteredArray)
-    console.log('filtered by date')
-
+    dataCtx.updateShownItems(res);
+    setDataArray(filteredArray);
+    console.log("filtered by date");
   }, [datesCtx]);
 
-
-
   useEffect(() => {
-    let res = filterForShowing(dataArray, clicks, number)
-    dataCtx.updateShownItems(res)
-    console.log('filtered for showing')
+    let res = filterForShowing(dataArray, clicks, number);
+    dataCtx.updateShownItems(res);
+    console.log("filtered for showing");
   }, [clicks, number]);
-
 
   return (
     <>
-    {console.log(dataArray.length)}
-    {/* {console.log(dataCtx.shownItems)} */}
-    <div className={classes.table}>
-      <h2>Your tonometer measurements:</h2>
-      <ButtonsRow />
-      <ChartContainer/>
-      <DataPick />
-      <DataMenuContainer />
-      <FormContainer />
-      <RoundButton onClick={() => formsStateCtx.toggleForm()} />
-    </div>
+      {/* {console.log(dataArray.length)} */}
+      {/* {console.log(dataCtx.shownItems)} */}
+      <div className={classes.table}>
+        <h2>Your tonometer measurements:</h2>
+        <ButtonsRow />
+        <ChartContainer />
+        <DataPick />
+        <DataMenuContainer />
+        <FormContainer />
+        <RoundButton onClick={() => formsStateCtx.toggleForm()} />
+      </div>
     </>
   );
 };
