@@ -14,7 +14,7 @@ type FormsStateContextObj = {
   toggleDataPick: () => void;
   plusClick: () => void;
   minusClick: () => void;
-  toggleType: () => void;
+  toggleType: (type: boolean) => void;
 };
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
@@ -71,8 +71,8 @@ export const FormsStateContextProvider: React.FC<{
 
   const [type, setType] = useState(true)
 
-  const toggleType = () => {
-    setType(!type)
+  const toggleType = (type: boolean) => {
+    setType(type)
   }
   
 

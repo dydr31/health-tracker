@@ -4,6 +4,7 @@ import { useContext } from "react";
 
 import classes from "./ChartParentContainer.module.scss";
 import { FormsStateContext } from "../../../store/forms-state-context";
+import { DropdownWrapper } from "../../UI/DropdownWrapper";
 
 type List = {
   date: string;
@@ -39,16 +40,20 @@ export const ChartParenContainer: React.FC = () => {
   return (
     <div className={classes["chart-parent-container"]}>
       {type && (
-        <div className={classes["chart-subcontainer"]}>
+        <DropdownWrapper key='c1' className={classes["chart-subcontainer"]}>
+       
           {/* <label>Daily Measurements:</label> */}
           <ChartContainer data={daily} />
-        </div>
+        
+        </DropdownWrapper>
       )}
       {!type && (
-        <div className={classes["chart-subcontainer"]}>
+        <DropdownWrapper className={classes["chart-subcontainer"]} key='c2'>
+        
           {/* <label>Evening Measurements:</label> */}
           <ChartContainer data={evening} />
-        </div>
+      
+        </DropdownWrapper>
       )}
     </div>
   );

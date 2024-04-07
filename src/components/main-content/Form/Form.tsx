@@ -102,6 +102,7 @@ export const Form: React.FC = () => {
       <form className={classes.form} onSubmit={sumbitForm}>
         <div className={classes["inputs"]}>
           <div className={classes["date-inputs"]}>
+            {/* <label>Date</label> */}
             <input
               type="datetime-local"
               className={classes["date-input"]}

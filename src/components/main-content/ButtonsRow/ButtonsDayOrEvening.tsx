@@ -5,15 +5,16 @@ import classes from "./ButtonsDayOrEvening.module.scss";
 import { FormsStateContext } from "../../../store/forms-state-context";
 
 export const ButtonsDayOrEvening: React.FC = () => {
-    const {type, toggleType} = useContext(FormsStateContext)
+  const { type, toggleType } = useContext(FormsStateContext);
 
-    const onClickHandler = () => {
-        toggleType()
-    }
   return (
-    <div className={classes['day-or-evening']}>
-      <SmallButton text="day" onClick={onClickHandler} active={type}/>
-      <SmallButton text="evening" onClick={onClickHandler} active={!type}/>
+    <div className={classes["day-or-evening"]}>
+      <SmallButton text="day" onClick={() => toggleType(true)} active={type} />
+      <SmallButton
+        text="evening"
+        onClick={() => toggleType(false)}
+        active={!type}
+      />
     </div>
   );
 };
