@@ -73,7 +73,7 @@ export const Table: React.FC = () => {
   return (
     <>
       <div className={classes.table}>
-        <h2>Your tonometer measurements:</h2>
+        {/* <h2>Your tonometer measurements:</h2> */}
         <ButtonsRowContainer />
         <ChartParentContainer />
         <DataPick />

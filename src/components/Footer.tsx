@@ -55,6 +55,14 @@ export const Footer: React.FC = () => {
               Heart icons created by Freepik - Flaticon
             </a>
           </p>
+          <p>
+            <a
+              href="https://www.flaticon.com/free-icons/question"
+              title="question icons"
+            >
+              Question icons created by Freepik - Flaticon
+            </a>
+          </p>
         </div>
       </details>
     </footer>

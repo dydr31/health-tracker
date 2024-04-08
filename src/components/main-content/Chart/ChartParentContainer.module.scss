@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .chart-parent-container {
     // display: flex;
     // align-items: center;
@@ -7,10 +9,15 @@
     gap: 1rem;
 }
 
+.chart-parent-container h3{
+    color: $header-color;
+    margin: 0;
+    margin-left: 2rem;
+    margin-top: .25rem;
+}
+
 .chart-subcontainer {
-    // display: flex;
-    // flex-direction: column;
-    // width: 45vw;
+    // background-color: $main-color;
     
 }
 
@@ -25,9 +32,18 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        
     }
     .chart-subcontainer{
         width: 100%;
+    }
+}
+@media(max-width: 500px){
+    .chart-parent-container{
+        display: none;
+    }
+    .chart-parent-container-mobile{
+        display: block;
     }
 }
 

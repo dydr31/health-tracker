@@ -1,4 +1,39 @@
-.day-or-evening{
-    display: flex;
-    gap: .25rem;
+@import "../../../variables";
+
+.day-or-evening {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.pink {
+  color: $pink;
+}
+
+.blue {
+  color: $blue;
+}
+
+.red {
+  color: $red;
+}
+
+@media (max-width: 500px) {
+  .day-or-evening {
+    // display: none;
+  }
 }

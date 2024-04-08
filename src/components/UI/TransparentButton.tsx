@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./TransparentButton.module.scss";
 import close from "../pics/close.png";
 import arrow from '../pics/down-arrow.png'
+import question from '../pics/question.png'
 
 export const TransparentButton: React.FC<{
   onClick: React.MouseEventHandler;
@@ -11,6 +12,8 @@ export const TransparentButton: React.FC<{
     <button className={classes["close"]} onClick={props.onClick}>
       {props.type === 'close' && <img src={close} alt="close" className={classes.transparent} />}
       {props.type === 'mobile-get-back' && <img src={arrow} className={classes['mobile-get-back']}/>}
+      {props.type==='question' && <img src={question} className={classes.transparent}/>}
+
     </button>
   );
 };

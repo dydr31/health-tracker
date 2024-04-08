@@ -14,11 +14,14 @@ export const LineChart: React.FC<{
     }[];
   };
 }> = (props) => {
+
   Chart.register(CategoryScale);
+
+  let options = { plugins: { legend: { display: false }, } }
   return (
     <>
       {" "}
-      <Line data={props.data} />
+      <Line data={props.data} options={options}/>
     </>
   );
 };

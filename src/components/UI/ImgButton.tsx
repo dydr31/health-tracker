@@ -5,6 +5,7 @@ import arrow from "../pics/down-arrow.png";
 import pencil from "../pics/pencil.png";
 import menu from "../pics/menu.png";
 import filter from '../pics/filter.png'
+import question from '../pics/question.png'
 
 export const ImgButton: React.FC<{
   onClick: React.MouseEventHandler;
@@ -25,6 +26,7 @@ export const ImgButton: React.FC<{
       {props.type === "add new" && <img src={pencil} alt="add new" />}
       {props.type === "menu" && <img src={menu} alt="menu" />}
       {props.type === 'filter' && <img src={filter} alt='filter' />}
+      {props.type === 'question' && <img src={question} alt='info' />}
     </button>
   );
 };
