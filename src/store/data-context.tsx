@@ -4,6 +4,7 @@ import { getUserId } from "../util/login-functions";
 import { useState } from "react";
 import { ItemObj } from "../types/types";
 import { ItemObj2 } from "../types/types";
+import { filterForDayAndEvening } from "../components/main-content/Table-functions";
 
 type DataContextObj = {
   items: ItemObj[];
@@ -12,48 +13,52 @@ type DataContextObj = {
   loadItems: (email: string) => void;
   shownItems: ItemObj2[];
   updateShownItems: (data: ItemObj2[]) => void;
+  morningItems: ItemObj2[];
+  eveningItems: ItemObj2[];
+  setMorningItems: (items: ItemObj2[]) => void;
+  setEveningItems: (items: ItemObj2[]) => void;
 
 
 };
 
+const DUMMY_DATA = [
+  {
+    date: { seconds: 0, nanoseconds: 0 },
+    upper: 0,
+    lower: 0,
+    pulse: 0,
+  },
+]
+
+const DUMMY_DATA_2 = [
+  {
+    date: '',
+    upper: 0,
+    lower: 0,
+    pulse: 0,
+  },
+]
+
 export const DataContext = React.createContext<DataContextObj>({
-  items: [
-    {
-      date: { seconds: 0, nanoseconds: 0 },
-      upper: 0,
-      lower: 0,
-      pulse: 0,
-    },
-  ],
+  items: DUMMY_DATA,
   setItems: () => {},
   removeItem: () => {},
   loadItems: () => {},
-  shownItems: [
-    {
-      date: '',
-      upper: 0,
-      lower: 0,
-      pulse: 0,
-    },
-  ],
-  
+  shownItems: DUMMY_DATA_2,
   updateShownItems: () => {},
+  morningItems: DUMMY_DATA_2,
+  eveningItems: DUMMY_DATA_2,
+  setMorningItems: () => {},
+  setEveningItems: () => {},
 });
 
 export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
   props
 ) => {
-  let [items, setItems] = useState([
-    {
-      date: { seconds: 0, nanoseconds: 0 },
-      upper: 1,
-      lower: 1,
-      pulse: 1,
-    },
-  ]);
+  let [items, setItems] = useState(DUMMY_DATA)
 
   const removeItemHandler = async (date: string, email: string) => {
-    console.log("removing item");
+    
     let filteredItems = items.filter(
       (x) => x.date.toString() !== date.toString()
     );
@@ -64,34 +69,21 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     let id = await getUserId(email);
     let data = await getUserData(id!);
     setItems(data);
-    
   };
 
-  const [shownItems, setShownItems] = useState([
-    {
-      date: '',
-      upper: 1,
-      lower: 1,
-      pulse: 1,
-    },
-  ])
+  const [shownItems, setShownItems] = useState(DUMMY_DATA_2)
 
   const updateShownItems = (data: ItemObj2[]) => {
+    let filtered = filterForDayAndEvening(data);
     setShownItems(data)
+    setEveningItems(filtered.evening)
+    setMorningItems(filtered.daily)
   }
 
-  const [filteredItems, setFilteredItems] = useState([
-    {
-      date: '',
-      upper: 1,
-      lower: 1,
-      pulse: 1,
-    },
-  ])
 
-  const updateFilteredItems = (data: ItemObj2[]) => {
-    setFilteredItems(data)
-  }
+
+  const [morningItems, setMorningItems] = useState(DUMMY_DATA_2)
+  const [eveningItems, setEveningItems] = useState(DUMMY_DATA_2)
 
   const contextValue: DataContextObj = {
     items,
@@ -100,6 +92,10 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     loadItems: loadItemsHandler,
     shownItems,
     updateShownItems,
+    morningItems,
+    eveningItems,
+    setMorningItems,
+    setEveningItems,
 
   };
 

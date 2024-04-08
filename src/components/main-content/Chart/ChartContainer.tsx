@@ -25,15 +25,13 @@ type ItemObj2 = {
 
 export const ChartContainer: React.FC<{data: ItemObj2[]}> = (props) => {
   const [chartData, setChartData] = useState(dummyChartData);
-  const dataCtx = useContext(DataContext);
-  const formsStateCtx = useContext(FormsStateContext);
+  const {number} = useContext(FormsStateContext);
 
-  let number = formsStateCtx.number;
-  let shownData = props.data
+  let data = props.data
 
   useEffect(() => {
 
-    let datesData = shownData.map((item) => item.date.toString().slice(18, 28));
+    let datesData = data.map((item) => item.date.toString().slice(18, 28));
     let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
     let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
 
@@ -43,29 +41,29 @@ export const ChartContainer: React.FC<{data: ItemObj2[]}> = (props) => {
       datasets: [
         {
           label: "pulse",
-          data: shownData.map((item) => Number(item.pulse)),
+          data: data.map((item) => Number(item.pulse)),
           backgroundColor: ["rgb(232, 72, 85)"],
           borderColor: ["rgb(232, 72, 85)"],
         },
         {
           label: "upper",
-          data: shownData.map((item) => Number(item.upper)),
+          data: data.map((item) => Number(item.upper)),
           backgroundColor: ["rgb(239, 188, 213)"],
           borderColor: ["rgb(239, 188, 213)"],
         },
         {
           label: "lower",
-          data: shownData.map((item) => Number(item.lower)),
+          data: data.map((item) => Number(item.lower)),
           backgroundColor: ["rgb(100, 166, 237)"],
           borderColor: ["rgb(100, 166, 237)"],
         },
       ],
     });
-  }, [shownData, number]);
+  }, [data, number]);
 
   return (
-    <div className={classes["chart-container"]}>
+    <>
       <LineChart data={chartData} />
-    </div>
+    </>
   );
 };

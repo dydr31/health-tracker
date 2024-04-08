@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 export const DropdownWrapper: React.FC<{
   children: React.ReactNode;
   className: string;
-  key: string;
 }> = (props) => {
   return (
     <motion.div
@@ -12,7 +11,7 @@ export const DropdownWrapper: React.FC<{
       exit={{ y: -50, opacity: 0 }}
       transition={{ bounce: 0, duration: 0.25 }}
       className={props.className}
-      key={props.key}
+      
     >
       {props.children}
     </motion.div>

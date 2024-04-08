@@ -9,7 +9,7 @@ export const ButtonsDayOrEvening: React.FC = () => {
 
   return (
     <div className={classes["day-or-evening"]}>
-      <SmallButton text="day" onClick={() => toggleType(true)} active={type} />
+      <SmallButton text="morning" onClick={() => toggleType(true)} active={type} />
       <SmallButton
         text="evening"
         onClick={() => toggleType(false)}

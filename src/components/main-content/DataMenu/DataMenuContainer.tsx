@@ -10,7 +10,7 @@ import classes from "./DataMenuContainer.module.scss";
 import { DataContext } from "../../../store/data-context";
 import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 
-import { filterForDayAndEvening } from "../Chart/ChartParentContainer";
+import { filterForDayAndEvening } from "../Table-functions";
 
 export const DataMenuContainer = () => {
   const formsStateCtx = useContext(FormsStateContext);

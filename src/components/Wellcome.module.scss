@@ -1,3 +1,5 @@
+@import '../variables';
+
 .background{
     height: 70vh;
 }
@@ -13,6 +15,7 @@
 
 .wellcome h1 {
     font-size: 50px;
+    color: $header-color;
 }
 
 .wellcome button {

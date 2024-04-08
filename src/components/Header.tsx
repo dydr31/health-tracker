@@ -4,6 +4,7 @@ import { logOut } from "../util/login-functions";
 import classes from "./Header.module.scss";
 import { Button } from "./UI/Button";
 import { MobileIcon } from "./UI/MobileIcon";
+import heart from "./pics/heart.png";
 
 export const Header = () => {
   const LogInCtx = useContext(LogInContext);
@@ -17,7 +18,11 @@ export const Header = () => {
     <header className={classes.header}>
       <div className={classes["main-elements"]}>
         {/* <MobileIcon/> */}
-        <h1>Health tracker</h1>
+        <div className={classes["logo"]}>
+          <img src={heart} alt="heart logo" />
+          <h1>Health tracker</h1>
+        </div>
+
         {/* {LogInCtx.LogIn && (<div className={classes['show-on-mobile']}> 
           <Button text={"Log Out"} onClick={logoutHandler}></Button></div>
         )} */}

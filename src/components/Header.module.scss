@@ -14,6 +14,19 @@
 
 .header h1 {
     margin: 0;
+    color: $header-color;
+}
+
+.header img {
+    width: 2rem;
+    height: 2rem;
+    filter: $filter;
+}
+
+.logo{
+    display: flex;
+    align-items: center;gap: .5rem;
+    
 }
 
 .elements {

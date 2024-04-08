@@ -9,16 +9,16 @@ export const LineChart: React.FC<{
     datasets: {
       label: string;
       data: number[];
-      backgroundColor: string[],
-      borderColor: string[],
+      backgroundColor: string[];
+      borderColor: string[];
     }[];
   };
 }> = (props) => {
   Chart.register(CategoryScale);
   return (
-    <div className={classes.chart}>
+    <>
       {" "}
       <Line data={props.data} />
-    </div>
+    </>
   );
 };
