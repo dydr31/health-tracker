@@ -1,23 +1,22 @@
 @import "../../../variables";
 
-.day-or-evening {
+.content {
   display: flex;
   gap: 0.25rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1rem;
 }
 
 .menu {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  align-items: flex-start;
 }
 
-.menu ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  padding: 0;
+.menu p {
   margin: 0;
-  gap: 0.5rem;
 }
 
 .pink {
@@ -32,8 +31,8 @@
   color: $red;
 }
 
-@media (max-width: 500px) {
-  .day-or-evening {
-    // display: none;
+@media (max-width: 1000px) {
+  .content{
+    align-items: flex-start;
   }
 }

@@ -5,6 +5,10 @@
     font-weight: 400;
 }
 
+.show-on-mobile{
+    display: none;
+}
+
 @media(max-width: 500px){
     .table h2{
         display: none;
@@ -15,5 +19,12 @@
         flex-direction: column;
         gap: 1rem;
     }
+    .show-on-mobile{
+        display: block;
+    }
+}
+
+@media(max-width: 1000px){
+    
 }
 

@@ -1,52 +1,37 @@
-import { AnimatePresence, useScroll} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { Modal } from "../../UI/Modal";
-import { ImgButton } from "../../UI/ImgButton";
+import { ImgButton } from "../../UI/buttons/ImgButton";
 import { useContext, useState } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
 import { DataMenu } from "./DataMenu";
 
 import classes from "./DataMenuContainer.module.scss";
 import { DataContext } from "../../../store/data-context";
-import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
-
-import { filterForDayAndEvening } from "../Table-functions";
+import { DropdownWrapper } from "../../UI/DropdownWrapper";
+import { ChartLegend } from "../ButtonsRow/ChartLegend";
 
 export const DataMenuContainer = () => {
-  const formsStateCtx = useContext(FormsStateContext);
-  const {shownItems}= useContext(DataContext);
-
-  let data = shownItems
-
-  const {type} = useContext(FormsStateContext)
-
-  let daily = filterForDayAndEvening(shownItems).daily;
-  let evening = filterForDayAndEvening(shownItems).evening;
-
-  if (type === true){
-    data = daily
-  }
-  else {
-    data = evening
-  }
-
-
-
-  const dataMenuHandler = () => {
-    formsStateCtx.toggleDataMenu();
-  };
+  const { morningItems, eveningItems } = useContext(DataContext);
+  const { isChart } = useContext(FormsStateContext);
 
   return (
+    <>
     <AnimatePresence>
-      {formsStateCtx.dataMenu && (
-        <>
-          <Modal />
-          <OpacityChangingWrapper className={classes["data-menu-container"]}>
-            <ImgButton type={"close"} onClick={dataMenuHandler} />
-            <DataMenu data={data} />
-          </OpacityChangingWrapper>
-        </>
+      {!isChart && (
+        <div className={classes["data-menu-container"]}>
+          <DropdownWrapper className={classes.undefined}>
+            <h3>Morning Data:</h3>
+            <DataMenu data={morningItems} />
+          </DropdownWrapper>
+          <DropdownWrapper className={classes.undefined}>
+            <h3>Evening Data:</h3>
+            <DataMenu data={eveningItems} />
+          </DropdownWrapper>
+        </div>
       )}
-    </AnimatePresence>
+      <ChartLegend/>
+      </AnimatePresence>
+    </>
   );
 };

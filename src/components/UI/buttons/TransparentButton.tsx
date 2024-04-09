@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./TransparentButton.module.scss";
-import close from "../pics/close.png";
-import arrow from '../pics/down-arrow.png'
-import question from '../pics/question.png'
+import close from "../../pics/close.png";
+import arrow from '../../pics/down-arrow.png'
+import question from '../../pics/question.png'
 
 export const TransparentButton: React.FC<{
   onClick: React.MouseEventHandler;

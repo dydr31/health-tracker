@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./Table.module.scss";
 import { fetchData } from "../../util/data-functions";
-import { RoundButton } from "../UI/RoundButton";
+import { RoundButton } from "../UI/buttons/RoundButton";
 import { DataPick } from "./DataPick/DataPick";
 import { DatesContext } from "../../store/date-context";
 import { DataContext } from "../../store/data-context";
@@ -17,6 +17,7 @@ import {
   filterForDayAndEvening,
 } from "./Table-functions";
 import { dummyList } from "./Table-functions";
+import { ChartLegend } from "./ButtonsRow/ChartLegend";
 
 export const Table: React.FC = () => {
   const { dateFrom, dateTo } = useContext(DatesContext);
@@ -59,25 +60,35 @@ export const Table: React.FC = () => {
       );
       setDataArray(filteredArray);
     }
-    let res = filterForShowing(filteredArray, clicks, number);
+    let result = filterForShowing(filteredArray, clicks, number);
 
-    updateShownItems(res);
+    updateShownItems(result);
     setDataArray(filteredArray);
   }, [dateFrom, dateTo]);
 
   useEffect(() => {
-    let res = filterForShowing(dataArray, clicks, number);
-    updateShownItems(res);
+    let result = filterForShowing(dataArray, clicks, number);
+    updateShownItems(result);
   }, [clicks, number]);
 
+  const { isChart } = useContext(FormsStateContext);
   return (
     <>
       <div className={classes.table}>
         {/* <h2>Your tonometer measurements:</h2> */}
         <ButtonsRowContainer />
-        <ChartParentContainer />
+
+        {isChart && (
+          <>
+            {" "}
+            <ChartParentContainer />
+            <ChartLegend />{" "}
+          </>
+        )}
+
         <DataPick />
-        <DataMenuContainer />
+
+        {!isChart && <DataMenuContainer />}
         <FormContainer />
         <RoundButton onClick={() => toggleForm()} />
       </div>

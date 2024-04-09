@@ -1,6 +1,6 @@
 import classes from "./LogInMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
-import { Button } from "../UI/Button";
+import { Button } from "../UI/buttons/Button";
 import { LogIn } from "../../util/login-functions";
 import { isEmailValid, isPasswordValild } from "../../util/signup-login-form-validation";
 

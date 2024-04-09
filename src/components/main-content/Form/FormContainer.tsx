@@ -3,7 +3,7 @@ import { AnimatePresence} from "framer-motion";
 import classes from "./FormContainer.module.scss";
 
 import { Modal } from "../../UI/Modal";
-import { ImgButton } from "../../UI/ImgButton";
+import { ImgButton } from "../../UI/buttons/ImgButton";
 import { Form } from "./Form";
 import { useContext } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
@@ -23,7 +23,7 @@ export const FormContainer = () => {
         
           <Modal />
           <OpacityChangingWrapper className={classes["form-container"]}>
-            <ImgButton onClick={formHandler} type={"close"} />
+            <ImgButton onClick={formHandler} type={"close"} active={false}/>
             <Form />
           </OpacityChangingWrapper>
         </>

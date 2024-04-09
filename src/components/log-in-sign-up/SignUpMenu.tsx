@@ -1,4 +1,4 @@
-import { Button } from "../UI/Button";
+import { Button } from "../UI/buttons/Button";
 import classes from "./SignUpMenu.module.scss";
 import { FormEvent, useRef, useState } from "react";
 import { signUp } from "../../util/login-functions";

@@ -7,14 +7,14 @@ type FormsStateContextObj = {
   dataMenu: boolean;
   dataPick: boolean;
   clicks: number;
-  type: boolean;
+  isChart: boolean;
   setNumber: () => void;
   toggleForm: () => void;
   toggleDataMenu: () => void;
   toggleDataPick: () => void;
   plusClick: () => void;
   minusClick: () => void;
-  toggleType: (type: boolean) => void;
+  toggleChart: (type: boolean) => void;
 };
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
@@ -23,58 +23,57 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   dataMenu: false,
   dataPick: false,
   clicks: -1,
-  type: true,
+  isChart: true,
   setNumber: () => {},
   toggleForm: () => {},
   toggleDataMenu: () => {},
   toggleDataPick: () => {},
   plusClick: () => {},
   minusClick: () => {},
-  toggleType: () => {},
+  toggleChart: () => {},
 });
 
 export const FormsStateContextProvider: React.FC<{
   children: React.ReactNode;
 }> = (props) => {
   const [form, setForm] = useState(false);
-  const [dataMenu, setDataMenu] = useState(false)
-  const [dataPick, setDataPickMenu] = useState(false)
+  const [dataMenu, setDataMenu] = useState(false);
+  const [dataPick, setDataPickMenu] = useState(false);
 
-  const [number, setNumber] = useState(7)
-  const [clicks, setClicks] = useState(-1)
+  const [number, setNumber] = useState(7);
+  const [clicks, setClicks] = useState(-1);
 
   const toggleForm = () => {
     setForm(!form);
   };
 
-  const toggleDataMenu =() => {
-    setDataMenu(!dataMenu)
-  }
+  const toggleDataMenu = () => {
+    setDataMenu(!dataMenu);
+  };
 
   const toggleDataPick = () => {
-    setDataPickMenu(!dataPick)
-  }
+    setDataPickMenu(!dataPick);
+  };
 
   const setNumberHandler = () => {
-    setNumber(number + 1)
-    
-  }
+    if (number <= 11) {
+      setNumber(number + 1);
+    }
+  };
 
   const plusClick = () => {
-    setClicks(clicks + 1)
-  }
+    setClicks(clicks + 1);
+  };
 
   const minusClick = () => {
-    setClicks(clicks - 1)
+    setClicks(clicks - 1);
+  };
 
-  }
+  const [isChart, setIsChart] = useState(true);
 
-  const [type, setType] = useState(true)
-
-  const toggleType = (type: boolean) => {
-    setType(type)
-  }
-  
+  const toggleChart = (type: boolean) => {
+    setIsChart(type);
+  };
 
   const contextValue: FormsStateContextObj = {
     number,
@@ -88,9 +87,8 @@ export const FormsStateContextProvider: React.FC<{
     toggleDataPick,
     plusClick,
     minusClick,
-    type,
-    toggleType,
-
+    isChart,
+    toggleChart,
   };
 
   return (

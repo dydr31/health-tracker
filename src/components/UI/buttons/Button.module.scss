@@ -1,9 +1,8 @@
-@import "../../variables";
+@import "../../../variables";
 
-.small-button {
-    font-size: 14px;
-    height: 1.5rem;
-    padding: $size-main/4;
+.button {
+    font-size: 16px;
+    padding: $size-main/2;
     padding-left: $size-main;
     padding-right: $size-main;
     border: none;
@@ -13,19 +12,13 @@
     color : $header-color;
 }
 
-.small-button:hover,
-.small-button:active,
-.active{
+.button:hover,
+.button:active{
     background-color: $button-color-hover;
 }
 
-// .active{
-//     background-color: red;
-// }
-
 @media(max-width: 500px){
-    .small-button{
-        height: 2rem;
-        
+    .button{
+        height: 2.5rem;
     }
 }

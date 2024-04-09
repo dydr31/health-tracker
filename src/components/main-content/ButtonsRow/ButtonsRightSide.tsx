@@ -1,6 +1,6 @@
-import classes from "./ButtonsRow.module.scss";
-import { ImgButton } from "../../UI/ImgButton";
-import { SmallButton } from "../../UI/SmallButton";
+import classes from "./ButtonsRightSide.module.scss";
+import { ImgButton } from "../../UI/buttons/ImgButton";
+import { SmallButton } from "../../UI/buttons/SmallButton";
 import { useContext } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
 import { LogInContext } from "../../../store/login-context";
@@ -39,15 +39,14 @@ export const ButtonsRow: React.FC = () => {
   return (
     <div className={classes.buttons}>
       {-1 * clicks < maxClicks && (
-        <ImgButton type="left-arrow" onClick={arrowHandlerLeft} />
+        <ImgButton type="left-arrow" onClick={arrowHandlerLeft} active={false}/>
       )}
       {clicks < -1 && (
-        <ImgButton type="right-arrow" onClick={arrowHandlerRight} />
+        <ImgButton type="right-arrow" onClick={arrowHandlerRight} active={false}/>
       )}
-      <ImgButton type="menu" onClick={dataMenuHandler} />
-      <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} />
+      <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} active={false}/>
       <div className={classes["show-on-mobile"]}>
-        <ImgButton type="add new" onClick={() => formsStateCtx.toggleForm()} />
+        <ImgButton type="add new" onClick={() => formsStateCtx.toggleForm()} active={false}/>
       </div>
 
       <div className={classes["dont-show-on-mobile"]}>

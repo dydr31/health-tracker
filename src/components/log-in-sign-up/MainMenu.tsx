@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { DropdownWrapper } from "../UI/DropdownWrapper";
-import { TransparentButton } from "../UI/TransparentButton";
-import { Button } from "../UI/Button";
+import { TransparentButton } from "../UI/buttons/TransparentButton";
+import { Button } from "../UI/buttons/Button";
 import classes from "./MainMenu.module.scss";
 import { useContext } from "react";
 import { SignInContext } from "../../store/sign-up-sign-in-menu-context";

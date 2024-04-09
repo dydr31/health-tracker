@@ -2,7 +2,7 @@ import classes from "./DataMenuItem.module.scss";
 import { DateDisplay } from "./DateDisplay";
 import { useContext, useState } from "react";
 import { DataContext } from "../../../store/data-context";
-import { TransparentButton } from "../../UI/TransparentButton";
+import { TransparentButton } from "../../UI/buttons/TransparentButton";
 import { LogInContext } from "../../../store/login-context";
 
 export const DataMenuItem: React.FC<{
@@ -34,9 +34,9 @@ export const DataMenuItem: React.FC<{
       onMouseLeave={removeDeleteButton}
       className={classes.li}
     >
-      <div className={classes["floating-button"]}>
+      {/* <div className={classes["floating-button"]}>
         {showButton && <TransparentButton  type='close' onClick={deleteHandler} />}
-      </div>
+      </div> */}
       <div className={classes.content}>
         <DateDisplay date={props.date} />
         <p className={`${classes.upper} ${classes.number}`}>{props.upper}</p>

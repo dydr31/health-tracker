@@ -1,6 +1,6 @@
 import { DatesContext } from "../../../store/date-context";
-import { Button } from "../../UI/Button";
-import { ImgButton } from "../../UI/ImgButton";
+import { Button } from "../../UI/buttons/Button";
+import { ImgButton } from "../../UI/buttons/ImgButton";
 import classes from "./DataPick.module.scss";
 import { useContext, useRef} from "react";
 import { Modal } from "../../UI/Modal";
@@ -37,6 +37,7 @@ export const DataPick: React.FC = () => {
               <ImgButton
                 type={"close"}
                 onClick={() => formsStateCtx.toggleDataPick()}
+                active={false}
               />
 
               <form className={classes.form} onSubmit={submitForm}>

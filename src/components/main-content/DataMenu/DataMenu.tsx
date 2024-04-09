@@ -2,7 +2,7 @@ import classes from "./DataMenu.module.scss";
 import { DataMenuItem } from "./DataMenuItem";
 import { List } from "../../../types/types";
 
-export const DataMenu: React.FC<{ data: List }> = (props) => {
+export const DataMenu: React.FC<{ data: List}> = (props) => {
   let isEmpty = false;
   if (props.data.length === 0) {
     isEmpty = true;

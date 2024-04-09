@@ -8,7 +8,7 @@ import { DropdownWrapper } from "../../UI/DropdownWrapper";
 
 export const ChartParentContainer: React.FC = () => {
   const { morningItems, eveningItems } = useContext(DataContext);
-  const { type } = useContext(FormsStateContext);
+  const { isChart: type } = useContext(FormsStateContext);
 
   return (
     <>

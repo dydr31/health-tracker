@@ -1,7 +1,7 @@
 import classes from "./Wellcome.module.scss";
-import { Button } from "./UI/Button";
+import { Button } from "./UI/buttons/Button";
 import { useContext, useState } from "react";
-import { TransparentButton } from "./UI/TransparentButton";
+import { TransparentButton } from "./UI/buttons/TransparentButton";
 import { SignUpMenu } from "./log-in-sign-up/SignUpMenu";
 import { LogInMenu } from "./log-in-sign-up/LogInMenu";
 import { DropdownWrapper } from "./UI/DropdownWrapper";

@@ -1,10 +1,13 @@
-import { ButtonsLeftSide } from "./ButtonsLeftSide"
-import { ButtonsRow } from "./ButtonsRightSide"
-import classes from './ButtonRowContainer.module.scss'
+import { ChartLegend } from "./ChartLegend";
+import { ButtonsRow } from "./ButtonsRightSide";
+import classes from "./ButtonRowContainer.module.scss";
+import { SwitchDataDisplay } from "./SwichDataDisplay";
 
 export const ButtonsRowContainer: React.FC = () => {
-    return <div className={classes['button-row-container']}>
-        <ButtonsLeftSide/>
-        <ButtonsRow/>
+  return (
+    <div className={classes["button-row-container"]}>
+      <SwitchDataDisplay />
+      <ButtonsRow />
     </div>
-}
+  );
+};

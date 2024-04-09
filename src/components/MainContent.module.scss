@@ -5,12 +5,13 @@
     margin-left: $margin;
     margin-right: $margin;
     margin-bottom: $margin;
-    max-height: 90vh;
+    min-height: 65vh;
 }
 @media(max-width: 500px){
     .main{
         margin-left: .75rem;
         margin-right: .75rem;
         margin-bottom: .75rem;
+        min-height: 75vh;
     } 
 }

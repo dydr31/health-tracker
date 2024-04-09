@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { LogInContext } from "../store/login-context";
 import { logOut } from "../util/login-functions";
 import classes from "./Header.module.scss";
-import { Button } from "./UI/Button";
+import { Button } from "./UI/buttons/Button";
 import { MobileIcon } from "./UI/MobileIcon";
 import heart from "./pics/heart.png";
 
