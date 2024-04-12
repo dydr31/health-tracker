@@ -12,25 +12,32 @@ import { DropdownWrapper } from "../../UI/DropdownWrapper";
 import { ChartLegend } from "../ButtonsRow/ChartLegend";
 
 export const DataMenuContainer = () => {
-  const { morningItems, eveningItems } = useContext(DataContext);
-  const { isChart } = useContext(FormsStateContext);
+  const { morningItems, eveningItems, shownItems } = useContext(DataContext);
+  const { isChart, isSplit } = useContext(FormsStateContext);
 
   return (
     <>
-    <AnimatePresence>
-      {!isChart && (
-        <div className={classes["data-menu-container"]}>
-          <DropdownWrapper className={classes.undefined}>
-            <h3>Morning Data:</h3>
-            <DataMenu data={morningItems} />
-          </DropdownWrapper>
-          <DropdownWrapper className={classes.undefined}>
-            <h3>Evening Data:</h3>
-            <DataMenu data={eveningItems} />
-          </DropdownWrapper>
-        </div>
-      )}
-      <ChartLegend/>
+      <AnimatePresence>
+        {!isChart && isSplit && (
+          <div className={classes["data-menu-container"]}>
+            <DropdownWrapper className={classes.undefined}>
+              <h3>Morning Data:</h3>
+              <DataMenu data={morningItems} />
+            </DropdownWrapper>
+            <DropdownWrapper className={classes.undefined}>
+              <h3>Evening Data:</h3>
+              <DataMenu data={eveningItems} />
+            </DropdownWrapper>
+          </div>
+        )}
+        {!isChart && !isSplit && (
+          <div>
+            <DropdownWrapper className={classes.undefined}>
+              <DataMenu data={shownItems} />
+            </DropdownWrapper>
+          </div>
+        )}
+        <ChartLegend />
       </AnimatePresence>
     </>
   );

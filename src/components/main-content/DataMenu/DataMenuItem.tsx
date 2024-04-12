@@ -34,9 +34,11 @@ export const DataMenuItem: React.FC<{
       onMouseLeave={removeDeleteButton}
       className={classes.li}
     >
-      {/* <div className={classes["floating-button"]}>
-        {showButton && <TransparentButton  type='close' onClick={deleteHandler} />}
-      </div> */}
+      <div className={classes["floating-button"]}>
+        {
+        showButton && 
+        <TransparentButton  type='close' onClick={deleteHandler} />}
+      </div>
       <div className={classes.content}>
         <DateDisplay date={props.date} />
         <p className={`${classes.upper} ${classes.number}`}>{props.upper}</p>

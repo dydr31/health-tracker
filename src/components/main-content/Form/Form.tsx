@@ -27,9 +27,9 @@ export const Form: React.FC = () => {
       upperRef.current!.value = "";
       lowerRef.current!.value = "";
       pulseRef.current!.value = "";
-      setTimeout(() => {
-        window.location.reload();
-      }, 400);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 400);
     }
   };
   let [invalidUpper, setInvalidUpper] = useState(false);

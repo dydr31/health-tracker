@@ -21,7 +21,7 @@ export const LineChart: React.FC<{
   return (
     <>
       {" "}
-      <Line data={props.data} options={options}/>
+      <Line data={props.data} options={options} className={classes.chart}/>
     </>
   );
 };

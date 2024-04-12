@@ -12,19 +12,14 @@
 .chart-parent-container h3{
     color: $header-color;
     margin: 0;
-    margin-left: 2rem;
+    // margin-left: 2rem;
     margin-top: .25rem;
+    margin-bottom: .5rem;
 }
 
-.chart-subcontainer {
-    // background-color: $main-color;
-    
-}
 
-.chart-subcontainer label{
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    color: red;
+.single-chart-container{
+    max-width: 70vw;
 }
 
 @media(max-width: 900px){
@@ -38,12 +33,4 @@
         width: 100%;
     }
 }
-// @media(max-width: 500px){
-//     .chart-parent-container{
-//         display: none;
-//     }
-//     .chart-parent-container-mobile{
-//         display: block;
-//     }
-// }
 

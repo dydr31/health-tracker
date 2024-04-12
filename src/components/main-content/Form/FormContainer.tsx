@@ -12,7 +12,6 @@ import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 export const FormContainer = () => {
   const formsStateCtx = useContext(FormsStateContext);
   const formHandler = () => {
-    console.log("a");
     formsStateCtx.toggleForm();
   };
   return (

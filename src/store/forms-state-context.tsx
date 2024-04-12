@@ -8,6 +8,8 @@ type FormsStateContextObj = {
   dataPick: boolean;
   clicks: number;
   isChart: boolean;
+  isSplit: boolean;
+  toggleSplit: (type: boolean) => void;
   setNumber: () => void;
   toggleForm: () => void;
   toggleDataMenu: () => void;
@@ -24,6 +26,8 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   dataPick: false,
   clicks: -1,
   isChart: true,
+  isSplit: true,
+  toggleSplit: () => {},
   setNumber: () => {},
   toggleForm: () => {},
   toggleDataMenu: () => {},
@@ -56,7 +60,7 @@ export const FormsStateContextProvider: React.FC<{
   };
 
   const setNumberHandler = () => {
-    if (number <= 11) {
+    if (number <= 14) {
       setNumber(number + 1);
     }
   };
@@ -75,6 +79,12 @@ export const FormsStateContextProvider: React.FC<{
     setIsChart(type);
   };
 
+  const [isSplit, setIsSplit] = useState(true)
+
+  const toggleSplit = (type: boolean) => {
+    setIsSplit(type)
+  }
+
   const contextValue: FormsStateContextObj = {
     number,
     clicks,
@@ -88,6 +98,8 @@ export const FormsStateContextProvider: React.FC<{
     plusClick,
     minusClick,
     isChart,
+    isSplit,
+    toggleSplit,
     toggleChart,
   };
 

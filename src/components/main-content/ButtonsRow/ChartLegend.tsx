@@ -6,6 +6,7 @@ import { FormsStateContext } from "../../../store/forms-state-context";
 import { ImgButton } from "../../UI/buttons/ImgButton";
 import { TransparentButton } from "../../UI/buttons/TransparentButton";
 import { motion, AnimatePresence } from "framer-motion";
+import question from '../../pics/question.png'
 
 export const ChartLegend: React.FC = () => {
   const { isChart: isChart, toggleChart} = useContext(FormsStateContext);
@@ -18,7 +19,7 @@ export const ChartLegend: React.FC = () => {
 
   return (
     <div className={classes.content}>
-      <TransparentButton type="question" onClick={onClickHandler} />
+      <img src={question} onClick={onClickHandler}/>
       <AnimatePresence>
         {isOpen && (
           <motion.div

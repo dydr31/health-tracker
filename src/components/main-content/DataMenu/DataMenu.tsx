@@ -1,15 +1,18 @@
 import classes from "./DataMenu.module.scss";
 import { DataMenuItem } from "./DataMenuItem";
 import { List } from "../../../types/types";
+import { useContext } from "react";
+import { FormsStateContext } from "../../../store/forms-state-context";
 
 export const DataMenu: React.FC<{ data: List}> = (props) => {
   let isEmpty = false;
   if (props.data.length === 0) {
     isEmpty = true;
   }
+  const {isSplit} = useContext(FormsStateContext)
   return (
     <>
-      <div className={classes["container"]}>
+      <div className={`${ isSplit ? classes["container"] : classes['container_big']}`}>
         <ul>
           {/* <li className={classes.labels}>
             <p>date</p>

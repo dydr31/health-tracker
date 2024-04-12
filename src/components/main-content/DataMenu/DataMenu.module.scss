@@ -8,6 +8,10 @@
 //    border-right: $border;
 }
 
+// .container ul :first-child{
+//     // background-color: red;
+//     border-left: $border;
+// }
 .container ul {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -19,6 +23,14 @@
     border-left: $border;
     // border-top: $border;
     // border-bottom: $border;
+}
+
+.container_big ul{
+    background-color: $main-color;
+    display: grid;
+    border-left: $border;
+    padding: 0;
+    grid-template-columns: repeat(14, 1fr);
 }
 
 .floating-button{

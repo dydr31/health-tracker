@@ -1,12 +1,12 @@
 import { ChartLegend } from "./ChartLegend";
 import { ButtonsRow } from "./ButtonsRightSide";
 import classes from "./ButtonRowContainer.module.scss";
-import { SwitchDataDisplay } from "./SwichDataDisplay";
+import { DisplayButtons } from "./DisplayButtons";
 
 export const ButtonsRowContainer: React.FC = () => {
   return (
     <div className={classes["button-row-container"]}>
-      <SwitchDataDisplay />
+      <DisplayButtons />
       <ButtonsRow />
     </div>
   );
