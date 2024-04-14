@@ -15,14 +15,16 @@ import {
   filterForShowing,
   filterByDate,
   filterForDayAndEvening,
+  groupTheSame,
 } from "./Table-functions";
 import { dummyList } from "./Table-functions";
 import { ChartLegend } from "./ButtonsRow/ChartLegend";
+import { List } from "../../types/types";
 
 export const Table: React.FC = () => {
   const { dateFrom, dateTo } = useContext(DatesContext);
   const { Email } = useContext(LogInContext);
-  const { updateShownItems, loadItems } = useContext(DataContext);
+  const { updateShownItems, setGroupedItems } = useContext(DataContext);
   const { number, toggleForm, clicks } = useContext(FormsStateContext);
   let [dataArray, setDataArray] = useState(dummyList);
 
@@ -30,9 +32,15 @@ export const Table: React.FC = () => {
     (async () => {
       let data = await fetchData(Email);
       filterByDate(data);
-      setDataArray(data);
-      await loadItems(Email);
-      updateShownItems(data.slice(-number));
+      //setDataArray(data);
+      //await loadItems(Email);
+      //updateShownItems(data.slice(-number));
+      
+      let grouped = groupTheSame(data)
+      setDataArray(grouped)
+      updateShownItems(grouped!.slice(-number));
+      setGroupedItems(grouped)
+
     })();
   }, []);
 
@@ -40,7 +48,9 @@ export const Table: React.FC = () => {
     (async () => {
       let data = await fetchData(Email);
       filterByDate(data);
-      setDataArray(data);
+      //setDataArray(data);
+      let grouped = groupTheSame(data)
+      setDataArray(grouped)
     })();
 
     let from = Number(dateFrom);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { getUserData, updateData } from "../util/data-functions";
 import { getUserId } from "../util/login-functions";
 import { useState } from "react";
@@ -17,6 +17,8 @@ type DataContextObj = {
   eveningItems: ItemObj2[];
   setMorningItems: (items: ItemObj2[]) => void;
   setEveningItems: (items: ItemObj2[]) => void;
+  groupedItems: ItemObj2[];
+  setGroupedItems: (data: ItemObj2[]) => void;
 
 
 };
@@ -50,6 +52,8 @@ export const DataContext = React.createContext<DataContextObj>({
   eveningItems: DUMMY_DATA_2,
   setMorningItems: () => {},
   setEveningItems: () => {},
+  groupedItems: DUMMY_DATA_2,
+  setGroupedItems: () => {},
 });
 
 export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -84,6 +88,8 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
 
   const [morningItems, setMorningItems] = useState(DUMMY_DATA_2)
   const [eveningItems, setEveningItems] = useState(DUMMY_DATA_2)
+  const [groupedItems, setGroupedItems] = useState(DUMMY_DATA_2)
+
 
   const contextValue: DataContextObj = {
     items,
@@ -96,7 +102,8 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
     eveningItems,
     setMorningItems,
     setEveningItems,
-
+    groupedItems,
+    setGroupedItems,
   };
 
   

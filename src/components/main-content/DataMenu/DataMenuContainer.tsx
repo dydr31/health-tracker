@@ -17,23 +17,23 @@ export const DataMenuContainer = () => {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence key='table'>
         {!isChart && isSplit && (
-          <div className={classes["data-menu-container"]}>
-            <DropdownWrapper className={classes.undefined}>
+          <div className={classes["data-menu-container"]} key='split'>
+            <DropdownWrapper className={classes.undefined} key='t1'>
               <h3>Morning Data:</h3>
-              <DataMenu data={morningItems} />
+              <DataMenu data={morningItems} key='table1'/>
             </DropdownWrapper>
-            <DropdownWrapper className={classes.undefined}>
+            <DropdownWrapper className={classes.undefined} key='t2'>
               <h3>Evening Data:</h3>
-              <DataMenu data={eveningItems} />
+              <DataMenu data={eveningItems} key='table2'/>
             </DropdownWrapper>
           </div>
         )}
         {!isChart && !isSplit && (
-          <div>
-            <DropdownWrapper className={classes.undefined}>
-              <DataMenu data={shownItems} />
+          <div key='merged'>
+            <DropdownWrapper className={classes.undefined} key='t3'>
+              <DataMenu data={shownItems} key='table3'/>
             </DropdownWrapper>
           </div>
         )}

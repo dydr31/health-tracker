@@ -19,7 +19,7 @@ export const ChartLegend: React.FC = () => {
 
   return (
     <div className={classes.content}>
-      <img src={question} onClick={onClickHandler}/>
+      <TransparentButton type='question' onClick={onClickHandler}/>
       <AnimatePresence>
         {isOpen && (
           <motion.div

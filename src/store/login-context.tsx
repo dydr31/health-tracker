@@ -5,7 +5,8 @@ type LogInContextObj = {
   LogIn: boolean;
   Email: string;
   id: string;
-  fetchId: () => void
+  fetchId: () => void;
+  
 };
 
 export const LogInContext = React.createContext<LogInContextObj>({
@@ -28,16 +29,17 @@ const LogInContextProvider: React.FC<{ children: React.ReactNode }> = (
     Email = "";
   }
 
-  const [idValue, setId] = useState('')
+  const [id, setId] = useState('')
 
-  const fetchIdHandler = () => {
-    getUserId(Email)
+  const fetchIdHandler = async () => {
+    let id = await getUserId(Email)
+    console.log(id)
   }
 
   const contextValue: LogInContextObj = {
     LogIn: LogInStatus,
     Email: Email,
-    id: idValue,
+    id,
     fetchId: fetchIdHandler
   };
   return (

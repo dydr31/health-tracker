@@ -16,13 +16,13 @@ export const ChartParentContainer: React.FC = () => {
         {isSplit && (
           <DropdownWrapper key="c1" className={classes["chart-subcontainer"]}>
             <h3>Morning data:</h3>
-            <ChartContainer data={morningItems} />
+            <ChartContainer data={morningItems} key='chart1'/>
           </DropdownWrapper>
         )}
         {isSplit && (
           <DropdownWrapper className={classes["chart-subcontainer"]} key="c2">
             <h3>Evening data:</h3>
-            <ChartContainer data={eveningItems} />
+            <ChartContainer data={eveningItems} key='chart2'/>
           </DropdownWrapper>
         )}
       </div>

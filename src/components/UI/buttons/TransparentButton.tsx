@@ -10,9 +10,9 @@ export const TransparentButton: React.FC<{
 }> = (props) => {
   return (
     <button className={classes["close"]} onClick={props.onClick}>
-      {props.type === 'close' && <img src={close} alt="close" className={classes.transparent} />}
-      {props.type === 'mobile-get-back' && <img src={arrow} className={classes['mobile-get-back']}/>}
-      {props.type==='question' && <img src={question} className={classes.transparent}/>}
+      {props.type === 'close' && <img src={close} alt="close"/>}
+      {/* {props.type === 'mobile-get-back' && <img src={arrow} className={classes['mobile-get-back']}/>} */}
+      {props.type==='question' && <img src={question} alt='info'/>}
 
     </button>
   );

@@ -17,14 +17,9 @@
     filter: $filter;
 }
 
-.transparent {
-    background-color: red
-    //rgb(0, 0, 0, 0)
-    ;
-}
-
 .close:hover,
-.close:active{
+.close:active,
+.active{
     background-color: $button-color-hover;
 }
 
@@ -35,14 +30,12 @@
 .left-arrow{
     transform: rotate(90deg);
 }
-.mobile-get-back{
-    transform: rotate(90deg);
-}
+
 
 @media(max-width: 500px){
     .close{
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2rem;
+        width: 2rem;
     }
     .close img {
         width: 1rem;

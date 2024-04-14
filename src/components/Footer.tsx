@@ -109,6 +109,16 @@ export const Footer: React.FC = () => {
                 </a>
               </p>
             </li>
+            <li>
+              <p>
+                <a
+                  href="https://www.flaticon.com/free-icons/plus"
+                  title="plus icons"
+                >
+                  Plus icons created by Freepik - Flaticon
+                </a>
+              </p>
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>

@@ -30,7 +30,7 @@
     text-align: right;
 }
 
-.input {
+.form input {
     color: $accent-color2;
 }
 
@@ -45,5 +45,12 @@
         align-items: center;
         justify-content: center;
         
+    }
+    .form-content input{
+        font-size: 20px;
+        height: 25px;
+    }
+    .form-content label{
+        font-size: 20px;
     }
 }

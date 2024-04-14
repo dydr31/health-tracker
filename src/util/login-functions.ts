@@ -16,7 +16,9 @@ export const logInWithGoogle = async () => {
     localStorage.setItem("Email", email);
     localStorage.setItem("Name", name);
     console.log("you've logged in");
-    getUserId(email);
+    // let id = await getUserId(email);
+    // console.log(id)
+    return {email: email, name: name}
   } catch (err) {
     console.error(err);
   }

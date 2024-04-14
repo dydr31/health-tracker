@@ -4,15 +4,19 @@ import { List } from "../../../types/types";
 import { useContext } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
 
-export const DataMenu: React.FC<{ data: List}> = (props) => {
+export const DataMenu: React.FC<{ data: List }> = (props) => {
   let isEmpty = false;
   if (props.data.length === 0) {
     isEmpty = true;
   }
-  const {isSplit} = useContext(FormsStateContext)
+  const { isSplit } = useContext(FormsStateContext);
   return (
     <>
-      <div className={`${ isSplit ? classes["container"] : classes['container_big']}`}>
+      <div
+        className={`${
+          isSplit ? classes["container"] : classes["container_big"]
+        }`}
+      >
         <ul>
           {/* <li className={classes.labels}>
             <p>date</p>
@@ -30,10 +34,14 @@ export const DataMenu: React.FC<{ data: List}> = (props) => {
                 pulse={item.pulse}
                 key={Math.random()}
               />
-            ))}
-
-          {isEmpty && <p>You don't have data yet</p>}
+            )
+            )}
         </ul>
+        {isEmpty && (
+          <div className={classes.message}>
+            <p>You don't have data for this time period</p>
+          </div>
+        )}
       </div>
     </>
   );

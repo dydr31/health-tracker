@@ -6,12 +6,15 @@ import { ImgButton } from "../../UI/buttons/ImgButton";
 
 export const DisplayButtons: React.FC = () => {
   const { toggleChart, toggleSplit } = useContext(FormsStateContext);
+  const [isChart, setIsChart] = useState(true) 
 
   const chartHandler = () => {
     toggleChart(true);
+    setIsChart(true)
   };
   const tableHandler = () => {
     toggleChart(false);
+    setIsChart(false)
   };
   const splitHandler = () => {
     toggleSplit(true);
@@ -22,7 +25,7 @@ export const DisplayButtons: React.FC = () => {
 
   return (
     <div className={classes["display-buttons"]}>
-      <div className={classes["display-buttons__select-view"]}>
+      {/* <div className={classes["display-buttons__select-view"]}>
         <label className={classes["display-buttons__select-view__label"]}>
           Display settings:
         </label>
@@ -44,7 +47,9 @@ export const DisplayButtons: React.FC = () => {
             </option>
           </select>
         </div>
-      </div>
+      </div> */}
+      <ImgButton type='chart' onClick={chartHandler} active={isChart} key='1'/>
+      <ImgButton type='table' onClick={tableHandler} active={!isChart} key='2'/>
     </div>
   );
 };

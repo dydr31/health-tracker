@@ -14,7 +14,7 @@ export const ButtonsRow: React.FC = () => {
   let number = formsStateCtx.number;
   let clicks = formsStateCtx.clicks;
 
-  let length = dataCtx.items.length;
+  let length = dataCtx.groupedItems.length;
   let maxClicks = length / number;
 
   const arrowHandlerLeft = () => {
@@ -39,14 +39,14 @@ export const ButtonsRow: React.FC = () => {
   return (
     <div className={classes.buttons}>
       {-1 * clicks < maxClicks && (
-        <ImgButton type="left-arrow" onClick={arrowHandlerLeft} active={false}/>
+        <ImgButton type="left-arrow" onClick={arrowHandlerLeft} active={false} key='left-arrow'/>
       )}
       {clicks < -1 && (
-        <ImgButton type="right-arrow" onClick={arrowHandlerRight} active={false}/>
+        <ImgButton type="right-arrow" onClick={arrowHandlerRight} active={false} key='right-arrow'/>
       )}
-      <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} active={false}/>
+      <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} active={false} key='filter'/>
       <div className={classes["show-on-mobile"]}>
-        <ImgButton type="add new" onClick={() => formsStateCtx.toggleForm()} active={false}/>
+        <ImgButton type="plus" onClick={() => formsStateCtx.toggleForm()} active={false} key='plus'/>
       </div>
 
       <div className={classes["dont-show-on-mobile"]}>
