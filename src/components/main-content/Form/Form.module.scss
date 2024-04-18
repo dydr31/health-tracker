@@ -19,7 +19,6 @@
 
 .form input {
   height: $size-main;
- 
   font-family: "Raleway", sans-serif;
 }
 
@@ -31,10 +30,6 @@
   color: $accent-color2;
 }
 
-.date-inputs{
-  display: flex;
-  flex-direction: column;
-}
 
 .red{
     border-color: rgb(255, 21, 0);
@@ -50,21 +45,19 @@
 }
 
 
-.input-container{
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  gap: .5rem;
-  text-align: right;
-}
-
 @media(max-width: 500px){
   .form{
+    min-width: 90vw;
   }
   .form input{
     font-size: 20px;
     height: 25px;
   }
-  .input{
+  .inputs{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: left;
     
   }
 }

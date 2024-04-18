@@ -3,12 +3,10 @@ import { DataContext } from "../../../store/data-context";
 import { useContext } from "react";
 
 import classes from "./ChartParentContainer.module.scss";
-import { FormsStateContext } from "../../../store/forms-state-context";
 import { DropdownWrapper } from "../../UI/DropdownWrapper";
 
 export const ChartParentContainer: React.FC = () => {
   const { morningItems, eveningItems } = useContext(DataContext);
-  const { isSplit } = useContext(FormsStateContext);
 
   return (
     <>

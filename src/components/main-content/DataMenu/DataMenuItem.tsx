@@ -33,13 +33,13 @@ export const DataMenuItem: React.FC<{
 
   return (
     <>
-      <div
+      <li
         onMouseEnter={showDeleteButton}
         onMouseLeave={removeDeleteButton}
         className={classes.li}
       >
         <div className={classes["floating-button"]}>
-        {showButton && !props.modified &&(
+        {showButton &&(
           <TransparentButton type="close" onClick={deleteHandler} />
         )}
         </div>
@@ -49,7 +49,7 @@ export const DataMenuItem: React.FC<{
           <p className={`${classes.lower} ${classes.number}`}>{props.lower}</p>
           <p className={`${classes.pulse} ${classes.number}`}>{props.pulse}</p>
         </div>
-      </div>
+      </li>
     </>
   );
 };

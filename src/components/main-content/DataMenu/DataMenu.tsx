@@ -1,9 +1,9 @@
 import classes from "./DataMenu.module.scss";
-import { DataMenuItemContainer } from "./DataMenuItemContainer";
-import { ItemObj, List } from "../../../types/types";
+import { ItemObj } from "../../../types/types";
 import { useContext } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
-import { ModifiedList } from "../Table-functions";
+import { DataMenuItem } from "./DataMenuItem";
+
 
 export const DataMenu: React.FC<{ data: ItemObj[] }> = (props) => {
   let isEmpty = false;
@@ -19,22 +19,14 @@ export const DataMenu: React.FC<{ data: ItemObj[] }> = (props) => {
         }`}
       >
         <ul>
-          {/* <li className={classes.labels}>
-            <p>date</p>
-            <p>upper</p>
-            <p>lower</p>
-            <p>pulse</p>
-          </li> */}
-
           {!isEmpty &&
             props.data.map((item) => (
-              <DataMenuItemContainer
+              <DataMenuItem
                 date={item.date}
                 upper={item.upper}
                 lower={item.lower}
                 pulse={item.pulse}
                 modified={item.modified}
-                // grouped={item.grouped}
                 key={Math.random()}
               />
             )

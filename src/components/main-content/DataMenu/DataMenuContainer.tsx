@@ -19,7 +19,7 @@ export const DataMenuContainer = () => {
     <>
       <AnimatePresence key="table">
         {!isChart && (
-          <div className={classes["data-menu-container"]} key="split">
+          <div className={classes["data-menu-container"]}>
             <DropdownWrapper className={classes.undefined} key="t1">
               <h3>Morning Data:</h3>
               <DataMenu data={morningItems} key="table1" />

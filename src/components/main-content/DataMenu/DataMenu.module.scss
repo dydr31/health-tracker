@@ -3,10 +3,10 @@
 .container {
    background-color: $main-color;
 
-   border-top: $border;
-   border-bottom: $border;
-    border-right: $border;
-    border-left: $border;
+//    border-top: $border;
+//    border-bottom: $border;
+//     border-right: $border;
+//     border-left: $border;
 }
 
 .container ul {
@@ -30,10 +30,6 @@
     grid-template-columns: repeat(14, 1fr);
 }
 
-.floating-button{
-    position: absolute;
-    top: 15rem;
-}
 
 .message{
     

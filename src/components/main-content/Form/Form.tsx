@@ -14,8 +14,6 @@ export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);
   const lowerRef = useRef<HTMLInputElement>(null);
   const pulseRef = useRef<HTMLInputElement>(null);
-  const customDateRef = useRef<HTMLInputElement>(null);
-  const currentDateRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
 
   const { Email } = useContext(LogInContext);
@@ -29,7 +27,7 @@ export const Form: React.FC = () => {
         new Date(x.date.seconds * 1000).getFullYear() === date.getFullYear()
     );
 
-    console.log(a);
+  
     if (a.length === 0) {
       return true;
     } else if (a.length === 1) {
@@ -61,7 +59,7 @@ export const Form: React.FC = () => {
         window.location.reload();
       }, 400);
     }
-    
+
   };
   let [invalidUpper, setInvalidUpper] = useState(false);
   let [invalidLower, setInvalidLower] = useState(false);

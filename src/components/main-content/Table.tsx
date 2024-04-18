@@ -99,7 +99,7 @@ export const Table: React.FC = () => {
           <>
             {" "}
             <ChartParentContainer />
-            <ChartLegend />{" "}
+           
           </>
         )}
 
