@@ -1,10 +1,11 @@
 import classes from "./DataMenu.module.scss";
-import { DataMenuItem } from "./DataMenuItem";
-import { List } from "../../../types/types";
+import { DataMenuItemContainer } from "./DataMenuItemContainer";
+import { ItemObj, List } from "../../../types/types";
 import { useContext } from "react";
 import { FormsStateContext } from "../../../store/forms-state-context";
+import { ModifiedList } from "../Table-functions";
 
-export const DataMenu: React.FC<{ data: List }> = (props) => {
+export const DataMenu: React.FC<{ data: ItemObj[] }> = (props) => {
   let isEmpty = false;
   if (props.data.length === 0) {
     isEmpty = true;
@@ -27,11 +28,13 @@ export const DataMenu: React.FC<{ data: List }> = (props) => {
 
           {!isEmpty &&
             props.data.map((item) => (
-              <DataMenuItem
+              <DataMenuItemContainer
                 date={item.date}
                 upper={item.upper}
                 lower={item.lower}
                 pulse={item.pulse}
+                modified={item.modified}
+                // grouped={item.grouped}
                 key={Math.random()}
               />
             )

@@ -3,6 +3,7 @@ import { LineChart } from "./Chart";
 import classes from "./ChartContainer.module.scss";
 import { DataContext } from "../../../store/data-context";
 import { FormsStateContext } from "../../../store/forms-state-context";
+import { Date2 } from "../../../types/types";
 
 const dummyChartData = {
   labels: [""],
@@ -17,25 +18,22 @@ const dummyChartData = {
 };
 
 type ItemObj2 = {
-  date: string;
+  date: Date2;
   upper: number;
   lower: number;
   pulse: number;
-}
+};
 
-export const ChartContainer: React.FC<{data: ItemObj2[]}> = (props) => {
+export const ChartContainer: React.FC<{ data: ItemObj2[] }> = (props) => {
   const [chartData, setChartData] = useState(dummyChartData);
-  const {number} = useContext(FormsStateContext);
+  const { number } = useContext(FormsStateContext);
 
-  let data = props.data
+  let data = props.data;
+
+  let datesArr = data.map((item) => new Date(Number(item.date.seconds) * 1000));
+  let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
 
   useEffect(() => {
-
-    let datesData = data.map((item) => item.date.toString().slice(18, 28));
-    let datesArr = datesData.map((item) => new Date(Number(item) * 1000));
-    let datesArrStrings = datesArr.map((item) => item.toString().slice(4, 10));
-
-    
     setChartData({
       labels: datesArrStrings,
       datasets: [

@@ -14,7 +14,8 @@ export const ButtonsRow: React.FC = () => {
   let number = formsStateCtx.number;
   let clicks = formsStateCtx.clicks;
 
-  let length = dataCtx.groupedItems.length;
+  let length = 2
+  // dataCtx.groupedItems.length;
   let maxClicks = length / number;
 
   const arrowHandlerLeft = () => {

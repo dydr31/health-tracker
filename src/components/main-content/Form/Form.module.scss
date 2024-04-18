@@ -4,20 +4,27 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 70vw;
   
 }
 
 .inputs{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 50% 50%;
   padding: $size-main;
   gap: .5rem;
   background-color: $main-color;
+  text-align: right;
 }
 
 .form input {
   height: $size-main;
+ 
   font-family: "Raleway", sans-serif;
+}
+
+.input {
+  width: 30px;
 }
 
 .date-input {
@@ -40,6 +47,14 @@
     padding: 0;
     margin: 0;
     font-size: 14px
+}
+
+
+.input-container{
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: .5rem;
+  text-align: right;
 }
 
 @media(max-width: 500px){

@@ -9,6 +9,7 @@ import question from "../../pics/question.png";
 import chart from "../../pics/chart.png";
 import table from "../../pics/cells.png";
 import plus from "../../pics/plus.png";
+import asterisc from '../../pics/asterisc.png'
 
 const Close = { src: close, alt: "close", className: "" };
 const RightArrow = {
@@ -28,6 +29,7 @@ const Question = { src: question, alt: "info", className: "" };
 const Plus = { src: plus, alt: "add new", className: "" };
 const Chart = { src: chart, alt: "chart", className: "" };
 const Table = { src: table, alt: "table", className: "" };
+const Asterics = {src: asterisc, alt: 'info', className: ''}
 
 export const ImgButton: React.FC<{
   onClick: React.MouseEventHandler;
@@ -64,6 +66,9 @@ export const ImgButton: React.FC<{
   }
   if (props.type === 'table') {
     Placeholder = Table;
+  }
+  if(props.type ==='asterisc' ){
+    Placeholder = Asterics;
   }
 
   return (

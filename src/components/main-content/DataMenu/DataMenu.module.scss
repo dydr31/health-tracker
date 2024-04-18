@@ -3,15 +3,12 @@
 .container {
    background-color: $main-color;
 
-//    border-top: $border;
-//    border-bottom: $border;
-//    border-right: $border;
+   border-top: $border;
+   border-bottom: $border;
+    border-right: $border;
+    border-left: $border;
 }
 
-// .container ul :first-child{
-//     // background-color: red;
-//     border-left: $border;
-// }
 .container ul {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

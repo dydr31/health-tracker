@@ -119,6 +119,16 @@ export const Footer: React.FC = () => {
                 </a>
               </p>
             </li>
+            <li>
+              <p>
+                <a
+                  href="https://www.flaticon.com/free-icons/asterisc"
+                  title="asterisc icons"
+                >
+                  Asterisc icons created by Bogdan Rosu - Flaticon
+                </a>
+              </p>
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>
