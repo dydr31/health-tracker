@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LogInContext } from "../store/login-context";
-import { Table } from "./main-content/Table";
+import { Container } from "./main-content/Container";
 import { Wellcome } from "./Wellcome";
 
 import classes from "./MainContent.module.scss";
@@ -14,7 +14,7 @@ export const MainContent: React.FC = () => {
     <main className={classes.main}>
       {logInCtx.LogIn ? (
         <FormsStateContextProvider>
-          <Table />
+          <Container />
         </FormsStateContextProvider>
       ) : (
         <SignInContextProvider>

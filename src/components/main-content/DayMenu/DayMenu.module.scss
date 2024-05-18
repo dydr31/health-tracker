@@ -1,0 +1,36 @@
+@import '../../../variables';
+
+.day-menu{
+    background-color: $main-color;
+    z-index: 600;
+    min-width: 50vw;
+    text-align: center;
+    padding: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1rem;
+}
+
+.content label{
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.data-container{
+    display: flex;
+}
+
+.data-container p{
+    margin: 0;
+}
+

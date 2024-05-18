@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { addDataPoint } from "../../../util/data-functions";
 import { Button } from "../../UI/buttons/Button";
 import classes from "./Form.module.scss";
@@ -9,6 +9,7 @@ import {
   checkPulse,
 } from "../../../util/datapoint-form-validation";
 import { DataContext } from "../../../store/data-context";
+import { DayDataContext } from "../../../store/day-data-context";
 
 export const Form: React.FC = () => {
   const upperRef = useRef<HTMLInputElement>(null);
@@ -18,6 +19,8 @@ export const Form: React.FC = () => {
 
   const { Email } = useContext(LogInContext);
   const { items } = useContext(DataContext);
+
+  const { day, month, year, data} = useContext(DayDataContext)
 
   const isThereAPlaceForNewDataPoint = (date: Date) => {
     let a = items.filter(
@@ -139,8 +142,17 @@ export const Form: React.FC = () => {
     return isValid
   }
 
+  let targetDate = new Date (year, month - 1, day)
+  let targetUpper = data[0].upper
+
+  let defaultValue = '2020-01-01'
+  useEffect(() => {
+    upperRef.current!.value = targetUpper.toString()
+    dateRef.current!.value = '2020-01-01'
+  }, [])
+
   return (
-    <>
+    <>{console.log(targetDate.toString())}
       <form className={classes.form} onSubmit={sumbitForm}>
         <div className={classes["inputs"]}>
           <label htmlFor="date">Date</label>
@@ -152,6 +164,7 @@ export const Form: React.FC = () => {
             ref={dateRef}
             id="date"
             onBlur={dateBlur}
+            defaultValue='2020-01-01'
           />
 
           <label htmlFor="upper">Systolic blood pressure</label>

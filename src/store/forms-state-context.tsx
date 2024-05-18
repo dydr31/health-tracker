@@ -7,16 +7,19 @@ type FormsStateContextObj = {
   dataMenu: boolean;
   dataPick: boolean;
   clicks: number;
-  isChart: boolean;
-  isSplit: boolean;
-  toggleSplit: (type: boolean) => void;
+  isMorning: boolean;
+  dayMenu: boolean;
+
+
   setNumber: () => void;
   toggleForm: () => void;
   toggleDataMenu: () => void;
   toggleDataPick: () => void;
   plusClick: () => void;
   minusClick: () => void;
-  toggleChart: (type: boolean) => void;
+  setIsMorning: (type: boolean) => void;
+  toggleDayMenu: () => void;
+
 };
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
@@ -25,16 +28,19 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   dataMenu: false,
   dataPick: false,
   clicks: -1,
-  isChart: true,
-  isSplit: true,
-  toggleSplit: () => {},
+  isMorning: false,
+  dayMenu: false,
+
   setNumber: () => {},
   toggleForm: () => {},
   toggleDataMenu: () => {},
   toggleDataPick: () => {},
   plusClick: () => {},
   minusClick: () => {},
-  toggleChart: () => {},
+  setIsMorning: () => {},
+  toggleDayMenu: () => {},
+ 
+  
 });
 
 export const FormsStateContextProvider: React.FC<{
@@ -73,16 +79,12 @@ export const FormsStateContextProvider: React.FC<{
     setClicks(clicks - 1);
   };
 
-  const [isChart, setIsChart] = useState(true);
+  const [isMorning, setIsMorning] = useState(false)
 
-  const toggleChart = (type: boolean) => {
-    setIsChart(type);
-  };
+  const [dayMenu, setDayMenu] = useState(false)
 
-  const [isSplit, setIsSplit] = useState(true)
-
-  const toggleSplit = (type: boolean) => {
-    setIsSplit(type)
+  const toggleDayMenu = () => {
+    setDayMenu(!dayMenu)
   }
 
   const contextValue: FormsStateContextObj = {
@@ -97,10 +99,13 @@ export const FormsStateContextProvider: React.FC<{
     toggleDataPick,
     plusClick,
     minusClick,
-    isChart,
-    isSplit,
-    toggleSplit,
-    toggleChart,
+    isMorning,
+    setIsMorning,
+    dayMenu,
+    toggleDayMenu,
+
+
+   
   };
 
   return (

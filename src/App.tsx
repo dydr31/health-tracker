@@ -9,13 +9,11 @@ function App() {
   return (
     <>
       <DataContextProvider>
-        <DatesContextProvider>
-          <LogInContextProvider>
-            <Header />
-            <MainContent />
-            <Footer/>
-          </LogInContextProvider>
-        </DatesContextProvider>
+        <LogInContextProvider>
+          <Header />
+          <MainContent />
+          <Footer />
+        </LogInContextProvider>
       </DataContextProvider>
     </>
   );

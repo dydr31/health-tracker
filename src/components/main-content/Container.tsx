@@ -1,50 +1,52 @@
 import { useContext, useEffect, useState } from "react";
-import classes from "./Table.module.scss";
+import classes from "./Container.module.scss";
 import { RoundButton } from "../UI/buttons/RoundButton";
-import { DataPick } from "./DataPick/DataPick";
+import { DataPick } from "./DataMenu/DataPick";
 import { DatesContext } from "../../store/date-context";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
 import { FormsStateContext } from "../../store/forms-state-context";
 import { FormContainer } from "./Form/FormContainer";
-import { DataMenuContainer } from "./DataMenu/DataMenuContainer";
+
 import { ChartParentContainer } from "./Chart/ChartParentContainer";
 import { ButtonsRowContainer } from "./ButtonsRow/ButtonRowContainer";
-import { ChartLegend } from "./ButtonsRow/ChartLegend";
 
-import {  sortByDate } from "./Table-ulils";
-import { restructuredItems } from "./Table-ulils";
+import { sortByDate } from "./Table-ulils";
+import {
+  DayDataContext,
+  DayDataContextProvider,
+} from "../../store/day-data-context";
+import { DayMenu } from "./DayMenu/DayMenu";
+import { DayMenuContainer } from "./DayMenu/DayMenuContainer";
 
-let modifiedList = [{date: '', upper: 0, lower: 0, pulse: 0, grouped: false}]
+let modifiedList = [{ date: "", upper: 0, lower: 0, pulse: 0, grouped: false }];
 
-export const Table: React.FC = () => {
+export const Container: React.FC = () => {
   const { dateFrom, dateTo } = useContext(DatesContext);
   const { Email } = useContext(LogInContext);
-  const { shownItems, items, loadItems, updateShownItems, setItems } = useContext(DataContext);
+  const { shownItems, items, loadItems, updateShownItems, setItems } =
+    useContext(DataContext);
   const { number, toggleForm, clicks } = useContext(FormsStateContext);
   let [dataArray, setDataArray] = useState(modifiedList);
 
   useEffect(() => {
     (async () => {
-      let data = await loadItems(Email)
-      sortByDate(data!)
-      setItems(data!)
-      updateShownItems(data!)
+      let data = await loadItems(Email);
+      sortByDate(data!);
+      setItems(data!);
+      updateShownItems(data!);
       // let restructured = restructuredItems(data!)
       // // console.log(restructured)
       // updateShownItems(restructured)
-      
-
 
       //setDataArray(data);
       //await loadItems(Email);
       //updateShownItems(data.slice(-number));
-      
+
       // let grouped = groupTheSame(data)
       // setDataArray(grouped)
       // updateShownItems(grouped!.slice(-number));
       // setGroupedItems(grouped)
-
     })();
   }, []);
 
@@ -86,29 +88,18 @@ export const Table: React.FC = () => {
   //   updateShownItems(result);
   // }, [clicks, number]);
 
-  const { isChart } = useContext(FormsStateContext);
   return (
     <>
-    {/* {console.log(items)}
-    {console.log(shownItems)} */}
       <div className={classes.table}>
-        {/* <h2>Your tonometer measurements:</h2> */}
         <ButtonsRowContainer />
 
-        {isChart && (
-          <>
-            {" "}
-            <ChartParentContainer />
-           
-          </>
-        )}
+        <ChartParentContainer />
+        <DayDataContextProvider>
+          <DataPick />
+          <DayMenuContainer />
 
-        <DataPick />
-
-        {/* {!isChart &&  */}
-        <DataMenuContainer />
-        {/* // } */}
-        <FormContainer />
+          <FormContainer />
+        </DayDataContextProvider>
         <RoundButton onClick={() => toggleForm()} />
       </div>
     </>

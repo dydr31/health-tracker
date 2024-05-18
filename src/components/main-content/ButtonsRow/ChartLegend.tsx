@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import question from '../../pics/question.png'
 
 export const ChartLegend: React.FC = () => {
-  const { isChart: isChart, toggleChart} = useContext(FormsStateContext);
+  const { } = useContext(FormsStateContext);
 
   const [isOpen, setIsOpen] = useState(false);
 

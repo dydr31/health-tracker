@@ -1,0 +1,19 @@
+@import '../../../variables';
+
+.element{
+    background-color: $accent-color;
+    cursor:pointer;
+    color: black;
+ 
+    border: 2px solid $main-color;
+
+}
+
+.element:hover{
+    border: 2px solid $accent-color2;
+    
+}
+
+.highlighted {
+    background-color: $accent-color2;
+}

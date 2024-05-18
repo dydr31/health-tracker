@@ -1,0 +1,30 @@
+@import '../../../variables';
+
+.calendar-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color:$main-color;
+    padding: 1rem;
+    padding-top:0;
+    padding-bottom: 0;;
+}
+
+.left-arrow{
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: rotate(90deg);
+}
+
+.right-arrow{
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: rotate(-90deg);
+}
+
+@media(max-width: 500px){
+    .calendar-container{
+        gap: .3rem;
+        padding: .5rem;
+    }
+}
