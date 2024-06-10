@@ -16,8 +16,8 @@ import {
   DayDataContext,
   DayDataContextProvider,
 } from "../../store/day-data-context";
-import { DayMenu } from "./DayMenu/DayMenu";
-import { DayMenuContainer } from "./DayMenu/DayMenuContainer";
+
+import { FixedDateFormContainer } from "./FixedDateForm/FixedDateFormContainer";
 
 let modifiedList = [{ date: "", upper: 0, lower: 0, pulse: 0, grouped: false }];
 
@@ -96,8 +96,8 @@ export const Container: React.FC = () => {
         <ChartParentContainer />
         <DayDataContextProvider>
           <DataPick />
-          <DayMenuContainer />
-
+          {/* <DayMenuContainer /> */}
+           <FixedDateFormContainer/>
           <FormContainer />
         </DayDataContextProvider>
         <RoundButton onClick={() => toggleForm()} />

@@ -8,7 +8,8 @@ type FormsStateContextObj = {
   dataPick: boolean;
   clicks: number;
   isMorning: boolean;
-  dayMenu: boolean;
+
+  fixedDateMenu: boolean;
 
 
   setNumber: () => void;
@@ -18,7 +19,8 @@ type FormsStateContextObj = {
   plusClick: () => void;
   minusClick: () => void;
   setIsMorning: (type: boolean) => void;
-  toggleDayMenu: () => void;
+ 
+  setFixedDateMenu: (type: boolean) => void
 
 };
 
@@ -29,7 +31,7 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   dataPick: false,
   clicks: -1,
   isMorning: false,
-  dayMenu: false,
+  fixedDateMenu: false,
 
   setNumber: () => {},
   toggleForm: () => {},
@@ -38,7 +40,7 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   plusClick: () => {},
   minusClick: () => {},
   setIsMorning: () => {},
-  toggleDayMenu: () => {},
+  setFixedDateMenu: () => {},
  
   
 });
@@ -83,9 +85,13 @@ export const FormsStateContextProvider: React.FC<{
 
   const [dayMenu, setDayMenu] = useState(false)
 
-  const toggleDayMenu = () => {
-    setDayMenu(!dayMenu)
+  const toggleDayMenu = (data: boolean) => {
+    console.log(data)
+
+    setDayMenu(data)
   }
+
+  const [fixedDateMenu, setFixedDateMenu] = useState(false)
 
   const contextValue: FormsStateContextObj = {
     number,
@@ -101,8 +107,9 @@ export const FormsStateContextProvider: React.FC<{
     minusClick,
     isMorning,
     setIsMorning,
-    dayMenu,
-    toggleDayMenu,
+
+    fixedDateMenu,
+    setFixedDateMenu,
 
 
    

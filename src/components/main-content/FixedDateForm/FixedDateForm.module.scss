@@ -1,0 +1,76 @@
+@import "../../../variables";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: $size-main;
+  gap: 0.5rem;
+  background-color: $main-color;
+  text-align: right;
+}
+
+.inputs p {
+  margin: 0;
+  text-align: left;
+  color: $accent-color2;
+}
+
+.time-form{
+  display: flex;
+  gap: .2rem;
+}
+
+.time-input{
+  width: 19px;
+  color: $accent-color2;
+}
+
+
+.input {
+  width: 25px;
+//   height: $size-main;
+//   font-family: "Raleway", sans-serif;
+}
+
+.red{
+    border-color: rgb(255, 21, 0);
+    border-radius: .15rem;
+    background-color: rgb(254, 232, 225);
+}
+
+.button-container{
+    
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.button{
+    width: 100%;
+    background-color: $accent-color;
+    border: none;
+    padding: .5rem;
+    font-size: 16px;
+    color : $header-color;
+    font-weight: 600;
+}
+
+.button:hover,
+.button:active{
+    background-color: $button-color-hover;
+}
+
+.disabled{
+  color: gray;
+}
+
+.disabled:hover{
+  background-color: $accent-color;
+}

@@ -18,34 +18,6 @@ export const Form: React.FC = () => {
   const dateRef = useRef<HTMLInputElement>(null);
 
   const { Email } = useContext(LogInContext);
-  const { items } = useContext(DataContext);
-
-  const { day, month, year, data} = useContext(DayDataContext)
-
-  const isThereAPlaceForNewDataPoint = (date: Date) => {
-    let a = items.filter(
-      (x) =>
-        new Date(x.date.seconds * 1000).getDate() === date.getDate() &&
-        new Date(x.date.seconds * 1000).getMonth() === date.getMonth() &&
-        new Date(x.date.seconds * 1000).getFullYear() === date.getFullYear()
-    );
-
-  
-    if (a.length === 0) {
-      return true;
-    } else if (a.length === 1) {
-      let hoursNewDataPoint = date.getHours();
-      let hoursPrevDataPoint = new Date(a[0].date.seconds * 1000).getHours();
-      if (
-        (hoursPrevDataPoint < 17 && hoursNewDataPoint < 17) ||
-        (hoursPrevDataPoint > 17 && hoursNewDataPoint > 17)
-      ) {
-        return false;
-      } else return true;
-    } else {
-      return false;
-    }
-  };
 
   const sumbitForm = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -74,8 +46,12 @@ export const Form: React.FC = () => {
     let lower = Number(lowerRef.current!.value);
     let pulse = Number(pulseRef.current!.value);
     let date = new Date (dateRef.current!.value);
+    
+    if(dateRef.current!.value === ''){
+      date = new Date()
+    }
 
-    if (checkUpper(upper) && checkLower(lower) && checkPulse(pulse) && checkDate(date)) {
+    if (checkUpper(upper) && checkLower(lower) && checkPulse(pulse)) {
       let dataPoint = {
         date: date,
         upper: upper!,
@@ -96,10 +72,6 @@ export const Form: React.FC = () => {
     if (!checkPulse(pulse)) {
       setInvalidPulse(true);
       return null;
-    }
-    if (!checkDate(date)) {
-      setInvalidDate(true)
-      return null
     }
   };
 
@@ -130,29 +102,8 @@ export const Form: React.FC = () => {
     }
   };
 
-  const dateBlur = () => {
-    const date = new Date(dateRef.current!.value);
-    let isValid = isThereAPlaceForNewDataPoint(date);
-    console.log(isValid);
-    setInvalidDate(!isValid);
-  };
-
-  const checkDate = (date: Date) => {
-    let isValid = isThereAPlaceForNewDataPoint(date);
-    return isValid
-  }
-
-  let targetDate = new Date (year, month - 1, day)
-  let targetUpper = data[0].upper
-
-  let defaultValue = '2020-01-01'
-  useEffect(() => {
-    upperRef.current!.value = targetUpper.toString()
-    dateRef.current!.value = '2020-01-01'
-  }, [])
-
   return (
-    <>{console.log(targetDate.toString())}
+    <>
       <form className={classes.form} onSubmit={sumbitForm}>
         <div className={classes["inputs"]}>
           <label htmlFor="date">Date</label>
@@ -163,7 +114,7 @@ export const Form: React.FC = () => {
             }`}
             ref={dateRef}
             id="date"
-            onBlur={dateBlur}
+            // onBlur={dateBlur}
             defaultValue='2020-01-01'
           />
 

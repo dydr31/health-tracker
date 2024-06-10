@@ -1,5 +1,3 @@
-import { DatesContext } from "../../../store/date-context";
-import { Button } from "../../UI/buttons/Button";
 import { ImgButton } from "../../UI/buttons/ImgButton";
 import classes from "./DataPick.module.scss";
 import { useContext, useRef } from "react";
@@ -8,10 +6,10 @@ import { AnimatePresence } from "framer-motion";
 import { FormsStateContext } from "../../../store/forms-state-context";
 import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 import { CalendarContainer } from "./CalendarContainer";
-import { DayMenu } from "../DayMenu/DayMenu";
+
 
 export const DataPick: React.FC = () => {
-  let { toggleDataPick, dataPick, dayMenu } = useContext(FormsStateContext);
+  let { toggleDataPick, dataPick} = useContext(FormsStateContext);
 
   return (
     <>

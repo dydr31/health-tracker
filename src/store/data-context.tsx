@@ -47,10 +47,14 @@ export const DataContextProvider: React.FC<{ children: React.ReactNode }> = (
   let [items, setItems] = useState(DUMMY_DATA);
 
   const removeItemHandler = async (date: Date2, email: string) => {
+    console.log(date)
     let filteredItems = items.filter(
-      (x) => x.date.toString() !== date.toString()
+      (x) => x.date.seconds !== date.seconds
     );
+    //console.log(items)
     console.log(filteredItems);
+    // console.log(items.map(x => x.date))
+    //console.log(items.map(x => x.date))
     await updateData(email, filteredItems);
   };
 

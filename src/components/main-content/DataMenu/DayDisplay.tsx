@@ -7,33 +7,66 @@ export const DayDisplay: React.FC<{
   day: number;
   month: number;
   year: number;
-  data: { lower: number; upper: number; pulse: number }[];
-}> = ({ day, month, year, data }) => {
-  let gotData = false;
-  if (data[0].lower !== 0) {
-    gotData = true;
-  }
-  const { toggleDayMenu, toggleDataPick, toggleForm } =
-    useContext(FormsStateContext);
-  const { setAllData: setData } = useContext(DayDataContext);
+  hasMorningData: boolean;
+  hasEveningData: boolean;
+
+  morningData: {
+    lower: number;
+    upper: number;
+    pulse: number;
+    date: { seconds: number };
+  };
+  eveningData: {
+    lower: number;
+    upper: number;
+    pulse: number;
+    date: { seconds: number };
+  };
+}> = ({
+  day,
+  month,
+  year,
+  hasMorningData,
+  hasEveningData,
+  morningData,
+  eveningData,
+}) => {
+
+  const { toggleDataPick, setFixedDateMenu } = useContext(FormsStateContext);
+  const { setAllData, setMorningDataHandler, setEveningDataHandler} = useContext(DayDataContext);
+
+  //const hours = date.getHours()
 
   const openDayDataMenu = () => {
     toggleDataPick();
-    toggleForm();
-    if (gotData) {
-      console.log(data)
-      setData(day, month, year, data);
-    } else {
-      setData(day, month, year, [{ lower: 0, upper: 0, pulse: 0 }]);
+    setFixedDateMenu(true);
+    if (hasMorningData){
+      setMorningDataHandler(morningData)
+      
     }
+    if(hasEveningData){
+      setEveningDataHandler(eveningData)
+    }
+    setAllData(day, month, year)
   };
+
   return (
     <>
+      {/* {console.log(morningData)}
+      {console.log(eveningData)} */}
       <li
         onClick={openDayDataMenu}
-        className={`${classes.element} ${
-          gotData ? classes.highlighted : undefined
-        }`}
+        className={`${classes.element} 
+     
+        ${
+          hasMorningData && hasEveningData
+            ? classes.highlighted
+            : hasMorningData || hasEveningData
+            ? classes["half-highlighted"]
+            : undefined
+        }
+
+        `}
       >
         {day}
       </li>

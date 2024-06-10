@@ -32,7 +32,15 @@ export const Calendar: React.FC<{ month: number; year: number }> = ({
       day: i,
       year: year,
       month: month,
-      data: [{ lower: 0, upper: 0, pulse: 0 }],
+      hours: 0,
+      date: new Date(year, month, i),
+      hasMorningData: false,
+      morningData: { lower: 0, upper: 0, pulse: 0, date: {seconds: 0} },
+
+      hasEveningData: false,
+      eveningData: { lower: 0, upper: 0, pulse: 0, date: {seconds: 0} },
+
+      // data: [{ lower: 0, upper: 0, pulse: 0, date: {seconds: 0} }],
     });
   }
 
@@ -43,6 +51,8 @@ export const Calendar: React.FC<{ month: number; year: number }> = ({
     day: new Date(Number(x.date.seconds) * 1000).getDate(),
     month: new Date(Number(x.date.seconds) * 1000).getMonth() + 1,
     year: new Date(Number(x.date.seconds) * 1000).getFullYear(),
+    hours: new Date(Number(x.date.seconds) * 1000).getHours(),
+    date: x.date,
     lower: x.lower,
     upper: x.upper,
     pulse: x.pulse,
@@ -54,31 +64,41 @@ export const Calendar: React.FC<{ month: number; year: number }> = ({
   //   let matchedDays = [];
   if (filtered.length !== 0) {
     for (let i = 0; i <= filtered.length; i++) {
+      //finding if our items match days of the month
       let found = array.filter((x) => x.day === filtered[i]?.day);
       found = found.filter((x) => x.month === filtered[i]?.month);
       found = found.filter((x) => x.year === filtered[i]?.year);
+      // indexOfFound is the day - 1 that matches
       let indexOfFound = array.indexOf(found[0]);
+      // console.log(indexOfFound)
+      // let dataPointsThatBelongTheFoundDay = filtered.filter(x => x.day === indexOfFound)
+      // console.log(dataPointsThatBelongTheFoundDay)
       if (indexOfFound !== -1) {
-        // console.log(filtered[i])
-        array[indexOfFound].data = [
-          {
-            lower: filtered[i].lower,
+
+        if (filtered[i].hours < 17) {
+          array[indexOfFound].hasMorningData = true;
+          array[indexOfFound].morningData = {
             upper: filtered[i].upper,
+            lower: filtered[i].lower,
             pulse: filtered[i].pulse,
-          },
-        ];
+            date: filtered[i].date,
+          }
+        } else {
+          array[indexOfFound].hasEveningData = true;
+          array[indexOfFound].eveningData = {
+            upper: filtered[i].upper,
+            lower: filtered[i].lower,
+            pulse: filtered[i].pulse,
+            date: filtered[i].date,
+          }
+        }
       }
-      //   if (found.length !== 0) {
-      //     matchedDays.push(found[0]);
-      //   }
     }
   }
 
-
-
   return (
     <>
-      
+      {/* {console.log(array)} */}
       <div className={classes["month-container"]}>
         <h3>{monthName}</h3>
 
@@ -94,15 +114,15 @@ export const Calendar: React.FC<{ month: number; year: number }> = ({
             <li key={x.id}></li>
           ))}
           {array.map((x) => (
-            // <li key={x.day} id={String(x.day)} onClick={openDayMenu}>
-            //     {x.day}
-            // </li>
             <DayDisplay
               key={x.day}
               day={x.day}
               month={x.month}
               year={x.year}
-              data={x.data}
+              hasMorningData={x.hasMorningData}
+              hasEveningData={x.hasEveningData}
+              eveningData={x.eveningData}
+              morningData={x.morningData}
             />
           ))}
         </ul>

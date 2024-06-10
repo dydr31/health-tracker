@@ -66,3 +66,7 @@ export const updateData = async (
     console.error(err);
   }
 };
+
+export const deleteData = async () => {
+  
+}

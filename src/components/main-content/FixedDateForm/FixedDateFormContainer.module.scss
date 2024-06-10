@@ -1,0 +1,16 @@
+.form-container{
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+    z-index: 101;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
