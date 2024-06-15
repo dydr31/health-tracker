@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./Container.module.scss";
-import { RoundButton } from "../UI/buttons/RoundButton";
+import { RoundButton } from "./RoundButton";
 import { DataPick } from "./DataMenu/DataPick";
 import { DatesContext } from "../../store/date-context";
 import { DataContext } from "../../store/data-context";
@@ -22,12 +22,14 @@ import { FixedDateFormContainer } from "./FixedDateForm/FixedDateFormContainer";
 let modifiedList = [{ date: "", upper: 0, lower: 0, pulse: 0, grouped: false }];
 
 export const Container: React.FC = () => {
-  const { dateFrom, dateTo } = useContext(DatesContext);
   const { Email } = useContext(LogInContext);
   const { shownItems, items, loadItems, updateShownItems, setItems } =
     useContext(DataContext);
-  const { number, toggleForm, clicks } = useContext(FormsStateContext);
+  const { number, toggleForm, clicks, setFixedDateMenu, fixedDateMenu } =
+    useContext(FormsStateContext);
   let [dataArray, setDataArray] = useState(modifiedList);
+  let { morningData, setMorningDataHandler, setEveningDataHandler } =
+    useContext(DayDataContext);
 
   useEffect(() => {
     (async () => {
@@ -35,72 +37,26 @@ export const Container: React.FC = () => {
       sortByDate(data!);
       setItems(data!);
       updateShownItems(data!);
-      // let restructured = restructuredItems(data!)
-      // // console.log(restructured)
-      // updateShownItems(restructured)
-
-      //setDataArray(data);
-      //await loadItems(Email);
-      //updateShownItems(data.slice(-number));
-
-      // let grouped = groupTheSame(data)
-      // setDataArray(grouped)
-      // updateShownItems(grouped!.slice(-number));
-      // setGroupedItems(grouped)
     })();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let data = await fetchData(Email);
-  //     filterByDate(data);
-  //     //setDataArray(data);
-  //     //data type changed to ModifiedList
-  //     let grouped = groupTheSame(data)
-  //     setDataArray(grouped)
-  //   })();
-
-  //   let from = Number(dateFrom);
-  //   let to = Number(dateTo);
-  //   let filteredArray = dataArray;
-
-  //   if (from > 0) {
-  //     filteredArray = filteredArray.filter(
-  //       (item) => Number(item.date.toString().slice(18, 28)) * 1000 >= from
-  //     );
-  //     setDataArray(filteredArray);
-  //   }
-
-  //   if (to > 0) {
-  //     filteredArray = filteredArray.filter(
-  //       (item) => Number(item.date.toString().slice(18, 28)) * 1000 <= to
-  //     );
-  //     setDataArray(filteredArray);
-  //   }
-  //   // let result = filterForShowing(filteredArray, clicks, number);
-
-  //   // updateShownItems(result);
-  //   setDataArray(filteredArray);
-  // }, [dateFrom, dateTo]);
 
   // useEffect(() => {
-  //   let result = filterForShowing(dataArray, clicks, number);
-  //   updateShownItems(result);
-  // }, [clicks, number]);
+  //   console.log("aaaa");
+  //   console.log(morningData)
+  // }, [morningData, fixedDateMenu]);
 
   return (
     <>
       <div className={classes.table}>
         <ButtonsRowContainer />
-
         <ChartParentContainer />
         <DayDataContextProvider>
           <DataPick />
-          {/* <DayMenuContainer /> */}
-           <FixedDateFormContainer/>
-          <FormContainer />
+          <FixedDateFormContainer />
+          <RoundButton/>
         </DayDataContextProvider>
-        <RoundButton onClick={() => toggleForm()} />
+        
       </div>
     </>
   );

@@ -73,6 +73,8 @@ export const DayDataContextProvider: React.FC<{
 
   const setMorningDataHandler = (data: DataPointDataObj) => {
     setMorningData(data);
+    console.log(data)
+    console.log('morningData set')
   };
 
   const setEveningDataHandler = (data: DataPointDataObj) => {

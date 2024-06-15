@@ -27,9 +27,10 @@ export const FixedDateFormContainer: React.FC = () => {
 
   useEffect(() => {
     setData(morningData)
-  }, [fixedDateMenu])
+  }, [fixedDateMenu, morningData])
   return (
     <>
+  
       <AnimatePresence>
         {fixedDateMenu && (
           <>
