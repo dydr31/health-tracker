@@ -4,7 +4,14 @@ import { getUserId } from "../util/login-functions";
 import { useState } from "react";
 import { Date2, ItemObj } from "../types/types";
 
-import { filterForDayAndEvening } from "../components/main-content/Table-functions";
+const filterForDayAndEvening = (data: ItemObj[]) => {
+  let a: ItemObj[] = [];
+  let b: ItemObj[] = [];
+  data.forEach((x) =>
+    (new Date (x.date.seconds * 1000)).getHours() >= 17 ? a.push(x) : b.push(x)
+  );
+  return { daily: b, evening: a };
+};
 
 type DataContextObj = {
   items: ItemObj[];
