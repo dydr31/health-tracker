@@ -32,13 +32,13 @@ export const DayDisplay: React.FC<{
   eveningData,
 }) => {
 
-  const { toggleDataPick, setFixedDateMenu } = useContext(FormsStateContext);
+  const { setCalendarHandler, setFixedDateMenu } = useContext(FormsStateContext);
   const { setDate: setAllData, setMorningDataHandler, setEveningDataHandler} = useContext(PickedDayDataContext);
 
   //const hours = date.getHours()
 
   const openDayDataMenu = () => {
-    toggleDataPick();
+    setCalendarHandler();
     setFixedDateMenu(true);
     if (hasMorningData){
       setMorningDataHandler(morningData)
@@ -52,8 +52,6 @@ export const DayDisplay: React.FC<{
 
   return (
     <>
-      {/* {console.log(morningData)}
-      {console.log(eveningData)} */}
       <li
         onClick={openDayDataMenu}
         className={`${classes.element} 

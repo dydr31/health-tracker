@@ -1,5 +1,5 @@
 import { ImgButton } from "../../UI/buttons/ImgButton";
-import classes from "./DataPick.module.scss";
+import classes from "./CalendarParentContainer.module.scss";
 import { useContext, useRef } from "react";
 import { Modal } from "../../UI/Modal";
 import { AnimatePresence } from "framer-motion";
@@ -7,21 +7,19 @@ import { FormsStateContext } from "../../../store/forms-context";
 import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 import { CalendarContainer } from "./CalendarContainer";
 
-
 export const DataPick: React.FC = () => {
-  let { toggleDataPick, dataPick} = useContext(FormsStateContext);
+  let { setCalendarHandler, calendar } = useContext(FormsStateContext);
 
   return (
     <>
-      {/* {console.log(datesCtx)} */}
       <AnimatePresence>
-        {dataPick && (
+        {calendar && (
           <>
             <Modal />
             <OpacityChangingWrapper className={classes["form-container"]}>
               <ImgButton
                 type={"close"}
-                onClick={() => toggleDataPick()}
+                onClick={() => setCalendarHandler()}
                 active={false}
               />
 
@@ -29,7 +27,6 @@ export const DataPick: React.FC = () => {
             </OpacityChangingWrapper>
           </>
         )}
-        
       </AnimatePresence>
     </>
   );

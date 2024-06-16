@@ -129,6 +129,16 @@ export const Footer: React.FC = () => {
                 </a>
               </p>
             </li>
+            <li>
+              <p>
+                <a
+                  href="https://www.flaticon.com/free-icons/calendar"
+                  title="calendar icons"
+                >
+                  Calendar icons created by Prosymbols Premium - Flaticon
+                </a>
+              </p>
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>

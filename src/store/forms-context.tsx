@@ -2,69 +2,44 @@ import { useState } from "react";
 import React from "react";
 
 type FormsStateContextObj = {
-  number: number;
-
   dataMenu: boolean;
-  dataPick: boolean;
-  clicks: number;
+  calendar: boolean;
   isMorning: boolean;
-
   fixedDateMenu: boolean;
-
-
-  setNumber: () => void;
-
   toggleDataMenu: () => void;
-  toggleDataPick: () => void;
-  plusClick: () => void;
-  minusClick: () => void;
+  setCalendarHandler: () => void;
   setIsMorning: (type: boolean) => void;
- 
   setFixedDateMenu: (type: boolean) => void
-
 };
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
-  number: 7,
-
   dataMenu: false,
-  dataPick: false,
-  clicks: -1,
+  calendar: false,
   isMorning: false,
   fixedDateMenu: false,
-
-  setNumber: () => {},
- 
   toggleDataMenu: () => {},
-  toggleDataPick: () => {},
-  plusClick: () => {},
-  minusClick: () => {},
+  setCalendarHandler: () => {},
   setIsMorning: () => {},
   setFixedDateMenu: () => {},
- 
-  
+
 });
 
 export const FormsStateContextProvider: React.FC<{
   children: React.ReactNode;
 }> = (props) => {
-  const [form, setForm] = useState(false);
+
   const [dataMenu, setDataMenu] = useState(false);
-  const [dataPick, setDataPickMenu] = useState(false);
+  const [calendar, setCalendar] = useState(false);
 
   const [number, setNumber] = useState(7);
   const [clicks, setClicks] = useState(-1);
-
-  const toggleForm = () => {
-    setForm(!form);
-  };
 
   const toggleDataMenu = () => {
     setDataMenu(!dataMenu);
   };
 
-  const toggleDataPick = () => {
-    setDataPickMenu(!dataPick);
+  const setCalendarHandler = () => {
+    setCalendar(!calendar);
   };
 
   const setNumberHandler = () => {
@@ -82,29 +57,17 @@ export const FormsStateContextProvider: React.FC<{
   };
 
   const [isMorning, setIsMorning] = useState(true)
-
   const [fixedDateMenu, setFixedDateMenu] = useState(false)
 
   const contextValue: FormsStateContextObj = {
-    number,
-    clicks,
-
     dataMenu,
-    dataPick,
-    setNumber: setNumberHandler,
-  
+    calendar,
     toggleDataMenu,
-    toggleDataPick,
-    plusClick,
-    minusClick,
+    setCalendarHandler,
     isMorning,
     setIsMorning,
-
     fixedDateMenu,
     setFixedDateMenu,
-
-
-   
   };
 
   return (

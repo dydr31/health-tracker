@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./Container.module.scss";
 import { RoundButton } from "./RoundButton";
-import { DataPick } from "./DataMenu/DataPick";
+import { DataPick } from "./DataMenu/CalendarParentContainer";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
 import { FormsStateContext } from "../../store/forms-context";
@@ -17,6 +17,7 @@ import {
 } from "../../store/picked-day-data-context";
 
 import { FixedDateFormContainer } from "./FixedDateForm/FixedDateFormContainer";
+import { ShownItemsContextProvider } from "../../store/shown-items-context";
 
 let modifiedList = [{ date: "", upper: 0, lower: 0, pulse: 0, grouped: false }];
 
@@ -46,6 +47,7 @@ export const Container: React.FC = () => {
 
   return (
     <>
+    <ShownItemsContextProvider>
       <div className={classes.table}>
         <ButtonsRowContainer />
         <ChartParentContainer />
@@ -56,6 +58,7 @@ export const Container: React.FC = () => {
         </PickedDayDataContextProvider>
         
       </div>
+      </ShownItemsContextProvider>
     </>
   );
 };
