@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Button } from "../../UI/buttons/Button";
 import { SmallButton } from "../../UI/buttons/SmallButton";
 import classes from "./ChartLegend.module.scss";
-import { FormsStateContext } from "../../../store/forms-state-context";
+import { FormsStateContext } from "../../../store/forms-context";
 import { ImgButton } from "../../UI/buttons/ImgButton";
 import { TransparentButton } from "../../UI/buttons/TransparentButton";
 import { motion, AnimatePresence } from "framer-motion";

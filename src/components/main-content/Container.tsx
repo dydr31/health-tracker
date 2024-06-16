@@ -4,7 +4,7 @@ import { RoundButton } from "./RoundButton";
 import { DataPick } from "./DataMenu/DataPick";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
-import { FormsStateContext } from "../../store/forms-state-context";
+import { FormsStateContext } from "../../store/forms-context";
 
 
 import { ChartParentContainer } from "./Chart/ChartParentContainer";
@@ -12,9 +12,9 @@ import { ButtonsRowContainer } from "./ButtonsRow/ButtonRowContainer";
 
 import { sortByDate } from "./Container-functions";
 import {
-  DayDataContext,
-  DayDataContextProvider,
-} from "../../store/day-data-context";
+  PickedDayDataContext,
+  PickedDayDataContextProvider,
+} from "../../store/picked-day-data-context";
 
 import { FixedDateFormContainer } from "./FixedDateForm/FixedDateFormContainer";
 
@@ -24,11 +24,10 @@ export const Container: React.FC = () => {
   const { Email } = useContext(LogInContext);
   const { shownItems, items, loadItems, updateShownItems, setItems } =
     useContext(DataContext);
-  const { number, toggleForm, clicks, setFixedDateMenu, fixedDateMenu } =
-    useContext(FormsStateContext);
+
   let [dataArray, setDataArray] = useState(modifiedList);
   let { morningData, setMorningDataHandler, setEveningDataHandler } =
-    useContext(DayDataContext);
+    useContext(PickedDayDataContext);
 
   useEffect(() => {
     (async () => {
@@ -50,11 +49,11 @@ export const Container: React.FC = () => {
       <div className={classes.table}>
         <ButtonsRowContainer />
         <ChartParentContainer />
-        <DayDataContextProvider>
+        <PickedDayDataContextProvider>
           <DataPick />
           <FixedDateFormContainer />
           <RoundButton/>
-        </DayDataContextProvider>
+        </PickedDayDataContextProvider>
         
       </div>
     </>

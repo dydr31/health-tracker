@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import classes from "./FixedDateFormContainer.module.scss";
-import { FormsStateContext } from "../../../store/forms-state-context";
+import { FormsStateContext } from "../../../store/forms-context";
 import { AnimatePresence } from "framer-motion";
 import { ImgButton } from "../../UI/buttons/ImgButton";
 import { Modal } from "../../UI/Modal";
 import { OpacityChangingWrapper } from "../../UI/OpacityChangingWrapper";
 import { FixedDateForm } from "./FixedDateForm";
 import { SmallButton } from "../../UI/buttons/SmallButton";
-import { DayDataContext } from "../../../store/day-data-context";
+import { PickedDayDataContext } from "../../../store/picked-day-data-context";
 
 export const FixedDateFormContainer: React.FC = () => {
   const { fixedDateMenu, setFixedDateMenu } = useContext(FormsStateContext);
-  const {morningData, eveningData, setMorningDataHandler, setEveningDataHandler} = useContext(DayDataContext)
+  const {morningData, eveningData, setMorningDataHandler, setEveningDataHandler} = useContext(PickedDayDataContext)
   const [isMorning, setIsMorning] = useState(true)
   const [data, setData] = useState(morningData)
 

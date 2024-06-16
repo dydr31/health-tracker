@@ -4,7 +4,7 @@ import { Container } from "./main-content/Container";
 import { Wellcome } from "./Wellcome";
 
 import classes from "./MainContent.module.scss";
-import { FormsStateContextProvider } from "../store/forms-state-context";
+import { FormsStateContextProvider } from "../store/forms-context";
 import { SignInContextProvider } from "../store/sign-up-sign-in-menu-context";
 
 export const MainContent: React.FC = () => {

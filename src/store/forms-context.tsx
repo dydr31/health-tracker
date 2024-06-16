@@ -3,7 +3,7 @@ import React from "react";
 
 type FormsStateContextObj = {
   number: number;
-  form: boolean;
+
   dataMenu: boolean;
   dataPick: boolean;
   clicks: number;
@@ -13,7 +13,7 @@ type FormsStateContextObj = {
 
 
   setNumber: () => void;
-  toggleForm: () => void;
+
   toggleDataMenu: () => void;
   toggleDataPick: () => void;
   plusClick: () => void;
@@ -26,7 +26,7 @@ type FormsStateContextObj = {
 
 export const FormsStateContext = React.createContext<FormsStateContextObj>({
   number: 7,
-  form: false,
+
   dataMenu: false,
   dataPick: false,
   clicks: -1,
@@ -34,7 +34,7 @@ export const FormsStateContext = React.createContext<FormsStateContextObj>({
   fixedDateMenu: false,
 
   setNumber: () => {},
-  toggleForm: () => {},
+ 
   toggleDataMenu: () => {},
   toggleDataPick: () => {},
   plusClick: () => {},
@@ -81,26 +81,18 @@ export const FormsStateContextProvider: React.FC<{
     setClicks(clicks - 1);
   };
 
-  const [isMorning, setIsMorning] = useState(false)
-
-  const [dayMenu, setDayMenu] = useState(false)
-
-  const toggleDayMenu = (data: boolean) => {
-    console.log(data)
-
-    setDayMenu(data)
-  }
+  const [isMorning, setIsMorning] = useState(true)
 
   const [fixedDateMenu, setFixedDateMenu] = useState(false)
 
   const contextValue: FormsStateContextObj = {
     number,
     clicks,
-    form,
+
     dataMenu,
     dataPick,
     setNumber: setNumberHandler,
-    toggleForm,
+  
     toggleDataMenu,
     toggleDataPick,
     plusClick,

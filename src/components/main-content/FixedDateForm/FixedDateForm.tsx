@@ -2,7 +2,7 @@ import classes from "./FixedDateForm.module.scss";
 
 import { Button } from "../../UI/buttons/Button";
 import { useContext, useState, useRef, useEffect } from "react";
-import { DayDataContext } from "../../../store/day-data-context";
+import { PickedDayDataContext } from "../../../store/picked-day-data-context";
 import { LogInContext } from "../../../store/login-context";
 
 import {
@@ -11,14 +11,14 @@ import {
   checkPulse,
 } from "../../../util/datapoint-form-validation";
 import { addDataPoint, updateData } from "../../../util/data-functions";
-import { DataPointDataObj } from "../../../store/day-data-context";
+import { DataPointDataObj } from "../../../store/picked-day-data-context";
 import { DataContext } from "../../../store/data-context";
 
 export const FixedDateForm: React.FC<{
   data: DataPointDataObj;
   isMorning: boolean;
 }> = ({ data, isMorning }) => {
-  const { day, month, year } = useContext(DayDataContext);
+  const { day, month, year } = useContext(PickedDayDataContext);
   const date = new Date(Number(data.date.seconds * 1000));
   const fixedDate = new Date(year, month - 1, day);
 

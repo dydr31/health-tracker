@@ -1,14 +1,14 @@
 import classes from "./RoundButton.module.scss";
 import { useContext } from "react";
 import { DataContext } from "../../store/data-context";
-import { DayDataContext } from "../../store/day-data-context";
-import { FormsStateContext } from "../../store/forms-state-context";
+import { PickedDayDataContext } from "../../store/picked-day-data-context";
+import { FormsStateContext } from "../../store/forms-context";
 
 export const RoundButton: React.FC = () => {
   const { items } = useContext(DataContext);
 
-  let { setMorningDataHandler, setEveningDataHandler, setAllData } =
-    useContext(DayDataContext);
+  let { setMorningDataHandler, setEveningDataHandler, setDate: setAllData } =
+    useContext(PickedDayDataContext);
 
   const { setFixedDateMenu } = useContext(FormsStateContext);
 

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import classes from "./DayDisplay.module.scss";
-import { FormsStateContext } from "../../../store/forms-state-context";
-import { DayDataContext } from "../../../store/day-data-context";
+import { FormsStateContext } from "../../../store/forms-context";
+import { PickedDayDataContext } from "../../../store/picked-day-data-context";
 
 export const DayDisplay: React.FC<{
   day: number;
@@ -33,7 +33,7 @@ export const DayDisplay: React.FC<{
 }) => {
 
   const { toggleDataPick, setFixedDateMenu } = useContext(FormsStateContext);
-  const { setAllData, setMorningDataHandler, setEveningDataHandler} = useContext(DayDataContext);
+  const { setDate: setAllData, setMorningDataHandler, setEveningDataHandler} = useContext(PickedDayDataContext);
 
   //const hours = date.getHours()
 

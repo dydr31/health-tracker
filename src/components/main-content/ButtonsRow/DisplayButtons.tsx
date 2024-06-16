@@ -1,7 +1,7 @@
 import { SmallButton } from "../../UI/buttons/SmallButton";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import classes from "./DisplayButtons.module.scss";
-import { FormsStateContext } from "../../../store/forms-state-context";
+import { FormsStateContext } from "../../../store/forms-context";
 
 
 export const DisplayButtons: React.FC = () => {

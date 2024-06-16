@@ -2,7 +2,7 @@ import classes from "./ButtonsRightSide.module.scss";
 import { ImgButton } from "../../UI/buttons/ImgButton";
 import { SmallButton } from "../../UI/buttons/SmallButton";
 import { useContext } from "react";
-import { FormsStateContext } from "../../../store/forms-state-context";
+import { FormsStateContext } from "../../../store/forms-context";
 import { LogInContext } from "../../../store/login-context";
 import { DataContext } from "../../../store/data-context";
 
@@ -47,7 +47,7 @@ export const ButtonsRow: React.FC = () => {
       )}
       <ImgButton type="filter" onClick={() => formsStateCtx.toggleDataPick()} active={false} key='filter'/>
       <div className={classes["show-on-mobile"]}>
-        <ImgButton type="plus" onClick={() => formsStateCtx.toggleForm()} active={false} key='plus'/>
+        <ImgButton type="plus" onClick={() => formsStateCtx.setFixedDateMenu(true)} active={false} key='plus'/>
       </div>
 
       <div className={classes["dont-show-on-mobile"]}>

@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import classes from "./ChartParentContainer.module.scss";
 import { DropdownWrapper } from "../../UI/DropdownWrapper";
-import { FormsStateContext } from "../../../store/forms-state-context";
+import { FormsStateContext } from "../../../store/forms-context";
 import { ChartLegend } from "../ButtonsRow/ChartLegend";
 
 export const ChartParentContainer: React.FC = () => {

@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-
-type dataObj = { upper: number; lower: number; pulse: number }[];
+import React, { useState } from "react";
 
 export type DataPointDataObj = {
   upper: number;
@@ -17,10 +15,10 @@ type ContextObj = {
   eveningData: DataPointDataObj;
   setMorningDataHandler: (data: DataPointDataObj) => void;
   setEveningDataHandler: (data: DataPointDataObj) => void;
-  setAllData: (day: number, month: number, year: number) => void;
+  setDate: (day: number, month: number, year: number) => void;
 };
 
-export const DayDataContext = React.createContext<ContextObj>({
+export const PickedDayDataContext = React.createContext<ContextObj>({
   day: 0,
   month: 0,
   year: 0,
@@ -28,10 +26,10 @@ export const DayDataContext = React.createContext<ContextObj>({
   eveningData: { upper: 0, lower: 0, pulse: 0, date: { seconds: 0 } },
   setMorningDataHandler: () => {},
   setEveningDataHandler: () => {},
-  setAllData: () => {},
+  setDate: () => {},
 });
 
-export const DayDataContextProvider: React.FC<{
+export const PickedDayDataContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [day, setDay] = useState(0);
@@ -52,7 +50,7 @@ export const DayDataContextProvider: React.FC<{
     date: { seconds: 0 },
   });
 
-  const setDayMontYear = (day: number, month: number, year: number) => {
+  const setDate = (day: number, month: number, year: number) => {
     setDay(day);
     setMonth(month);
     setYear(year);
@@ -74,11 +72,11 @@ export const DayDataContextProvider: React.FC<{
     eveningData,
     setMorningDataHandler,
     setEveningDataHandler,
-    setAllData: setDayMontYear,
+    setDate: setDate,
   };
   return (
-    <DayDataContext.Provider value={contextValue}>
+    <PickedDayDataContext.Provider value={contextValue}>
       {children}
-    </DayDataContext.Provider>
+    </PickedDayDataContext.Provider>
   );
 };
