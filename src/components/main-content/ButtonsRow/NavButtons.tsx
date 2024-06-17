@@ -30,6 +30,7 @@ export const ButtonsRow: React.FC = () => {
           active={false}
           disabled={clicks < maxClicks ? false : true}
           key="left-arrow"
+          rounded={true}
         />
 
         <ImgButton
@@ -38,6 +39,7 @@ export const ButtonsRow: React.FC = () => {
           active={false}
           disabled={clicks >= 1 ? false : true}
           key="right-arrow"
+          rounded={true}
         />
 
         <ImgButton
@@ -46,6 +48,7 @@ export const ButtonsRow: React.FC = () => {
           active={false}
           disabled={false}
           key="filter"
+          rounded={true}
         />
         <div className={classes["show-on-mobile"]}>
           <ImgButton
@@ -54,6 +57,7 @@ export const ButtonsRow: React.FC = () => {
             active={false}
             disabled={false}
             key="plus"
+            rounded={true}
           />
         </div>
       </div>

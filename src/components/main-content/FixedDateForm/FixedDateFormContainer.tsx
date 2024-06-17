@@ -36,17 +36,20 @@ export const FixedDateFormContainer: React.FC = () => {
           <>
             <Modal />
             <OpacityChangingWrapper className={classes["form-container"]}>
+              {/* <div className={classes.test}>a</div> */}
               <div className={classes["buttons-container"]}>
                 <div>
                   <SmallButton
                     text="morning"
                     active={isMorning}
                     onClick={switchToMorning}
+                    rounded={false}
                   />
                   <SmallButton
                     text="evening"
                     active={!isMorning}
                     onClick={switchToEvening}
+                    rounded={false}
                   />
                 </div>
 
@@ -61,6 +64,7 @@ export const FixedDateFormContainer: React.FC = () => {
                   type={"close"}
                   active={false}
                   disabled={false}
+                  rounded={false}
                 />
               </div>
 

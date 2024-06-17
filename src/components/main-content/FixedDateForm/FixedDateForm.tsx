@@ -13,6 +13,7 @@ import {
 import { addDataPoint, updateData } from "../../../util/data-functions";
 import { DataPointDataObj } from "../../../store/picked-day-data-context";
 import { DataContext } from "../../../store/data-context";
+import { FormsStateContext } from "../../../store/forms-context";
 
 export const FixedDateForm: React.FC<{
   data: DataPointDataObj;
@@ -172,6 +173,7 @@ export const FixedDateForm: React.FC<{
 
   const { Email } = useContext(LogInContext);
   const { removeItem } = useContext(DataContext);
+  const {setFixedDateMenu} = useContext(FormsStateContext)
 
   const submitForm = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -207,7 +209,7 @@ export const FixedDateForm: React.FC<{
     } else {
       console.log("data hasnt changed");
     }
-
+    setFixedDateMenu(false)
     //window.location.reload()
   };
   const deleteEntry = async () => {

@@ -22,6 +22,7 @@ export const DataPick: React.FC = () => {
                 onClick={() => setCalendarHandler()}
                 active={false}
                 disabled={false}
+                rounded={false}
               />
 
               <CalendarContainer />

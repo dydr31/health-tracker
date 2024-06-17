@@ -6,6 +6,8 @@
     color: black;
  
     border: 2px solid $main-color;
+    border-radius: $border-radius;
+    clip-path: inset(0px 0px 0px round .2rem);
 
 }
 
@@ -29,4 +31,22 @@
 
 .disabled:hover{
     border: 2px solid $main-color;
+}
+
+.top{
+
+}
+
+.fill-in-top{
+    width: 100%;
+    height: 100%;
+    background-color: $accent-color2;
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+    
+}
+
+.day-number{
+    position: absolute;
+    z-index: 330;
+
 }

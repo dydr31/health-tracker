@@ -78,6 +78,7 @@ export const DayDisplay: React.FC<{
         ${isFuture && classes.disabled
           
         }
+        
 
         `}
       >

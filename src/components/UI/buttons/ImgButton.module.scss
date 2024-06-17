@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border-radius: $border-radius;
+    
 }
 
 .close img{
@@ -44,6 +44,9 @@
     cursor:auto;
 }
 
+.rounded{
+    border-radius: $border-radius;
+}
 
 @media(max-width: 500px){
     .close{

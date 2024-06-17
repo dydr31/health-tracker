@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .form-container{
     position: fixed;
     top: 50%;
@@ -8,6 +10,15 @@
     // justify-content: flex-end;
     // align-items: flex-end;
     z-index: 101;
+    background-color: $main-color;
+    clip-path: inset(0px 0px 0px round .2rem);
+}
+
+.test{
+    background-color: rgba(234, 57, 57, 0.5);
+    width: 50%;
+    height: 100%;
+    position: absolute;
 }
 
 .buttons-container{

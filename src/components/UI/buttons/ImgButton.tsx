@@ -43,6 +43,7 @@ export const ImgButton: React.FC<{
   type: string;
   active: boolean;
   disabled: boolean;
+  rounded: boolean;
 }> = (props) => {
   let Placeholder = Close;
 
@@ -88,7 +89,7 @@ export const ImgButton: React.FC<{
       onClick={props.onClick}
       className={`${classes.close} ${
         props.active ? classes.active : undefined
-      } ${props.disabled ? classes.inactive : undefined}`}
+      } ${props.disabled ? classes.inactive : undefined} ${props.rounded ? classes.rounded : undefined}`}
     >
       <img
         src={Placeholder.src}

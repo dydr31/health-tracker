@@ -31,7 +31,7 @@ export const ShownItemsContextProvider: React.FC<{children: React.ReactNode }> =
 
 
     const contextValue = {
-        n: 7,
+        n: 14,
         clicks,
         setClicks,
         maxClicks,

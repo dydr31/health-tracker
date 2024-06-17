@@ -21,7 +21,7 @@ export const sortByDate = (data: ItemObj[]) => {
 
 export const Container: React.FC = () => {
   const { Email } = useContext(LogInContext);
-  const { loadItems, updateShownItems, setItems } = useContext(DataContext);
+  const { loadItems, updateShownItems, setItems, items } = useContext(DataContext);
 
   useEffect(() => {
     (async () => {
@@ -30,7 +30,7 @@ export const Container: React.FC = () => {
       setItems(data!);
       updateShownItems(data!);
     })();
-  }, []);
+  }, [items]);
 
   return (
     <>

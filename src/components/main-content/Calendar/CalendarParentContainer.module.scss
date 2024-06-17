@@ -11,6 +11,8 @@
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: $main-color;
+    clip-path: inset(0px 0px 0px round .2rem);
 }
 
 .form{

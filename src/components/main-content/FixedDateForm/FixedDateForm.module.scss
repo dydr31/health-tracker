@@ -11,7 +11,8 @@
   display: grid;
   grid-template-columns: 50% 50%;
   padding: $size-main;
-  gap: 0.5rem;
+  row-gap: 0.5rem;
+  column-gap: .5rem;
   background-color: $main-color;
   text-align: right;
 }
