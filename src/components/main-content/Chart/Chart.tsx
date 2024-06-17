@@ -1,7 +1,6 @@
 import { Line } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
-import classes from "./Chart.module.scss";
 
 export const LineChart: React.FC<{
   data: {
@@ -21,7 +20,7 @@ export const LineChart: React.FC<{
   return (
     <>
       {" "}
-      <Line data={props.data} options={options} className={classes.chart}/>
+      <Line data={props.data} options={options} />
     </>
   );
 };

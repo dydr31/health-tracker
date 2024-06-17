@@ -176,11 +176,15 @@ export const FixedDateForm: React.FC<{
   const submitForm = async (event: React.FormEvent) => {
     event.preventDefault();
     if (checkIfChanged()) {
+
       console.log("data changed");
       let dataPoint = checkForm();
       if (dataPoint !== null) {
         console.log("removing prev datapoint and adding new");
-
+        upperRef.current!.value = ''
+        timeRef.current!.value = ''
+        lowerRef.current!.value = ''
+        pulseRef.current!.value = ''
         let transformedData = [
           {
             lower: data.lower,
@@ -203,6 +207,7 @@ export const FixedDateForm: React.FC<{
     } else {
       console.log("data hasnt changed");
     }
+
     //window.location.reload()
   };
   const deleteEntry = async () => {

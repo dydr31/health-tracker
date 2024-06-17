@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LineChart } from "./Chart";
 import { Date2 } from "../../../types/types";
+import classes from "./ChartContainer.module.scss";
+import { ShownItemsContext } from "../../../store/shown-items-context";
+import { FormsStateContext } from "../../../store/forms-context";
+import { ChartLegend } from "./ChartLegend";
+import { DropdownWrapper } from "../../UI/DropdownWrapper";
+import { Message } from "./Message";
 
 const dummyChartData = {
   labels: [""],
@@ -53,9 +59,55 @@ export const ChartContainer: React.FC<{ data: ItemObj2[] }> = (props) => {
     });
   }, [data]);
 
+  let showChart = false;
+
+  let hasActualData = false;
+  let hasEnoughData = false;
+  if (data[0]?.upper !== 0 && data[0]?.upper !== undefined) {
+    hasActualData = true;
+  }
+  if (data.length > 2) {
+    hasEnoughData = true;
+  }
+
+  if (hasActualData && hasEnoughData) {
+    showChart = true;
+  }
+
+  const { setCalendarHandler } = useContext(FormsStateContext);
+  const { isMorning } = useContext(FormsStateContext);
+  //its not the loading
+
   return (
     <>
-      <LineChart data={chartData} />
+      <DropdownWrapper className={classes["chart-subcontainer"]}>
+        {hasActualData && hasEnoughData && (
+          <>
+            {" "}
+            {isMorning && showChart && <h3>Morning data:</h3>}
+            {!isMorning && showChart && <h3>Evening data:</h3>}
+            <div className={classes['line-chart']}>
+              <LineChart data={chartData} />
+            </div>
+          </>
+        )}
+        {!hasActualData && <Message>No data found</Message>}
+        {hasActualData && !hasEnoughData && (
+          <Message>
+            No enough data to display the chart, fill in new measurements using{" "}
+            <b
+              className={classes["bold-text"]}
+              onClick={() => {
+                setCalendarHandler();
+              }}
+            >
+              {" "}
+              calendar
+            </b>
+          </Message>
+        )}
+        {showChart && <ChartLegend />}
+      </DropdownWrapper>
     </>
   );
 };

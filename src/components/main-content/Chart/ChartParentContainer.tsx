@@ -5,7 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import classes from "./ChartParentContainer.module.scss";
 import { DropdownWrapper } from "../../UI/DropdownWrapper";
 import { FormsStateContext } from "../../../store/forms-context";
-import { ChartLegend } from "./ChartLegend";
+
+import { Message } from "./Message";
 import { ShownItemsContext } from "../../../store/shown-items-context";
 
 export const ChartParentContainer: React.FC = () => {
@@ -40,16 +41,17 @@ export const ChartParentContainer: React.FC = () => {
     }
   }, [morningItems, clicks, isMorning]);
 
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <>
-      <div className={classes["chart-parent-container"]}>
-        <DropdownWrapper key="cn" className={classes["chart-subcontainer"]}>
-          {isMorning && <h3>Morning data:</h3>}
-          {!isMorning && <h3>Evening data:</h3>}
-          <ChartContainer data={slicedItems} key="chart1" />
-        </DropdownWrapper>
-      </div>
-      <ChartLegend />
+      {!loading && <ChartContainer data={slicedItems} />}
+      {loading && <Message>Loading ...</Message>}
     </>
   );
 };

@@ -22,5 +22,6 @@ $filter: invert(19%) sepia(30%) saturate(2901%) hue-rotate(201deg) brightness(97
 $border: 1px solid lightgray;
 
 $size-main: 1rem;
-$margin: $size-main*3;
+// $margin: $size-main*3;
+$margin: 10%;
 $margin-mobile: .75rem;

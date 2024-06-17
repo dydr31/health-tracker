@@ -26,7 +26,7 @@ export const RoundButton: React.FC = () => {
       dateFormat: new Date(x.date.seconds * 1000),
       ...x,
     }));
-    setAllData(day, month, year);
+    setAllData(day, month + 1, year);
 
     filtered = filtered.filter(
       (x) =>
