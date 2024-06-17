@@ -19,10 +19,8 @@ export const ChartParentContainer: React.FC = () => {
   useEffect(() => {
     if (isMorning) {
       setMaxClicks(Math.floor(morningItems.length / n));
-      
     } else {
-      setMaxClicks(Math.floor(eveningItems.length / n) );
-      
+      setMaxClicks(Math.floor(eveningItems.length / n));
     }
   }, [isMorning, morningItems, eveningItems]);
 
@@ -33,15 +31,12 @@ export const ChartParentContainer: React.FC = () => {
     }
     if (clicks > 0) {
       let range = [-(clicks + 1) * n, -clicks * n];
-      console.log(range);
       setSlicedItems(items.slice(range[0], range[1]));
     }
     if (clicks < 0) {
-      console.log("its future");
     }
     if (clicks === 0) {
       setSlicedItems(items.slice(-n));
-      console.log("default week");
     }
   }, [morningItems, clicks, isMorning]);
 

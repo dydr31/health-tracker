@@ -1,27 +1,39 @@
 @import "../../variables";
 
 .round-button{
-    position: fixed;
-    right: 3rem;
-    bottom: 3rem;
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 5rem;
+    height: 5rem;
     background-color: $accent-color2;
     border: none;
     border-radius: 50%;
     cursor: pointer;
     font-size: 23px;
     color: white;
-    z-index: 55;
-    
+    z-index: 55;   
+}
+
+.round-button-container{
+    position: fixed;
+    right: 3rem;
+    bottom: 3rem;
+    width: 5rem;
+    height: 5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.round-button:hover{
+   background-color: $header-color;
 }
 
 @media(max-width: 500px){
     .round-button{
-        // bottom: 5.5rem;
-        // right: 2rem;
-        // z-index: 100;
-        display: none;
+        bottom: 5.5rem;
+        right: 2rem;
+        z-index: 99;
+
     }
 
 }

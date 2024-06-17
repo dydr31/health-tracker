@@ -1,9 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LineChart } from "./Chart";
-import { ShownItemsContext } from "../../../store/shown-items-context";
-import classes from "./ChartContainer.module.scss";
-import { DataContext } from "../../../store/data-context";
-import { FormsStateContext } from "../../../store/forms-context";
 import { Date2 } from "../../../types/types";
 
 const dummyChartData = {
@@ -55,28 +51,7 @@ export const ChartContainer: React.FC<{ data: ItemObj2[] }> = (props) => {
         },
       ],
     });
-  }, [
-    data,
-    //number
-  ]);
-
-  const { n, clicks, setMaxClicks, maxClicks } = useContext(ShownItemsContext);
-  const [slicedItems, setSlicedItems] = useState(data);
-
-  useEffect(() => {
-    if (clicks > 0) {
-      let range = [-(clicks + 1) * n, -clicks * n];
-      setSlicedItems(data.slice(range[0], range[1]));
-      console.log(data.slice(range[0], range[1]));
-    }
-    if (clicks < 0) {
-      console.log("its future");
-    }
-    if (clicks === 0) {
-      setSlicedItems(data.slice(-n));
-      console.log("default week");
-    }
-  }, [data, clicks]);
+  }, [data]);
 
   return (
     <>

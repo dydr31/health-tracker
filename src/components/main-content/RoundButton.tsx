@@ -3,14 +3,19 @@ import { useContext } from "react";
 import { DataContext } from "../../store/data-context";
 import { PickedDayDataContext } from "../../store/picked-day-data-context";
 import { FormsStateContext } from "../../store/forms-context";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const RoundButton: React.FC = () => {
   const { items } = useContext(DataContext);
 
-  let { setMorningDataHandler, setEveningDataHandler, setDate: setAllData } =
-    useContext(PickedDayDataContext);
+  let {
+    setMorningDataHandler,
+    setEveningDataHandler,
+    setDate: setAllData,
+  } = useContext(PickedDayDataContext);
 
-  const { setFixedDateMenu } = useContext(FormsStateContext);
+  const { setFixedDateMenu, fixedDateMenu } = useContext(FormsStateContext);
 
   const clickTodayFormHandler = () => {
     let today = new Date();
@@ -59,8 +64,22 @@ export const RoundButton: React.FC = () => {
   };
 
   return (
-    <button onClick={clickTodayFormHandler} className={classes["round-button"]}>
-      +
-    </button>
+    <div className={classes["round-button-container"]}>
+      <AnimatePresence>
+        {!fixedDateMenu && (
+          <motion.button
+            initial={{ y: -20, opacity: 0 }}
+            animate={{  y: 0, opacity: 1}}
+            exit={{ opacity:0}}
+            transition={{ bounce: 0, duration: 0.2 }}
+            
+            onClick={clickTodayFormHandler}
+            className={classes["round-button"]}
+          >
+            +
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };

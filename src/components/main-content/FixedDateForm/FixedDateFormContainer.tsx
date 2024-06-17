@@ -60,6 +60,7 @@ export const FixedDateFormContainer: React.FC = () => {
                   }}
                   type={"close"}
                   active={false}
+                  disabled={false}
                 />
               </div>
 

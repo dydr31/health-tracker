@@ -9,38 +9,42 @@ export const ButtonsRow: React.FC = () => {
   const { clicks, setClicks, maxClicks } = useContext(ShownItemsContext);
 
   const arrowHandlerLeft = () => {
-    setClicks(clicks + 1);
+    if (clicks < maxClicks) {
+      setClicks(clicks + 1);
+    }
   };
 
   const arrowHandlerRight = () => {
-    setClicks(clicks - 1);
+    if (clicks >= 1) {
+      setClicks(clicks - 1);
+    }
   };
 
   return (
-    <>{console.log(maxClicks, clicks)}
-      <div className={classes.buttons}>
-        {clicks < maxClicks && (
-          <ImgButton
-            type="left-arrow"
-            onClick={arrowHandlerLeft}
-            active={false}
-            key="left-arrow"
-          />
-        )}
+    <>
 
-        {clicks >= 1 && (
-          <ImgButton
-            type="right-arrow"
-            onClick={arrowHandlerRight}
-            active={false}
-            key="right-arrow"
-          />
-        )}
+      <div className={classes.buttons}>
+        <ImgButton
+          type="left-arrow"
+          onClick={arrowHandlerLeft}
+          active={false}
+          disabled={clicks < maxClicks ? false : true}
+          key="left-arrow"
+        />
+
+        <ImgButton
+          type="right-arrow"
+          onClick={arrowHandlerRight}
+          active={false}
+          disabled={clicks >= 1 ? false : true}
+          key="right-arrow"
+        />
 
         <ImgButton
           type="calendar"
           onClick={() => setCalendarHandler()}
           active={false}
+          disabled={false}
           key="filter"
         />
         <div className={classes["show-on-mobile"]}>
@@ -48,6 +52,7 @@ export const ButtonsRow: React.FC = () => {
             type="plus"
             onClick={() => setFixedDateMenu(true)}
             active={false}
+            disabled={false}
             key="plus"
           />
         </div>

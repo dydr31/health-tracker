@@ -1,34 +1,27 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 import classes from "./Container.module.scss";
 import { RoundButton } from "./RoundButton";
-import { DataPick } from "./DataMenu/CalendarParentContainer";
+import { DataPick } from "./Calendar/CalendarParentContainer";
 import { DataContext } from "../../store/data-context";
 import { LogInContext } from "../../store/login-context";
-import { FormsStateContext } from "../../store/forms-context";
-
 
 import { ChartParentContainer } from "./Chart/ChartParentContainer";
 import { ButtonsRowContainer } from "./ButtonsRow/ButtonRowContainer";
 
-import { sortByDate } from "./Container-functions";
-import {
-  PickedDayDataContext,
-  PickedDayDataContextProvider,
-} from "../../store/picked-day-data-context";
-
+import { ItemObj } from "../../types/types";
+import { PickedDayDataContextProvider } from "../../store/picked-day-data-context";
 import { FixedDateFormContainer } from "./FixedDateForm/FixedDateFormContainer";
 import { ShownItemsContextProvider } from "../../store/shown-items-context";
 
-let modifiedList = [{ date: "", upper: 0, lower: 0, pulse: 0, grouped: false }];
+export const sortByDate = (data: ItemObj[]) => {
+  data.sort((a, b) => {
+    return Number(a.date.seconds) - Number(b.date.seconds);
+  });
+};
 
 export const Container: React.FC = () => {
   const { Email } = useContext(LogInContext);
-  const { shownItems, items, loadItems, updateShownItems, setItems } =
-    useContext(DataContext);
-
-  let [dataArray, setDataArray] = useState(modifiedList);
-  let { morningData, setMorningDataHandler, setEveningDataHandler } =
-    useContext(PickedDayDataContext);
+  const { loadItems, updateShownItems, setItems } = useContext(DataContext);
 
   useEffect(() => {
     (async () => {
@@ -39,25 +32,18 @@ export const Container: React.FC = () => {
     })();
   }, []);
 
-
-  // useEffect(() => {
-  //   console.log("aaaa");
-  //   console.log(morningData)
-  // }, [morningData, fixedDateMenu]);
-
   return (
     <>
-    <ShownItemsContextProvider>
-      <div className={classes.table}>
-        <ButtonsRowContainer />
-        <ChartParentContainer />
-        <PickedDayDataContextProvider>
-          <DataPick />
-          <FixedDateFormContainer />
-          <RoundButton/>
-        </PickedDayDataContextProvider>
-        
-      </div>
+      <ShownItemsContextProvider>
+        <div className={classes.table}>
+          <ButtonsRowContainer />
+          <ChartParentContainer />
+          <PickedDayDataContextProvider>
+            <DataPick />
+            <FixedDateFormContainer />
+            <RoundButton />
+          </PickedDayDataContextProvider>
+        </div>
       </ShownItemsContextProvider>
     </>
   );

@@ -31,23 +31,35 @@ export const DayDisplay: React.FC<{
   morningData,
   eveningData,
 }) => {
+  const { setCalendarHandler, setFixedDateMenu } =
+    useContext(FormsStateContext);
+  const {
+    setDate: setAllData,
+    setMorningDataHandler,
+    setEveningDataHandler,
+  } = useContext(PickedDayDataContext);
 
-  const { setCalendarHandler, setFixedDateMenu } = useContext(FormsStateContext);
-  const { setDate: setAllData, setMorningDataHandler, setEveningDataHandler} = useContext(PickedDayDataContext);
-
-  //const hours = date.getHours()
+  let today = new Date();
+  let date = new Date (year, month - 1, day)
+  let isFuture = false
+  if(today < date){
+    isFuture = true
+  }
 
   const openDayDataMenu = () => {
+    if (!isFuture){
+
+    
     setCalendarHandler();
     setFixedDateMenu(true);
-    if (hasMorningData){
-      setMorningDataHandler(morningData)
-      
+    if (hasMorningData) {
+      setMorningDataHandler(morningData);
     }
-    if(hasEveningData){
-      setEveningDataHandler(eveningData)
+    if (hasEveningData) {
+      setEveningDataHandler(eveningData);
     }
-    setAllData(day, month, year)
+    setAllData(day, month, year);
+  }
   };
 
   return (
@@ -62,6 +74,9 @@ export const DayDisplay: React.FC<{
             : hasMorningData || hasEveningData
             ? classes["half-highlighted"]
             : undefined
+        }
+        ${isFuture && classes.disabled
+          
         }
 
         `}

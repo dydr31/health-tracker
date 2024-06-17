@@ -22,3 +22,11 @@
     background-color: $accent-color3;
 }
 
+.disabled{
+    background-color: rgb(196, 196, 196);
+    color: gray;
+}
+
+.disabled:hover{
+    border: 2px solid $main-color;
+}
